@@ -1,17 +1,25 @@
-import Link from 'next/link'
+import { initFirebase } from '../lib/firebaseApp';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useRouter } from 'next/router';
 
 
 export default function HomePage() {
+  //initializing configuration
+  initFirebase();
+
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+
+
+  const signIn = async () => {
+    const result = await signInWithPopup(auth, provider)
+    console.log(result.user)
+  }
   return (
     <div>
-      <h3>Home</h3>
-            <p>
-              This page does not require authentication, so it won't redirect to
-              the login page if you are not signed in.
-            </p>
-            <ul>
-                <li><Link href="/login">Login</Link></li>
-            </ul>
+      <h3>Click the button bellow to sign in:</h3>
+      <br></br>
+      <button onClick={signIn}> Click me to reveal yourself!</button>
     </div>
   );
 }
