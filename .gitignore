@@ -4,3 +4,6 @@
 
 # next.js
 /.next/
+
+#env
+.env.local
