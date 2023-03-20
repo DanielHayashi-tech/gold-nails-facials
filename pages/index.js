@@ -1,27 +1,17 @@
-import { useState } from 'react';
-function Header({ title }) {
-  return <h1>{title ? title : 'Default title'}</h1>;
-}
+import Link from 'next/link'
+
 
 export default function HomePage() {
-  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
-
-  const [likes, setLikes] = useState(0);
-
-  function handleClick() {
-    setLikes(likes + 1);
-  }
-
   return (
     <div>
-      <Header title="Develop. Preview. Ship. 🚀" />
-      <ul>
-        {names.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
-      </ul>
-
-      <button onClick={handleClick}>Like ({likes})</button>
+      <h3>Home</h3>
+            <p>
+              This page does not require authentication, so it won't redirect to
+              the login page if you are not signed in.
+            </p>
+            <ul>
+                <li><Link href="/login">Login</Link></li>
+            </ul>
     </div>
   );
 }
