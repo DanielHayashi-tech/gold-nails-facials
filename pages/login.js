@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 
 import { initializeApp } from "firebase/app";
-import { getAuth, linkWithCredential, signInWithEmailAndPassword   } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword   } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDrQ36nuiG1-xosnlh2AvW5uaSJS7IYPPo",
@@ -15,8 +15,8 @@ const firebaseConfig = {
   appId: "1:245392999579:web:6dc628bba4fafef708f23e"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+if (initializeApp.length === 0 ){
+}
 
 function Header({ title }) {
 
@@ -26,12 +26,13 @@ function Header({ title }) {
 }
 
 export default function HomePage() {
+  const app = initializeApp(firebaseConfig);
   const router = useRouter()
-  console.log(auth)
-  function signin() {
-    const email = document.querySelector('#email').value
-    const passwd = document.querySelector('#passwd').value
+  const auth = getAuth(app);
 
+  function signin() {
+      const email = document.querySelector('#email').value
+      const passwd = document.querySelector('#passwd').value    
 
     signInWithEmailAndPassword(auth, email, passwd)
     .then((userCredential) => {
@@ -52,7 +53,7 @@ export default function HomePage() {
     
     <div>
       <Header title="You made it to the login page! 👾" />
-      <button onClick={signin}>Login</button>
+      <button onClick={signin()}>Login</button>
       <ul>
           <li><Link href="/">Take me back home</Link></li>
       </ul>
