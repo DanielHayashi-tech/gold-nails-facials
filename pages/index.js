@@ -18,7 +18,7 @@ export default function HomePage() {
 
   if (user) {
     router.push("/dashboard")
-    return <div> Welcome {user.displayName} </div>
+    return <div> [] </div>
   }
 
 
@@ -30,6 +30,7 @@ export default function HomePage() {
     <div>
       <h3>Click the button below to sign in:</h3>
       <br></br>
+      
       <button onClick={() => signIn()}> Click me to if you want to see your dashboard!</button>
     </div>
   );
