@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Clients {
+  Clientid        Int           @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  phone_number    String
+  email_address   String
+  birthday        DateTime
+  status          Client_status @relation(fields: [client_statusID], references: [client_statusID])
+  client_statusID Int
+}
+
+model Client_status {
+  client_statusID           Int       @id
+  client_status_description String
+  Clients                   Clients[]
+}
