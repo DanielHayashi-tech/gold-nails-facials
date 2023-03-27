@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router'
 import ActiveLink from './ActiveLink'
 
-
 export default function Header() {
   const router = useRouter();
 
 
   return (
     <header>
-      <div class= "container">
+      <div>
         <nav>
           <ul>
             <li>
