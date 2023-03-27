@@ -1,7 +1,7 @@
-import { getAuth } from "firebase/auth";
+import { initFirebase } from '../lib/firebaseApp';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
-
 
 
 export default function Dashboard() {
@@ -9,8 +9,6 @@ export default function Dashboard() {
     const router = useRouter();
     const userName = "Blah";
     const[user, loading] = useAuthState(auth);
-
-
     if (loading) {
         return <div> Loading... </div>
       }
@@ -19,7 +17,6 @@ export default function Dashboard() {
         router.push("/")
         return <div> Please Sign in to Continue </div>
       }
-      
 
     return (
       <div>
@@ -31,4 +28,3 @@ export default function Dashboard() {
       </div>
     );
   }
-

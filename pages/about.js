@@ -4,7 +4,7 @@ import prisma from '../lib/prismaApp'
 
 export default function About({ data }) {
   const [myData, setMyData] = useState(data)
-  console.log(myData)
+  
 
   return (
     <div>
