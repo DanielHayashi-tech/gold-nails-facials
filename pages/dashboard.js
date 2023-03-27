@@ -1,17 +1,6 @@
-import { initFirebase } from '../lib/firebaseApp';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
-import { PrismaClient } from '@prisma/client'
-
-export async function getStaticProps() {
-  const prisma = new PrismaClient()
-  const posts = await prisma.Client_status.findMany()
-  console.log(posts)
-  return {
-    props : { posts }
-  }
-}
 
 
 
@@ -21,6 +10,7 @@ export default function Dashboard() {
     const userName = "Blah";
     const[user, loading] = useAuthState(auth);
 
+
     if (loading) {
         return <div> Loading... </div>
       }
@@ -29,6 +19,7 @@ export default function Dashboard() {
         router.push("/")
         return <div> Please Sign in to Continue </div>
       }
+      
 
     return (
       <div>
@@ -40,3 +31,4 @@ export default function Dashboard() {
       </div>
     );
   }
+

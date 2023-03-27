@@ -1,0 +1,26 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[dannyExample] (
+    [id] INT NOT NULL IDENTITY(1,1),
+    [name] NVARCHAR(1000) NOT NULL,
+    [email] NVARCHAR(1000) NOT NULL,
+    [created] DATETIME2 NOT NULL CONSTRAINT [dannyExample_created_df] DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT [dannyExample_pkey] PRIMARY KEY CLUSTERED ([id]),
+    CONSTRAINT [dannyExample_email_key] UNIQUE NONCLUSTERED ([email])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH
