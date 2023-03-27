@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import prisma from '../../lib/prismaApp'
-import Link from 'next/link';
-import Header from '../../components/header';
 
 export default function About({ data }) {
   const [myData, setMyData] = useState(data)
@@ -10,9 +7,8 @@ export default function About({ data }) {
 
   return (
     <div>
-      <Header />
-      <h1>My Data:</h1>
-    
+      <h1>The About page! </h1>
+      <p> This is using prsima to call out back end dummy data. </p>
       <table style={{ margin: 'auto'}}>
         <thead>
           <tr>

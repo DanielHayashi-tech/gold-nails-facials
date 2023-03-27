@@ -23,8 +23,6 @@ export default function Dashboard() {
 
     return (
       <div>
-        <Header />
-
         <h2> Welcome {user.displayName} </h2>
         <br></br>
         <h5> Click the button below me to signout!</h5>
