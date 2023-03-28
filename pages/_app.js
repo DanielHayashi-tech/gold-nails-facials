@@ -1,13 +1,15 @@
 import '../public/index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from '../components/navBar';
+import { AuthUserProvider } from '../context/AuthContext';
 
 
 
 export default function App({ Component, pageProps }) {
   return <>
   <NavBar />
-  <Component {...pageProps} />
+    {/* <Component {...pageProps} /> */}
+  <AuthUserProvider><Component {...pageProps} /></AuthUserProvider>
   </>
 }
 

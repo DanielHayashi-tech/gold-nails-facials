@@ -1,49 +1,56 @@
 import { initFirebase } from '../lib/firebaseApp';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import Login from './login';
+import { useAuth } from '../context/AuthContext';
 
 export default function HomePage() {
   //initializing configuration
   initFirebase();
-  const provider = new GoogleAuthProvider();
-  const auth = getAuth();
-  const [user, loading] = useAuthState(auth);
+  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const router = useRouter();
-
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
+  const { signIN, googleSignIn } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(data)
+    signIN(email, password)
+      .then(authUser => {
+        console.log("Success. The user is created in Firebase")
+        router.push("/dashboard");
+      })
+      .catch(error => {
+        console.log(error)
+        alert("Email/Password combination is incorrect.")
+        // An error occurred. Set error message to be displayed to user
+        setError(error.message)
+      });
   }
 
 
-  if (loading) {
-    return <div> Loading... </div>
-  }
+  // if (loading) {
+  //   return <div> Loading... </div>
+  // }
 
-  if (user) {
-    router.push("/dashboard")
-    return <div> bug  </div>
-  }
+  // if (user) {
+  //   router.push("/dashboard")
+  //   return <div> bug  </div>
+  // }
 
 
   const signIn = async () => {
-    const result = await signInWithPopup(auth, provider)
-    console.log(result.user)
+    const result = await googleSignIn()
+    router.push("/dashboard")
+  }
 
-  
-
-  
+  const goToSignUp = async () => {
+    router.push("/signUp");
 
   }
+
+
   return (
     <div>
        <div
@@ -57,13 +64,7 @@ export default function HomePage() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            onChange={(e) =>
-              setData({
-                ...data,
-                email: e.target.value,
-              })
-            }
-            value={data.email}
+            onChange={(event) => setEmail(event.target.value)}
             required
             type="email"
             placeholder="Enter email"
@@ -73,13 +74,7 @@ export default function HomePage() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            onChange={(e) =>
-              setData({
-                ...data,
-                password: e.target.value,
-              })
-            }
-            value={data.password}
+            onChange={(event) => setPassword(event.target.value)}
             required
             type="password"
             placeholder="Password"
@@ -90,8 +85,12 @@ export default function HomePage() {
         </Button>
         <br></br>
         <br></br>
-        <button onClick={() => signIn()}> I am the only one that works</button>
       </Form>
+      <Button onClick={() => goToSignUp()}class='mb-3'>Create Account</Button>
+      <br></br>
+      <br/>
+      <Button onClick={() => signIn()}> Sign in with Google</Button>
+
     </div>
     </div>
   );
