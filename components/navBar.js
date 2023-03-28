@@ -1,13 +1,21 @@
-import ActiveLink from './ActiveLink'
+import React from 'react'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import Link from 'next/link'
+import ActiveLink from './ActiveLink';
 
-export default function Header() {
+
+export default function NavBar() {
   return (
-    <header>
-      <div>
-        <nav>
-          <ul>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Link href="/" passHref>
+          <Navbar.Brand>Golden Nails and Facials</Navbar.Brand>
+        </Link>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
             <li>
-              <ActiveLink href='/'>
+              <ActiveLink href='/profile'>
                 Profile
               </ActiveLink>
             </li>
@@ -37,10 +45,9 @@ export default function Header() {
                 Logout
               </ActiveLink>
             </li>
-          </ul>
-        </nav>
-
-      </div>
-    </header>
-  )
-}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+};

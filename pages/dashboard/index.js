@@ -1,37 +1,32 @@
 import { initFirebase } from '../../lib/firebaseApp';
+import React, { useState, useEffect } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Header from '../../components/header';
+import { useAuth } from '../../context/AuthContext';
 
 
 export default function Dashboard() {
-    const auth = getAuth();
+    // const auth = getAuth();
     const router = useRouter();
-    const userName = "Blah";
-    const[user, loading] = useAuthState(auth);
+    const userName = "";
+    // const[user, loading] = useAuthState(auth);
+    const { authUser, loading, getUser, signOut } = useAuth();
 
-    if (loading) {
-        return <div> Loading... </div>
-      }
-    
-      if (!user) {
-        router.push("/")
-        return <div> Please Sign in to Continue </div>
-      }
+
+    useEffect(() => {
+      if (!loading && !authUser)
+        router.push('/')
+    }, [authUser, loading])
 
     return (
       <div>
-        <Header />
-
-        <h2> Welcome {user.displayName} </h2>
-        <p> Looks like you were authenticaed bc you wouldn't be here otherwise! </p>
+        <h2> Welcome {} </h2>
         <br></br>
         <h5> Click the button below me to signout!</h5>
-        <button onClick={() => auth.signOut()}>Log Out</button>
-        <br></br>
-        
+        <button onClick={() => signOut()}>Log Out</button>
       </div>
     );
   }
