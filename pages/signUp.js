@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'next/router';
+
 
 export default function SignUp() {
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [passwordOne, setPasswordOne] = useState("");
+  const [passwordTwo, setPasswordTwo] = useState("");
+  const [error, setError] = useState(null);
+
+  const { create_account } = useAuth();
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(data)
+    create_account(email, passwordOne)
+      .then(authUser => {
+        console.log("Success. The user is created in Firebase")
+        router.push("/");
+      })
+      .catch(error => {
+        console.log(error)
+        alert("That email is already in use.")
+        // An error occurred. Set error message to be displayed to user
+        setError(error.message)
+      });
   }
 
 
@@ -26,13 +44,7 @@ export default function SignUp() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
-            onChange={(e) =>
-              setData({
-                ...data,
-                email: e.target.value,
-              })
-            }
-            value={data.email}
+            onChange={(event) => setEmail(event.target.value)}
             required
             type="email"
             placeholder="Enter email"
@@ -42,13 +54,7 @@ export default function SignUp() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            onChange={(e) =>
-              setData({
-                ...data,
-                password: e.target.value,
-              })
-            }
-            value={data.password}
+            onChange={(event) => setPasswordOne(event.target.value)}
             required
             type="password"
             placeholder="Password"
