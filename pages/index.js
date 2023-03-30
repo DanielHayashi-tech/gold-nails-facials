@@ -59,9 +59,9 @@ export default function HomePage() {
         margin: 'auto',
       }}
     >
-      <h1 className="text-center my-3 ">Login</h1>
+      <h1 name="text-center my-3 ">Login</h1>
       <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group name="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             onChange={(event) => setEmail(event.target.value)}
@@ -71,7 +71,7 @@ export default function HomePage() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group name="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             onChange={(event) => setPassword(event.target.value)}
@@ -86,7 +86,7 @@ export default function HomePage() {
         <br></br>
         <br></br>
       </Form>
-      <Button onClick={() => goToSignUp()}class='mb-3'>Create Account</Button>
+      <Button onClick={() => goToSignUp()}name='mb-3'>Create Account</Button>
       <br></br>
       <br/>
       <Button onClick={() => signIn()}> Sign in with Google</Button>
