@@ -21,7 +21,7 @@ export default function Dashboard() {
 
     return (
       <div>
-        <h2> Welcome {} </h2>
+        <h2> Welcome { } </h2>
         <br></br>
         <h5> Click the button below me to signout!</h5>
         <button onClick={() => signOut()}>Log Out</button>
