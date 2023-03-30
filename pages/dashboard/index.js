@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Header from '../../components/header';
 import { useAuth } from '../../context/AuthContext';
 
 

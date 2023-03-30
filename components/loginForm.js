@@ -78,7 +78,7 @@ export default function LoginForm() {
         <br></br>
         <br></br>
       </Form>
-      <Button onClick={() => goToSignUp()}class='mb-3'>Create Account</Button>
+      <Button onClick={() => goToSignUp()}>Create Account</Button>
       <br></br>
       <br/>
       <Button onClick={() => signInWithGoogle()}> Sign in with Google</Button>
