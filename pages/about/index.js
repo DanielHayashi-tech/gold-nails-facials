@@ -54,7 +54,7 @@ export default function Dashboard() {
       <div style={{ textAlign: 'center' }}>
         <h2 style={{ margin: 0 }}>Welcome Back sample user</h2>
         <br />
-        <h5>Click the button below to sign out!</h5>
+        
         <button onClick={() => signOut()}>Log Out</button>
 
         <div style={{ backgroundColor: 'white', height: '250px', border: '1px solid black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

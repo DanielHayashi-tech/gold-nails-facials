@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from "react-scroll";
-import ActiveLink from './ActiveLink';
 import { links } from '../pages/api/links';
 import { Scroll } from 'react-scroll/modules';
 import ScrollDownButton from './scrolldown';
