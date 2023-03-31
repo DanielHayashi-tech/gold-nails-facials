@@ -4,7 +4,6 @@
 // import { useAuthState } from 'react-firebase-hooks/auth'
 // import { useRouter } from 'next/router';
 // import { useAuth } from '../../context/AuthContext';
-// import NavBar from '../../components/navBar';
 // import { useDisclosure } from "@chakra-ui/react";
 // import About from '../../components/about';
 // import Head from "next/head";
@@ -72,7 +71,7 @@ export default function Dashboard() {
         <SideDrawer ref={refBtn} onClose={onClose} isOpen={isOpen} />
         <Hero
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-          title="Nailed By Ingelosi"
+          title="I am a web developer."
         />
         <About
           desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. A sequi

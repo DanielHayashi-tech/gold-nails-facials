@@ -22,7 +22,7 @@ export default function MyNavbar(props) {
   return (
     <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed">
       <div className="container flex items-center justify-between px-4 py-4 mx-auto">
-        <div className={`text-[24px] ${lobster.className}`}>Ingelosi</div>
+        <div className={`text-[24px] ${lobster.className}`}>Golden Nails Bro</div>
 
         <div className="hidden gap-6 md:flex">
           {links.map(({ name, to, id, href }) => (
