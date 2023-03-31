@@ -1,11 +1,8 @@
-import { initFirebase } from '../../lib/firebaseApp';
-import React, { useState, useEffect } from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useAuthState } from 'react-firebase-hooks/auth'
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../context/AuthContext';
 import LogoutButton from '../../components/logoutButton';
-
+import ClientIntakeForm from '../../components/clientIntakeForm';
 
 
 export default function Dashboard() {
@@ -23,8 +20,20 @@ export default function Dashboard() {
 
     return (
       <div>
-        
+        <div style={{
+                textAlign: 'center',
+                fontSize: '50px',
+                fontWeight: 'bold',
+                color: 'red',
+                margin: '10px',
+                padding: '10px',
+            }}>
+            <h1>Dashboard</h1>
+        </div>
+        <ClientIntakeForm />
+        <div>
         <LogoutButton />
+        </div>
       </div>
     );
   }

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 
 
-
 export default function LogoutButton() {
     const router = useRouter();
     const { authUser, loading, signOut } = useAuth();
@@ -31,7 +30,7 @@ export default function LogoutButton() {
         width: '100px',
         height: '50px',
         position: 'absolute',
-        top: '50%', 
+        top: '120%', 
         left: '50%',
         transform: 'translate(-50%, -50%)'}}
         onClick={() => signOut()}>Log Out</button>
