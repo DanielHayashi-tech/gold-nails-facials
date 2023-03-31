@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 
 export default function LogoutButton() {
+    const router = useRouter();
     const { authUser, loading, signOut } = useAuth();
 
 
