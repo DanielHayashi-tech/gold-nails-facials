@@ -1,33 +1,48 @@
 import React from 'react'
+import {
+  Box,
+  Flex,
+  IconButton,
+  useColorModeValue,
+  Icon,
+} from "@chakra-ui/react";
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import Link from 'next/link'
+import { Link } from "react-scroll";
 import ActiveLink from './ActiveLink';
 import { links } from '../pages/api/links';
 import { Scroll } from 'react-scroll/modules';
 import ScrollDownButton from './scrolldown';
 
 export default function NavBar() {
+  const navBg = useColorModeValue("white", "gray.800");
+
   return (
-    <Navbar className="navbar" expand="lg">
-      <Container>
-        <Link href="/" passHref>
-          <Navbar.Brand>Golden Nails and Facials</Navbar.Brand>
-        </Link>
-      </Container>
-      <Container>  
-        <button href="/dashboard" passHref>
-          <Navbar.Brand>Dashboard</Navbar.Brand>
-        </button>
-        <ScrollDownButton href="/about" passHref/>
-          <Navbar.Brand>About</Navbar.Brand>
-        <ScrollDownButton/>
-        <Link href="/service" passHref>
-          <Navbar.Brand>Service</Navbar.Brand>
-        </Link>
-        <Link href="/quote" passHref>
-          <Navbar.Brand>Quote</Navbar.Brand>
-        </Link>
-      </Container>
-    </Navbar>
+    <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed">
+      <div className="container flex items-center justify-between px-4 py-4 mx-auto"/>
+        <div className={`text-[24px]`}>Golden Nails and Salon</div>
+
+        <div className="hidden gap-6 md:flex">
+          {links.map(({ name, to, id, href }) => (
+            <Link
+              key={id}
+              to={to}
+              smooth={true}
+              spy={true}
+              offset={0}
+              duration={500}
+              href={href}
+              className="cursor-pointer hover:text-emerald-700"
+            >
+              {name}
+            </Link>
+          ))}
+
+          <div className="text-sm">
+          </div>
+        </div>
+
+        <div className="md:hidden flex space-x-6">
+      </div>
+    </Flex>
   );
 };
