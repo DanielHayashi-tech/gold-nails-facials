@@ -2,7 +2,9 @@ import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import Link from 'next/link'
 import ActiveLink from './ActiveLink';
-
+import { links } from '../pages/api/links';
+import { Scroll } from 'react-scroll/modules';
+import ScrollDownButton from './scrolldown';
 
 export default function NavBar() {
   return (
@@ -13,12 +15,12 @@ export default function NavBar() {
         </Link>
       </Container>
       <Container>  
-        <Link href="/dashboard" passHref>
+        <button href="/dashboard" passHref>
           <Navbar.Brand>Dashboard</Navbar.Brand>
-        </Link>
-        <Link href="/about" passHref>
+        </button>
+        <ScrollDownButton href="/about" passHref/>
           <Navbar.Brand>About</Navbar.Brand>
-        </Link>
+        <ScrollDownButton/>
         <Link href="/service" passHref>
           <Navbar.Brand>Service</Navbar.Brand>
         </Link>
