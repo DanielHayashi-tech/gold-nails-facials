@@ -6,7 +6,7 @@ import ActiveLink from './ActiveLink';
 
 export default function NavBar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="navbar" expand="lg">
       <Container>
         <Link href="/" passHref>
           <Navbar.Brand>Golden Nails and Facials</Navbar.Brand>

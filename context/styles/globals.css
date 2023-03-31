@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+@layer components {
+  .btn {
+    @apply inline-block bg-indigo-400 rounded-[15px] shadow-md hover:bg-indigo-500 active:bg-indigo-500 active:shadow-lg active:translate-y-[4px]  px-4 py-2 mt-10 font-medium;
+  }
+
+  .inputStyle {
+    @apply outline-cyan-700 dark:bg-slate-800 border-gray-400 border rounded-[5px] px-4 py-2 w-[100%];
+  }
+}

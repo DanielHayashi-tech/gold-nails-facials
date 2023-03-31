@@ -5,26 +5,82 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router';
 import { useAuth } from '../../context/AuthContext';
 
-
 export default function Dashboard() {
-    // const auth = getAuth();
-    const router = useRouter();
-    const userName = "";
-    // const[user, loading] = useAuthState(auth);
-    const { authUser, loading, getUser, signOut } = useAuth();
+  const router = useRouter();
+  const { authUser, loading, getUser, signOut } = useAuth();
 
+  const [pageNumber, setPageNumber] = useState(8);
+  const [data, setData] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
 
-    useEffect(() => {
-      if (!loading && !authUser)
-        router.push('/')
-    }, [authUser, loading])
+  const dataArray = new Array(30).fill(0).map((_, i) => i + 1);
 
-    return (
-      <div>
-        <h2> Welcome { } </h2>
-        <br></br>
-        <h5> Click the button below me to signout!</h5>
-        <button onClick={() => signOut()}>Log Out</button>
-      </div>
-    );
+  useEffect(() => {
+    if (!loading && !authUser) router.push('/');
+  }, [authUser, loading]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`YOUR_API_URL?page=${pageNumber}`);
+      const newData = await response.json();
+      setData((prevData) => [...prevData, ...newData]);
+      setHasMore(newData.length > 0);
+    }
+
+    fetchData();
+  }, [pageNumber]);
+
+  function loadMore() {
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
   }
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{ textAlign: 'center' }}>
+        <h2 style={{ margin: 0 }}>Welcome Back {getUser().displayName}</h2>
+        <br />
+        <h5>Click the button below to sign out!</h5>
+        <button onClick={() => signOut()}>Log Out</button>
+
+        <div style={{ backgroundColor: 'white', height: '250px', border: '1px solid black', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <img src="goldennailslogo.png" alt="Company logo" style={{ maxHeight: '100%', maxWidth: '100%' }} />
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {dataArray.slice(21).map((item) => (
+            <div
+              key={item}
+              style={{
+                flexBasis: '30%',
+                margin: '5px',
+                backgroundColor: 'white',
+                height: '50px',
+                border: '1px solid black',
+              }}
+            >
+              {`Menu Item `}
+            </div>
+          ))}
+        </div>
+
+        {hasMore && (
+          <div>
+            {/* Render whatever you want to indicate that more data is loading */}
+          </div>
+        )}
+
+        {!hasMore && (
+          <div>
+            {/* Render whatever you want to indicate that there is no more data */}
+          </div>
+        )}
+
+        <div style={{ marginTop: '50px', borderTop: '1px solid black' }}>
+          <h3>About Us</h3>
+          <p>Or we can add an Image here to reflect the company</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
