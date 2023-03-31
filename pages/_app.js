@@ -10,7 +10,6 @@ initFirebase()
 
 export default function App({ Component, pageProps }) {
   return <>
-  <MyNavbar />
     {/* <Component {...pageProps} /> */}
     <ChakraProvider>
   <AuthUserProvider><Component {...pageProps} /></AuthUserProvider>
