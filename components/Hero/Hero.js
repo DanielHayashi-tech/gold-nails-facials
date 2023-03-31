@@ -28,7 +28,7 @@ export default function Hero(props) {
                 <TypeWriter
                   onInit={(typewriter) => {
                     typewriter
-                      .typeString("Welcome!")
+                      .typeString("Welcome Back!")
                       .pauseFor(2000)
                       .deleteAll()
                       .typeString("We're a nail salon")
