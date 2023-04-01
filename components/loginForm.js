@@ -51,7 +51,8 @@ export default function LoginForm() {
         margin: 'auto',
       }}
     >
-      <h1 className="text-center my-3 ">Login</h1>
+      <h1 className="text-center my-3 font-weight-bold">Login</h1>
+
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
