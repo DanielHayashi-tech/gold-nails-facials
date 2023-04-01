@@ -56,7 +56,7 @@ export default function Contact() {
         />
         <div>
           <button type="submit" className="btn transition duration-500">
-            Share Inquiry
+            Share Message
           </button>
         </div>
       </form>
