@@ -1,10 +1,10 @@
-import offers from "../../pages/api/offers";
+import pediOffers from "@/pages/api/pediOffers";
 import Headings from "../Heading/Headings";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function PedicureService() {
+const PedicureService = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
@@ -12,11 +12,11 @@ export default function PedicureService() {
   }
 
   return (
-    <section id="service" className="container px-4 py-10 mx-auto">
+    <section id="pedicureservice" className="container px-4 py-10 mx-auto">
       <Headings title="Our Pedicure Services" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] ">
         {/* test */}
-        {offers.map((offer) => (
+        {pediOffers.map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
             layout
@@ -51,3 +51,5 @@ export default function PedicureService() {
     </section>
   );
 }
+
+export default PedicureService;

@@ -9,8 +9,8 @@ import {
   import React from "react";
   import { Link } from "react-scroll";
   import { ThemeModeToggler } from "../Icons/ThemeModeToggler";
-  import { links } from "@/pages/api/serviceslinks";
   import { FaAlignJustify } from "react-icons/fa";
+  import { serviceslinks } from "../../pages/api/serviceslinks";
   
   
   const lobsterTwo = Lobster_Two({
@@ -19,7 +19,7 @@ import {
   });
   
   
-  const MyNavbar = React.forwardRef((props, ref) => {
+  const ServicesNavbar = React.forwardRef((props, ref) => {
     const navBg = useColorModeValue("white", "gray.800");
   
   
@@ -30,7 +30,7 @@ import {
   
   
           <div className="hidden gap-6 md:flex">
-            {links.map(({ name, to, id, href }) => (
+            {serviceslinks.map(({ name, to, id, href }) => (
               <Link
                 key={id}
                 to={to}
@@ -39,8 +39,7 @@ import {
                 offset={0}
                 duration={500}
                 href={href}
-                className="cursor-pointer hover:text-emerald-700"
-              >
+                className="cursor-pointer hover:text-emerald-700">
                 {name}
               </Link>
             ))}
@@ -63,5 +62,5 @@ import {
     );
   });
   
-  export default MyNavbar;
+  export default ServicesNavbar;
   
