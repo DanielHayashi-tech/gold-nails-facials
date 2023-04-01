@@ -7,13 +7,6 @@ import { BsPatchExclamationFill } from "react-icons/bs";
 
 export const links = [
   {
-    name: "Dashboard",
-    to: "dashboard",
-    id: 1,
-    icon: <IoHome className="mr-3" />,
-    href: "/dashboard",
-  },
-  {
     name: "About",
     to: "about",
     id: 2,
@@ -29,7 +22,7 @@ export const links = [
   },
   {
     name: "Quote",
-    to: "quote",
+    to: "contact",
     id: 4,
     icon: <FaEnvelope className="mr-3" />,
     href: "/quote",

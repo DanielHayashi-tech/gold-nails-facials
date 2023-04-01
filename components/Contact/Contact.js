@@ -24,7 +24,9 @@ export default function Contact() {
 
   return (
     <section id="contact" className="container px-4 py-10 mx-auto">
-      <Headings title="We welcome your creative ideas for nail designs at Golden Nails nFacial. Share a photo of your inspiration, and our skilled technicians will bring your vision to life." />
+      <Headings title="We welcome your creative ideas for nail designs at Golden Nails & Facial. 
+      Share a photo of your inspiration, and our skilled technicians will bring your vision to life."/>
+     
 
       <form onSubmit={handleOnSubmit} className="flex flex-col gap-8">
         <div className="grid grid-cols-1 gap-8 caret-red-600 md:grid-cols-2">

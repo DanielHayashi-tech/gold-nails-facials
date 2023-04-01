@@ -13,7 +13,6 @@ export default function Headings(props) {
       className={`text-[40px] font-bold flex items-center gap-4 py-10 ${lobsterTwo.className}`}
     >
       {props.title}
-      <div className="bg-emerald-700 h-[2px] w-[40px] translate-y-1"></div>
     </div>
   );
 };
