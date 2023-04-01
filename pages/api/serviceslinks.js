@@ -18,5 +18,12 @@ export const serviceslinks = [
     id: 14,
     icon: <BsHandbagFill className="mr-3" />,
     href: "/MenuServices/PedicureService"
+  },
+  {
+    name: "Waxing",
+    to: "waxingservice",
+    id: 21,
+    icon: <BsHandbagFill className="mr-3" />,
+    href: "/MenuServices/WaxingService"
   }
 ];
