@@ -1,11 +1,15 @@
 # dependencies
 /node_modules
 
+# IDE
+.vscode
+
 # next.js
 /.next/
 
 #env
 .env.local
+.env
 
 #package-lock.json
-package-lock.jsong
+package-lock.json
