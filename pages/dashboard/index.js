@@ -4,6 +4,7 @@ import MyNavbar from "../../components/Nav/MyNavbar";
 import Service from "../../components/Service/Service";
 import Contact from "../../components/Contact/Contact";
 
+
 import About from "../../components/About/About";
 import MyFooter from "../../components/Footer/MyFooter";
 import { useRef } from "react";
@@ -14,10 +15,11 @@ import SideDrawer from "../../components/Sidebar/SideDrawer";
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
 const siteTitle = "Minful Soutions.";
 
-export default function Dashboard() {
+
+export default function Dashboard()  {
 
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const refBtn = useRef();
+  const refBtn = useRef(null);
 
   return (
     <>

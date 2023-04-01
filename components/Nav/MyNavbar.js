@@ -19,12 +19,12 @@ const lobsterTwo = Lobster_Two({
 });
 
 
-export default function MyNavbar(props) {
+const MyNavbar = React.forwardRef((props, ref) => {
   const navBg = useColorModeValue("white", "gray.800");
 
 
   return (
-    <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed">
+    <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed" ref={ref}>
       <div className="container flex items-center justify-between px-4 py-4 mx-auto">
         <div className={`text-[24px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
 
@@ -54,11 +54,13 @@ export default function MyNavbar(props) {
 
         <div className="md:hidden flex space-x-6">
           <ThemeModeToggler />
-          <IconButton ref={props.ref} onClick={props.onOpen}>
+          <IconButton onClick={props.onOpen}>
             <Icon as={FaAlignJustify} />
           </IconButton>
         </div>
       </div>
     </Flex>
   );
-}
+});
+
+export default MyNavbar;

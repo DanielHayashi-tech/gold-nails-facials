@@ -9,10 +9,14 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/react";
+import React from "react";
 import { links } from "@/pages/api/links";
 import { Link } from "react-scroll";
 
-export default function SideDrawer({ isOpen, ref, onClose }) {
+
+const SideDrawer= React.forwardRef((props, ref) => {
+
+  const { isOpen, myref, onClose } = props;
   return (
     <Drawer
       isOpen={isOpen}
@@ -24,7 +28,7 @@ export default function SideDrawer({ isOpen, ref, onClose }) {
 
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>SET SOME TEST HERE!!!!!</DrawerHeader>
+        <DrawerHeader>We appreciate you!</DrawerHeader>
         <DrawerBody>
           {links.map(({ name, to, id, icon }, index) => (
             <Collapse
@@ -54,5 +58,5 @@ export default function SideDrawer({ isOpen, ref, onClose }) {
       </DrawerContent>
     </Drawer>
   );
-};
-
+});
+export default SideDrawer;
