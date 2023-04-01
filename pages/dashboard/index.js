@@ -1,14 +1,3 @@
-// import { initFirebase } from '../../lib/firebaseApp';
-// import React, { useState, useEffect } from 'react';
-// import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-// import { useAuthState } from 'react-firebase-hooks/auth'
-// import { useRouter } from 'next/router';
-// import { useAuth } from '../../context/AuthContext';
-// import { useDisclosure } from "@chakra-ui/react";
-// import About from '../../components/about';
-// import Head from "next/head";
-// import { useRef } from "react";
-
 import Head from "next/head";
 import Hero from "../../components/Hero/Hero";
 import MyNavbar from "../../components/Nav/MyNavbar";
@@ -22,36 +11,10 @@ import { useDisclosure } from "@chakra-ui/react";
 import SideDrawer from "../../components/Sidebar/SideDrawer";
 
 
-const name = "Nailed By Ingelosi is a salon that offers menicure and pedicure.";
-const siteTitle = "Ingelosi";
+const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
+const siteTitle = "Minful Soutions.";
 
 export default function Dashboard() {
-  // const router = useRouter();
-  // const { authUser, loading, getUser, signOut } = useAuth();
-
-  // const [pageNumber, setPageNumber] = useState(8);
-  // const [data, setData] = useState([]);
-  // const [hasMore, setHasMore] = useState(true);
-
-  // const dataArray = new Array(30).fill(0).map((_, i) => i + 1);
-
-  // const { onOpen, onClose, isOpen } = useDisclosure();
-  // const refBtn = useRef();
-
-  // useEffect(() => {
-  //   if (!loading && !authUser) router.push('/');
-  // }, [authUser, loading]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await fetch(`YOUR_API_URL?page=${pageNumber}`);
-  //     const newData = await response.json();
-  //     setData((prevData) => [...prevData, ...newData]);
-  //     setHasMore(newData.length > 0);
-  //   }
-
-  //   fetchData();
-  // }, [pageNumber]);
 
   const { onOpen, onClose, isOpen } = useDisclosure();
   const refBtn = useRef();
@@ -71,15 +34,13 @@ export default function Dashboard() {
         <SideDrawer ref={refBtn} onClose={onClose} isOpen={isOpen} />
         <Hero
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-          title="I am a web developer."
+          title="Golden Nails & Facials"
         />
         <About
-          desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. A sequi
-              vitae doloremque quas ex fugiat earum obcaecati quod laudantium
-              aliquam dicta, sapiente in cum. Culpa vitae quam obcaecati
-              nesciunt incidunt."
-          street="1234 Maddison Str"
-          city="Protea Glen, Soweto"
+          desc="Welcome to Golden Nails and Facials, where we provide top-quality 
+          nail and skincare services in a relaxing and inviting atmosphere. 
+          Our team of experienced technicians is dedicated to helping you look and feel your best, 
+          using only the highest quality products and techniques."
         />
         <Service />
         <Contact />

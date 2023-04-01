@@ -9,8 +9,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const name = "Nailed By Ingelosi is a salon that offers menicure and pedicure.";
-export const siteTitle = "Ingelosi";
+const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
+export const siteTitle = "Mindful Sol.";
 
 export default function Layout({ children }) {
   return (
