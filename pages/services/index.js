@@ -3,6 +3,7 @@ import ServicesNavbar from "../../components/Nav/ServicesNavbar";
 import Contact from "../../components/Contact/Contact";
 import ManicureService from "@/components/MenuServices/ManicureService";
 import PedicureeService from "@/components/MenuServices/PedicureService";
+import WaxingService from "@/components/MenuServices/WaxingService";
 import MyFooter from "../../components/Footer/MyFooter";
 import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
@@ -31,6 +32,7 @@ export default function Services()  {
         
         <ManicureService />
         <PedicureeService />
+        <WaxingService />
 
         <Contact />
         <MyFooter date="2023" rights="All rights reserved." />

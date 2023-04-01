@@ -14,7 +14,7 @@ const ManicureService = () => {
   return (
     <section id="ManicureService" className="container px-4 py-10 mx-auto">
       <Headings title="Our Manicure Services" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] ">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         {/* test */}
         {manicureOffers.map((offer) => (
           <motion.div
