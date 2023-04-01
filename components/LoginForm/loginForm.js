@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { initFirebase } from '../lib/firebaseApp';
+import { initFirebase } from '@/lib/firebaseApp';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 
 export default function LoginForm() {
