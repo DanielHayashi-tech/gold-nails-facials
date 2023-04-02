@@ -11,165 +11,183 @@ datasource db {
 }
 
 model Clients {
-  ClientID        Int           @id @default(autoincrement())
-  first_name      String  @db.Char(255)
-  last_name       String  @db.Char(255)
-  phone_number    String  @db.Char(20) @unique
-  email_address   String  @unique
-  birthday        DateTime @db.DateTime
   client_register_date  DateTime  @default(now())
   Client_status    Client_status @relation(fields: [Client_statusID], references: [Client_statusID])
-  Client_statusID Int  
-  service_orders  Service_Order[]
+  ClientID             Int             @id @default(autoincrement())
+  first_name           String          @db.Char(255)
+  last_name            String          @db.Char(255)
+  phone_number         String          @unique @db.Char(20)
+  email_address        String          @unique @db.Char(255)
+  birthday             DateTime        @db.DateTime
+  client_register_date DateTime        @default(now())
+  Client_status        Client_status   @relation(fields: [Client_statusID], references: [Client_statusID])
+  Client_statusID      Int  
+  service_orders       Service_Order[]
 }
 
 model Client_status {
   Client_statusID           Int       @id @default(autoincrement())
-  client_status_description String  @db.Char(255)
+  client_status_description String    @db.Char(255)
+  status_date               DateTime  @default(now())
   Clients                   Clients[]
 }
 
 model Service_Order_Status {
-  Service_Order_StatusID           Int       @id @default(autoincrement())
-  Service_Order_Status_Description String @db.Char(255)
-  Status_date                     DateTime  @default(now())
-  Service_Order                   Service_Order[]
+  Service_Order_StatusID           Int             @id @default(autoincrement())
+  Service_Order_Status_Description String          @db.Char(255)
+  Status_date                      DateTime        @default(now())
+  Service_Order                    Service_Order[]
 }
 
 model Employee {
-  EmployeeID        Int           @id @default(autoincrement())
-  first_name      String  @db.Char(255)
-  last_name       String  @db.Char(255)
-  phone_number    String  @db.Char(20) @unique
-  email_address   String  @unique
-  address_1       String  @db.Char(255)
-  address_2       String  @db.Char(255)
-  city            String  @db.Char(20)
-  state           String  @db.Char(20)
-  zip_code        String  @db.Char(10)
-  employee_statusID Int @unique
-  status          Employee_status @relation(fields: [employee_statusID], references: [employee_statusID])
-  Employee_Specialty Employee_Specialty[]
-  Employee_Service_Skill     Employee_Service_Skill[]
+  EmployeeID             Int                      @id @default(autoincrement())
+  first_name             String                   @db.Char(255)
+  last_name              String                   @db.Char(255)
+  phone_number           String                   @unique @db.Char(20)
+  email_address          String                   @unique @db.Char(255)
+  address_1              String                   @db.Char(255)
+  address_2              String                   @db.Char(255)
+  city                   String                   @db.Char(20)
+  state                  String                   @db.Char(20)
+  zip_code               String                   @db.Char(10)
+  employee_statusID      Int                      
+  date_added             DateTime                 @default(now())
+  status                 Employee_status          @relation(fields: [employee_statusID], references: [employee_statusID])
+  Employee_Specialty     Employee_Specialty[]
+  Employee_Service_Skill Employee_Service_Skill[]
 }
 
 model Employee_status {
-  employee_statusID           Int       @id @default(autoincrement())
-  employee_status_description String
-  status_date                DateTime   @default(now())
-  Employee                   Employee[]
+  employee_statusID           Int        @id @default(autoincrement())
+  employee_status_description String   @db.Char(255)
+  status_date                 DateTime   @default(now())
+  Employee                    Employee[]
 }
+
 model Employee_Specialty {
-  Employee_SpecialtyID           Int       @id @default(autoincrement())
-  EmployeeID Int
-  SpecialtyID Int
-  employee_specialty_statusID Int
-  Employee_Specialty_Status      Employee_Specialty_Status @relation(fields: [employee_specialty_statusID], references: [employee_specialty_statusID])
-  Employee                      Employee @relation(fields: [EmployeeID], references: [EmployeeID])
-  Specialty                     Specialty @relation(fields: [SpecialtyID], references: [SpecialtyID])
+  Employee_SpecialtyID        Int                       @id @default(autoincrement())
+  EmployeeID                  Int
+  SpecialtyID                 Int   
+  employee_specialty_statusID Int 
+  date_added                  DateTime  @default(now())
+  Employee_Specialty_Status   Employee_Specialty_Status @relation(fields: [employee_specialty_statusID], references: [employee_specialty_statusID])
+  Employee                    Employee                  @relation(fields: [EmployeeID], references: [EmployeeID])
+  Specialty                   Specialty                 @relation(fields: [SpecialtyID], references: [SpecialtyID])
 }
 
 model Employee_Specialty_Status {
-  employee_specialty_statusID           Int       @id @default(autoincrement())
-  employee_specialty_status_description String
-  status_date                          DateTime
-  Employee_Specialty                     Employee_Specialty[]
-  
+  employee_specialty_statusID           Int                  @id @default(autoincrement())
+  employee_specialty_status_description String             @db.Char(255)
+  status_date                           DateTime  @default(now())
+  Employee_Specialty                    Employee_Specialty[]
 }
-model Specialty{
-  SpecialtyID           Int       @id @default(autoincrement())
-  specialty_statusID Int
-  date_added        DateTime
-  Specialty_Status      Specialty_Status @relation(fields: [specialty_statusID], references: [specialty_statusID])
-  Employee_Specialty     Employee_Specialty[]
+
+model Specialty {
+  SpecialtyID        Int                  @id @default(autoincrement())
+  specialty_statusID Int  
+  specialty_description String         @db.Char(255)
+  date_added         DateTime @default(now())
+  Specialty_Status   Specialty_Status     @relation(fields: [specialty_statusID], references: [specialty_statusID])
+  Employee_Specialty Employee_Specialty[]
 }
+
 model Specialty_Status {
-  specialty_statusID           Int       @id  @default(autoincrement())
-  specialty_status_description String
-  status_date                 DateTime
-  Specialty                     Specialty[]
+  specialty_statusID           Int         @id @default(autoincrement())
+  specialty_status_description String   @db.Char(255)
+  status_date                  DateTime @default(now())
+  Specialty                    Specialty[]
 }
+
 model Skill_Level {
-  Skill_LevelID           Int       @id @default(autoincrement())
-  skill_level_description String
-  Skill_Level_StatusID Int
-  date_added           DateTime
-  skill_level_status      Skill_Level_Status @relation(fields: [Skill_Level_StatusID], references: [Skill_Level_StatusID])
-  Employee_Service_Skill     Employee_Service_Skill[]
+  Skill_LevelID           Int                      @id @default(autoincrement())
+  skill_level_description String                 @db.Char(255)
+  Skill_Level_StatusID    Int 
+  date_added              DateTime  @default(now())
+  skill_level_status      Skill_Level_Status       @relation(fields: [Skill_Level_StatusID], references: [Skill_Level_StatusID])
+  Employee_Service_Skill  Employee_Service_Skill[]
 }
+
 model Skill_Level_Status {
-  Skill_Level_StatusID           Int       @id  @default(autoincrement())
-  skill_level_status_description String
-  status_date                   DateTime
-  Skill_Level                     Skill_Level[]
+  Skill_Level_StatusID           Int           @id @default(autoincrement())
+  skill_level_status_description String     @db.Char(255)
+  status_date                    DateTime @default(now())
+  Skill_Level                    Skill_Level[]
 }
-model Employee_Service_Skill{
-  Employee_Service_SkillID           Int       @id @default(autoincrement())
-  EmployeeID Int
-  ServiceID Int
-  Skill_LevelID Int
-  employee_service_statusID Int
-  date_added      DateTime
-  Employee_Service_Status      Employee_Service_Skill_Status @relation(fields: [employee_service_statusID], references: [Employee_Service_StatusID])
-  Employee                      Employee @relation(fields: [EmployeeID], references: [EmployeeID])
-  Service                     Service @relation(fields: [ServiceID], references: [ServiceID])
-  Skill_Level                     Skill_Level @relation(fields: [Skill_LevelID], references: [Skill_LevelID])
+
+model Employee_Service_Skill {
+  Employee_Service_SkillID  Int                           @id @default(autoincrement())
+  EmployeeID                Int 
+  ServiceID                 Int 
+  Skill_LevelID             Int 
+  employee_service_statusID Int 
+  date_added                DateTime  @default(now())
+  Employee_Service_Status   Employee_Service_Skill_Status @relation(fields: [employee_service_statusID], references: [Employee_Service_StatusID])
+  Employee                  Employee                      @relation(fields: [EmployeeID], references: [EmployeeID])
+  Service                   Service                       @relation(fields: [ServiceID], references: [ServiceID])
+  Skill_Level               Skill_Level                   @relation(fields: [Skill_LevelID], references: [Skill_LevelID])
 }
+
 model Employee_Service_Skill_Status {
-  Employee_Service_StatusID           Int       @id @default(autoincrement())
-  employee_service_status_description String
-  status_date                              DateTime
-  Employee_Service_Skill                     Employee_Service_Skill[]
+  Employee_Service_StatusID           Int                      @id @default(autoincrement())
+  employee_service_status_description String               @db.Char(255)
+  status_date                         DateTime  @default(now())
+  Employee_Service_Skill              Employee_Service_Skill[]
 }
-model Service{
-  ServiceID           Int       @id @default(autoincrement())
-  service_type        Int
-  service_statusID Int
-  service_description String
-  service_time      Int
-  service_price      Int
-  date_added        DateTime
-  service_status      Service_Status @relation(fields: [service_statusID], references: [service_statusID])
-  Service_Type      Service_Type @relation(fields: [service_type], references: [service_typeID])
+
+model Service {
+  ServiceID              Int                      @id @default(autoincrement())
+  service_typeID         Int    
+  service_statusID       Int    
+  service_description    String            @db.Char(255) 
+  service_time           Int             
+  service_price          Int               
+  date_added             DateTime @default(now())
+  service_status         Service_Status           @relation(fields: [service_statusID], references: [service_statusID])
+  Service_Type           Service_Type             @relation(fields: [service_typeID], references: [service_typeID])
   service_order_line     Service_Order_Line[]
-  Employee_Service_Skill     Employee_Service_Skill[]
+  Employee_Service_Skill Employee_Service_Skill[]
 }
-model Service_Type{
+
+model Service_Type {
   service_typeID           Int       @id @default(autoincrement())
-  service_type_description String
-  Service                     Service[]
+  service_type_description String @db.Char(255)
+  Service                  Service[]
 }
-model Service_Status{
-  service_statusID           Int       @id  @default(autoincrement())
-  service_status_description String
-  status_date               DateTime
-  Service                     Service[]
+
+model Service_Status {
+  service_statusID           Int       @id @default(autoincrement())
+  service_status_description String @db.Char(255)
+  status_date                DateTime @default(now())
+  Service                    Service[]
 }
-model Service_Order_Line{
-  Service_Order_LineID           Int       @id @default(autoincrement())
-  ServiceOrderID Int
-  ServiceID Int
-  OrderID Int @unique
+
+model Service_Order_Line {
+  Service_Order_LineID        Int                       @id @default(autoincrement())
+  ServiceOrderID              Int
+  ServiceID                   Int
+  OrderID                     Int                       @unique
   service_order_line_statusID Int
-  date_added      DateTime
-  Service_Order_Line_Status      Service_Order_Line_Status @relation(fields: [service_order_line_statusID], references: [service_order_line_statusID])
-  Service_Order                      Service_Order []
-  Service                     Service @relation(fields: [ServiceID], references: [ServiceID])
+  date_added                  DateTime  @default(now())
+  Service_Order_Line_Status   Service_Order_Line_Status @relation(fields: [service_order_line_statusID], references: [service_order_line_statusID])
+  Service_Order               Service_Order[]
+  Service                     Service                   @relation(fields: [ServiceID], references: [ServiceID])
 }
-model Service_Order{
-  ServiceOrderID            Int           @id @default(autoincrement())
-  OrderID Int
-  service_order_status_id   Int
-  service_order_quote      Int
-  service_order_date        DateTime
-  ClientID                   Int
-  Clients                    Clients       @relation(fields: [ClientID], references: [ClientID])
-  Service_Order_Status       Service_Order_Status @relation(fields: [service_order_status_id], references: [Service_Order_StatusID])
-  Service_Order_Line         Service_Order_Line @relation(fields: [OrderID], references: [OrderID])
+
+model Service_Order {
+  ServiceOrderID          Int                  @id @default(autoincrement())
+  OrderID                 Int
+  service_order_status_id Int
+  service_order_quote     Int 
+  service_order_date      DateTime  @default(now())
+  ClientID                Int
+  Clients                 Clients              @relation(fields: [ClientID], references: [ClientID])
+  Service_Order_Status    Service_Order_Status @relation(fields: [service_order_status_id], references: [Service_Order_StatusID])
+  Service_Order_Line      Service_Order_Line   @relation(fields: [OrderID], references: [OrderID])
 }
-model Service_Order_Line_Status{
-  service_order_line_statusID           Int       @id @default(autoincrement())
-  service_order_line_status_description String
-  status_date                          DateTime
-  Service_Order_Line                     Service_Order_Line[]
+
+model Service_Order_Line_Status {
+  service_order_line_statusID           Int                  @id @default(autoincrement())
+  service_order_line_status_description String           @db.Char(255)
+  status_date                           DateTime  @default(now())
+  Service_Order_Line                    Service_Order_Line[]
 }
