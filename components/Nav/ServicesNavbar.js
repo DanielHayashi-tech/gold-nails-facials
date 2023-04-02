@@ -25,11 +25,9 @@ import {
   
     return (
       <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed" ref={ref}>
-        <div className="container flex items-center justify-between px-4 py-4 mx-auto">
-          <div className={`text-[24px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
-  
-  
-          <div className="hidden gap-6 md:flex">
+      <div className="text-[23px] container flex items-center justify-between px-12 py-4 mx-auto">
+        <div className={`text-[35px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
+        <div className="hidden gap-10 md:flex">
             {serviceslinks.map(({ name, to, id, href }) => (
               <Link
                 key={id}

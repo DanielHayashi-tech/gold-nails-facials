@@ -10,7 +10,7 @@ const About = (props) => {
     <section id="about" className="container px-4 py-10 mx-auto">
       <Headings title="About Us" />
       <div className="grid tracking-tight grid-cols-1 md:grid-cols-2 gap-[60px]">
-        <div className="">
+        <div>
           <div>
             <p>{props.desc}</p>
           </div>
@@ -23,17 +23,18 @@ const About = (props) => {
           </a>
 
           <br></br>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.707734413577!2d-95.75496478457062!3d29.757170581987683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864127357810226b%3A0xf7f62ead58fea018!2sGolden%20Nails%20N%20Facial!5e0!3m2!1sen!2sus!4v1680297800133!5m2!1sen!2sus"
-          width="400"
+          <div className="flex items-center pb-4 text-xl font-bold pt-9">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.707734413577!2d-95.75496478457062!3d29.757170581987683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864127357810226b%3A0xf7f62ead58fea018!2sGolden%20Nails%20N%20Facial!5e0!3m2!1sen!2sus!4v1680297800133!5m2!1sen!2sus"
+          width="450"
           height="250"
           style= {{ border: "0"}}
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade">
-          </iframe>
-
-          
+            </iframe>
+          </div>
         </div>
+        
 
         <div>
           <h2 className="flex items-center pb-5 text-xl font-bold">
@@ -71,7 +72,7 @@ const About = (props) => {
             <BsFillTelephoneFill className="mr-5 text-2xl" />
            Phone Number
           </h2>
-          <p class="text-lg">(281) 392-7003</p>
+          <p className="text-lg">(281) 392-7003</p>
         </div>
       </div>
     </section>
