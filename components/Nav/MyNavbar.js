@@ -25,11 +25,11 @@ const MyNavbar = React.forwardRef((props, ref) => {
 
   return (
     <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed" ref={ref}>
-      <div className="container flex items-center justify-between px-4 py-4 mx-auto">
-        <div className={`text-[24px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
+      <div className="text-[23px] container flex items-center justify-between px-12 py-4 mx-auto">
+        <div className={`text-[35px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
 
 
-        <div className="hidden gap-6 md:flex">
+        <div className="hidden gap-10 md:flex">
           {links.map(({ name, to, id, href }) => (
             <Link
               key={id}
@@ -52,7 +52,7 @@ const MyNavbar = React.forwardRef((props, ref) => {
         </div>
 
 
-        <div className="md:hidden flex space-x-6">
+        <div className="md:hidden flex space-x-4">
           <ThemeModeToggler />
           <IconButton onClick={props.onOpen}>
             <Icon as={FaAlignJustify} />
