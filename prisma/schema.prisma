@@ -11,8 +11,6 @@ datasource db {
 }
 
 model Clients {
-  client_register_date  DateTime  @default(now())
-  Client_status    Client_status @relation(fields: [Client_statusID], references: [Client_statusID])
   ClientID             Int             @id @default(autoincrement())
   first_name           String          @db.Char(255)
   last_name            String          @db.Char(255)
