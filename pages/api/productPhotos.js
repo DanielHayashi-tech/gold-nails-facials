@@ -18,12 +18,12 @@ export default [
   {
     id: 4,
     imgLink: "https://flowbite.com/docs/images/carousel/carousel-4.svg",
-    alt: "img3",
+    alt: "img4",
   },
   {
     id: 5,
     imgLink: "https://flowbite.com/docs/images/carousel/carousel-5.svg",
-    alt: "img3",
+    alt: "img5",
   },
   // {
   //   id: 6,

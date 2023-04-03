@@ -10,7 +10,6 @@ import {
   import { Link } from "react-scroll";
   import { ThemeModeToggler } from "../Icons/ThemeModeToggler";
   import { loginlinks } from "@/pages/api/loginlinks";
-  import { FaAlignJustify } from "react-icons/fa";
   
   
   const lobsterTwo = Lobster_Two({
@@ -52,9 +51,6 @@ import {
   
           <div className="md:hidden flex space-x-4">
             <ThemeModeToggler />
-            <IconButton onClick={props.onOpen}>
-              <Icon as={FaAlignJustify} />
-            </IconButton>
           </div>
         </div>
       </Flex>
