@@ -10,6 +10,11 @@ import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SideDrawer from "../../components/Sidebar/SideDrawer";
 
+
+import { useRouter } from 'next/router';
+import { useAuth } from '../..//context/AuthContext.js';
+import React, { useEffect } from 'react';
+
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
 const siteTitle = "Mindful Solutions.";
 
@@ -24,10 +29,38 @@ const siteTitle = "Mindful Solutions.";
 //   return await resp.json();
 // }
 
+async function handleSignUp(token) {
+  console.log(token)
+  // Send a POST request to the /api/register route with the user's information
+  const response = await fetch('/api/dashboard', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+    } 
+  
+  });
+  
+  if(!response.ok) {
+    throw new Error(response.statusText)
+  }
+  const data = await response.json();
+  console.log(data)
+  return data
+}
 
 export default function Dashboard()  {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const refBtn = useRef(null);
+
+  const { authUser, loading, getToken } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !authUser)
+      router.push('/')
+  }, [authUser, loading])
+
 
   return (
     <>
@@ -55,6 +88,17 @@ export default function Dashboard()  {
         {/* <p>{prices}</p> */}
         <Service />
         <MyFooter date="2023" rights="All rights reserved." />
+        <button onClick={ async () => { 
+          try {
+            console.log()
+            await handleSignUp(await getToken())
+
+          }
+          catch( error) {
+            console.log(error)
+          }
+          
+          }}>Tesr</button>
       </main>
     </>
   );

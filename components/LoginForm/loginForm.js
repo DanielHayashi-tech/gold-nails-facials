@@ -14,7 +14,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { signIN, googleSignIn } = useAuth();
+  const { signIN } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
