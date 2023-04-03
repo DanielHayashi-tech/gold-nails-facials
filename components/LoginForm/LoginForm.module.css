@@ -1,0 +1,24 @@
+.container {
+    background-color: black;
+    color: gold;
+  }
+  
+  .card-header {
+    font-family: cursive;
+    font-weight: 600;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: black;
+  }
+  
+  .btn-block {
+    background-color: gold;
+    border-color: gold;
+    color: black;
+  }
+  
+  .btn-outline-primary {
+    color: gold;
+    border-color: gold;
+  }
+  
