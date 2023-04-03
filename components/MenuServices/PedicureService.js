@@ -1,5 +1,5 @@
 import pediOffers from "@/pages/api/pediOffers";
-import Headings from "../Heading/Headings";
+import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -13,7 +13,7 @@ const PedicureService = () => {
 
   return (
     <section id="pedicureservice" className="container px-5 py-5 mx-auto">
-      <Headings title="Our Pedicure Services"  />
+      <ServicesHeadings title="Our Pedicure Services"  />
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[200px] ">
     
         {pediOffers.map((offer) => (

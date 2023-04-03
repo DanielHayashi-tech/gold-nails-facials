@@ -32,8 +32,6 @@ export default function Services()  {
         <ManicureService />
         <PedicureeService />
         <WaxingService />
-
-        <Contact />
         <MyFooter date="2023" rights="All rights reserved." />
       </main>
     </>

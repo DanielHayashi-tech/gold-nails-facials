@@ -2,8 +2,23 @@ import React from "react";
 import Headings from "../Heading/Headings";
 import { BsClock } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
-import {BsFillTelephoneFill} from "react-icons/bs";
+import { BsFillTelephoneFill } from "react-icons/bs";
 import { GiClick } from "react-icons/gi";
+
+
+
+{/* Re fromat these 2 social media icons to be in a row */ }
+
+
+{/* <div className="grid grid-cols-2 gap-2 content-normal" >
+  <a href="https://www.yelp.com/biz/golden-nails-n-facial-katy">
+    <img src="/yelp2.png" width={35} height={35} />
+  </a>
+  <a href="https://www.google.com/search?q=golden+nails+n+facial&rlz=1C1UEAD_enUS1018US1019&oq=go&aqs=chrome.1.69i59l3j46i131i199i433i465i512j69i59j69i60l3.1911j0j9&sourceid=chrome&ie=UTF-8#lrd=0x864127357810226b:0xf7f62ead58fea018,1">
+    <img src="/google.png" width={35} height={35} />
+  </a>
+</div> */}
+
 
 const About = (props) => {
   return (
@@ -25,16 +40,16 @@ const About = (props) => {
           <br></br>
           <div className="flex items-center pb-4 text-xl font-bold pt-9">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.707734413577!2d-95.75496478457062!3d29.757170581987683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864127357810226b%3A0xf7f62ead58fea018!2sGolden%20Nails%20N%20Facial!5e0!3m2!1sen!2sus!4v1680297800133!5m2!1sen!2sus"
-          width="450"
-          height="250"
-          style= {{ border: "0"}}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade">
+              width="450"
+              height="250"
+              style={{ border: "0" }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
         </div>
-        
+
 
         <div>
           <h2 className="flex items-center pb-5 text-xl font-bold">
@@ -52,7 +67,7 @@ const About = (props) => {
               )}
             </div>
             <div className="flex flex-col gap-6 text-gray-600">
-              {[":",":",":", ":", ":", ":", ":"].map((separator, index) => (
+              {[":", ":", ":", ":", ":", ":", ":"].map((separator, index) => (
                 <div key={index}>{separator}</div>
               ))}
             </div>
@@ -70,7 +85,7 @@ const About = (props) => {
           </div>
           <h2 className="flex items-center pb-3 text-xl font-bold">
             <BsFillTelephoneFill className="mr-5 text-2xl" />
-           Phone Number
+            Phone Number
           </h2>
           <p className="text-lg">(281) 392-7003</p>
         </div>
