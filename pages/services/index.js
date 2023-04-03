@@ -31,19 +31,21 @@ export default function Services()  {
       </Head>
 
       <ServicesNavbar onOpen={onOpen} isOpen={isOpen} ref={refBtn} />
-
       <main>
         <SideDrawer ref={refBtn} onClose={onClose} isOpen={isOpen} />
         
         <ManicureService />
         <PedicureeService />
         <WaxingService />
+<<<<<<< HEAD
         <FacialService />
         <PowderNailsService />
         <PackageService />
         <AdditionalService />
         
         <Contact />
+=======
+>>>>>>> f9b76eef6d0c3589de3c15d20e7bec03a4b0a370
         <MyFooter date="2023" rights="All rights reserved." />
       </main>
     </>

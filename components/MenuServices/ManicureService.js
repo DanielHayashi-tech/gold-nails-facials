@@ -1,5 +1,5 @@
 import manicureOffers from "../../pages/api/manicureOffers";
-import Headings from "../Heading/Headings";
+import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -12,10 +12,10 @@ const ManicureService = () => {
   }
 
   return (
-    <section id="ManicureService" className="container px-12 py-10 mx-auto">
-      <Headings title="Our Manicure Services" />
-      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
-        {/* test */}
+    <section id="ManicureService" className="container px-5 py-5 mx-auto">
+      <ServicesHeadings title="Our Manicure Services"  />
+      <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[200px] ">
+        
         {manicureOffers.map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
