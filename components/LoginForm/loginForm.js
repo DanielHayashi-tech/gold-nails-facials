@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { Navbar } from "react-bootstrap";
+import styles from './LoginForm.module.css';
 
 export default function LoginForm() {
   //initializing configuration
@@ -44,54 +45,56 @@ export default function LoginForm() {
 
 
   return (
-    <div className="container my-5 py-5">
-    <div className="row justify-content-center">
-      <div className="col-md-6">
-        <div className="card shadow-lg border-0 rounded-lg mt-5">
-          <div className="card-header">
-            <h3
-              className="text-center"
-              style={{
-                fontFamily: "cursive",
-                fontWeight: "600",
-                fontSize: "3rem",
-                marginBottom: "1rem",
-              }}
-            >
-              My Golden Nails N' Facials
-            </h3>
-          </div>
-          <div className="card-body">
-            <Form onSubmit={handleLogin}>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+    <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
+  <div className="row justify-content-center">
+    <div className="col-md-6">
+      <div className="card shadow-lg border-0 rounded-lg mt-5">
+        <div className="card-header">
+          <h3
+            className="text-center"
+            style={{
+              fontFamily: "cursive",
+              fontWeight: "600",
+              fontSize: "3rem",
+              marginBottom: "1rem",
+              color: "#FEE28D",
+              textShadow: "0 0 5px black", // add text-shadow property
+            }}
+          >
+            My Golden Nails
+          </h3>
+        </div>
+            <div className="card-body">
+              <Form onSubmit={handleLogin}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+  
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
               </Form.Group>
 
               {error && <p className="text-danger mb-3">{error}</p>}
 
              <Button
-  variant="primary"
-  type="submit"
-  className="btn-block custom-button"
->
+                  variant="primary"
+                  type="submit"
+                    className="btn-block custom-button"
+                      >
   Login
 </Button>
 
@@ -108,7 +111,7 @@ export default function LoginForm() {
                 Sign Up Now
               </Button>
             </div>
-            <hr className="my-2" />
+            <hr className="my-7" />
             <div className="text-center">
               <Button
                 variant="outline-primary"
