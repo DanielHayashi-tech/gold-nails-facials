@@ -13,7 +13,7 @@ import SideDrawer from "../../components/Sidebar/SideDrawer";
 
 
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
-const siteTitle = "Minful Soutions.";
+const siteTitle = "Mindful Solutions.";
 
 
 export default function Dashboard()  {
