@@ -1,5 +1,5 @@
 import additionalOffers from "@/pages/api/additionalOffers";
-import Headings from "../Heading/Headings";
+import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export default function AdditionalService() {
 
   return (
     <section id="additionalservice" className="container px-4 py-10 mx-auto">
-      <Headings title="Additional Services" />
+      <ServicesHeadings title="Additional Services" />
       <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         {/* test */}
         {additionalOffers.map((offer) => (

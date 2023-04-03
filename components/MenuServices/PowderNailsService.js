@@ -1,5 +1,5 @@
 import powdernailOffers from "@/pages/api/powdernailOffers";
-import Headings from "../Heading/Headings";
+import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -13,8 +13,8 @@ export default function PowderNailService() {
 
   return (
     <section id="powdernailsservice" className="container px-4 py-10 mx-auto">
-      <Headings title="Our Powder Nails Services" />
-      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
+      <ServicesHeadings title="Our Powder Nails Services" />
+      <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         {/* test */}
         {powdernailOffers.map((offer) => (
           <motion.div

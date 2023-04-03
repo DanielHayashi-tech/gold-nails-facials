@@ -30,4 +30,9 @@ export default [
     title: "Check out our Packages!",
     img: require("public/manicure3.jpg"),
   },
+  {
+    id: 7,
+    title: "Check out our Aditional Services!",
+    img: require("public/remove.jpg"),
+  },
 ];

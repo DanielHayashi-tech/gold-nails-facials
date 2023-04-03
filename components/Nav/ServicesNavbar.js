@@ -25,15 +25,9 @@ import {
   
     return (
       <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed" ref={ref}>
-<<<<<<< HEAD
       <div className="text-[18px] container flex items-center justify-between px-8 py-2">
         <div className={`text-[35px] font-bold ${greatVibe.className}`}>Golden Nails n Facial</div>
         <div className="hidden gap-6 md:flex">
-=======
-      <div className="text-[22px] container flex items-center justify-between px-1 py-3 mx-auto">
-        <div className={`text-[34px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
-        <div className="hidden gap-10 md:flex">
->>>>>>> f9b76eef6d0c3589de3c15d20e7bec03a4b0a370
             {serviceslinks.map(({ name, to, id, href }) => (
               <Link
                 key={id}

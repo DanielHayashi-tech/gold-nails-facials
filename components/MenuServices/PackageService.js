@@ -1,5 +1,5 @@
 import packageOffers from "@/pages/api/packageOffers";
-import Headings from "../Heading/Headings";
+import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export default function PackageService() {
 
   return (
     <section id="packageservice" className="container px-4 py-10 mx-auto">
-      <Headings title="Our Packages" />
+      <ServicesHeadings title="Our Packages" />
       <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         {/* test */}
         {packageOffers.map((offer) => (
