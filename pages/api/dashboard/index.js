@@ -1,5 +1,5 @@
 import { rewrites } from '@/next.config';
-import { authMiddleware } from '../../lib/authMiddleware';
+import { authMiddleware } from '../../../lib/authMiddleware';
 import jwt from 'jsonwebtoken';
 
 
