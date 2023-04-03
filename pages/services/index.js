@@ -26,7 +26,6 @@ export default function Services()  {
       </Head>
 
       <ServicesNavbar onOpen={onOpen} isOpen={isOpen} ref={refBtn} />
-
       <main>
         <SideDrawer ref={refBtn} onClose={onClose} isOpen={isOpen} />
         
