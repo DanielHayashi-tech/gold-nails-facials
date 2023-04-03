@@ -20,7 +20,6 @@ export default function LoginForm() {
     e.preventDefault();
     signIN(email, password)
       .then(authUser => {
-        console.log("Success. The user is created in Firebase")
         router.push("/dashboard");
       })
       .catch(error => {
@@ -32,10 +31,6 @@ export default function LoginForm() {
   }
 
 
-  const signInWithGoogle = async () => {
-    const result = await googleSignIn()
-    router.push("/dashboard")
-  }
 
   const goToSignUp = async () => {
     router.push("/signUp");
@@ -109,14 +104,6 @@ export default function LoginForm() {
               </Button>
             </div>
             <hr className="my-2" />
-            <div className="text-center">
-              <Button
-                variant="outline-primary"
-                onClick={signInWithGoogle}
-              >
-                Sign in with Google
-              </Button>
-            </div>
           </div>
         </div>
       </div>
