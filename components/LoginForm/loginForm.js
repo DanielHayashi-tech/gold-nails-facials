@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
-
+import { Navbar } from "react-bootstrap";
 
 export default function LoginForm() {
   //initializing configuration
@@ -87,14 +87,14 @@ export default function LoginForm() {
 
               {error && <p className="text-danger mb-3">{error}</p>}
 
-              <Button
-                variant="primary"
-                type="submit"
-                className="btn-block"
-                style={{ backgroundColor: "#007bff" }}
-              >
-                Login
-              </Button>
+             <Button
+  variant="primary"
+  type="submit"
+  className="btn-block custom-button"
+>
+  Login
+</Button>
+
             </Form>
           </div>
           <div className="card-footer text-center">
