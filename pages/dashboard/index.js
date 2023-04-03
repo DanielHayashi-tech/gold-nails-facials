@@ -2,7 +2,6 @@ import Head from "next/head";
 import Hero from "../../components/Hero/Hero";
 import MyNavbar from "../../components/Nav/MyNavbar";
 import Service from "../../components/Service/Service";
-import Contact from "../../components/Contact/Contact";
 
 
 import About from "../../components/About/About";
@@ -12,7 +11,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import SideDrawer from "../../components/Sidebar/SideDrawer";
 
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
-const siteTitle = "Minful Soutions.";
+const siteTitle = "Mindful Solutions.";
 
 // async function getPrices() {
 //   const resp = await fetch('/api/dashboard?token=test', {
@@ -55,8 +54,6 @@ export default function Dashboard()  {
         />
         {/* <p>{prices}</p> */}
         <Service />
-        
-        <Contact />
         <MyFooter date="2023" rights="All rights reserved." />
       </main>
     </>

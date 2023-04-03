@@ -53,7 +53,7 @@ const SideDrawer= React.forwardRef((props, ref) => {
         </DrawerBody>
 
         <DrawerFooter>
-          <Box>2023. All rights reserved. Ingelosi.</Box>
+          <Box>Golden Nails n' Facials</Box>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
