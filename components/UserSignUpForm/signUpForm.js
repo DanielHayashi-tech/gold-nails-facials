@@ -3,7 +3,6 @@ import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
 
-
 export default function SignUpForm() {
   const router = useRouter();
 
@@ -38,8 +37,44 @@ export default function SignUpForm() {
         margin: 'auto',
       }}
     >
-      <h1 className="text-center my-3 ">Sign Up</h1>
+      <h1 className="text-center my-20 ">Sign Up</h1>
       <Form onSubmit={handleSignUp}>
+      <Form.Group className="mb-3" controlId="formBasicFirstName">
+          <Form.Label> First Name</Form.Label>
+          <Form.Control
+            // onChange={(event) => setEmail(event.target.value)}
+            required
+            type="text"
+            placeholder="First Name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicLastName">
+          <Form.Label> Last Name</Form.Label>
+          <Form.Control
+            // onChange={(event) => setEmail(event.target.value)}
+            required
+            type="text"
+            placeholder="Last Name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicBirthday">
+          <Form.Label> Birthdate</Form.Label>
+          <Form.Control
+            // onChange={(event) => setEmail(event.target.value)}
+            required
+            type="date"
+            placeholder="Format MM/DD/YYYY"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
+          <Form.Label> Phone Number</Form.Label>
+          <Form.Control
+            // onChange={(event) => setEmail(event.target.value)}
+            required
+            type="tel"
+            placeholder="Format 123-456-7890"
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control

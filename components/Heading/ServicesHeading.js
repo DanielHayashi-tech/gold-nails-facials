@@ -6,10 +6,10 @@ const lobsterTwo = Lobster_Two({
   subsets: ["latin"],
 });
 
-export default function Headings(props) {
+export default function ServicesHeadings(props) {
   
   return (
-    <div className={`text-[40px] font-bold flex items-center gap-4 py-10 ${lobsterTwo.className}`}>
+    <div className={`text-[40px] font-bold flex justify-center items-center gap-10 py-10 ${lobsterTwo.className}`}>
       {props.title}
     </div>
   );

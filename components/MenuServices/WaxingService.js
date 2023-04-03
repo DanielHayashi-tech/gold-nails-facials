@@ -1,6 +1,5 @@
 import waxingOffers from "@/pages/api/waxingOffers";
-
-import Headings from "../Heading/Headings";
+import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -14,7 +13,7 @@ export default function WaxingService() {
 
   return (
     <section id="waxingservice" className="container px-5 py-5 mx-auto">
-      <Headings title="Our Waxing Services"  />
+      <ServicesHeadings title="Our Waxing Services"  />
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[200px] ">
     
         {waxingOffers.map((offer) => (

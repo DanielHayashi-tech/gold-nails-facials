@@ -2,7 +2,6 @@ import Head from "next/head";
 import Hero from "../../components/Hero/Hero";
 import MyNavbar from "../../components/Nav/MyNavbar";
 import Service from "../../components/Service/Service";
-import Contact from "../../components/Contact/Contact";
 
 
 import About from "../../components/About/About";
@@ -45,7 +44,6 @@ export default function Dashboard()  {
           using only the highest quality products and techniques."
         />
         <Service />
-        <Contact />
         <MyFooter date="2023" rights="All rights reserved." />
       </main>
     </>
