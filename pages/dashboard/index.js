@@ -11,13 +11,22 @@ import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import SideDrawer from "../../components/Sidebar/SideDrawer";
 
-
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
 const siteTitle = "Minful Soutions.";
 
+// async function getPrices() {
+//   const resp = await fetch('/api/dashboard?token=test', {
+//     method: 'GET',
+
+//   })
+//   if(!resp.ok) {
+//     throw new Error(resp.statusText)
+//   }
+//   return await resp.json();
+// }
+
 
 export default function Dashboard()  {
-
   const { onOpen, onClose, isOpen } = useDisclosure();
   const refBtn = useRef(null);
 
@@ -44,7 +53,9 @@ export default function Dashboard()  {
           Our team of experienced technicians is dedicated to helping you look and feel your best, 
           using only the highest quality products and techniques."
         />
+        {/* <p>{prices}</p> */}
         <Service />
+        
         <Contact />
         <MyFooter date="2023" rights="All rights reserved." />
       </main>
