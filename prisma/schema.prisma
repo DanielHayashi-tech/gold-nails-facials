@@ -12,6 +12,7 @@ datasource db {
 
 model Clients {
   ClientID             Int             @id @default(autoincrement())
+  firebaseuID          String          @unique @db.Char(255)
   first_name           String          @db.Char(255)
   last_name            String          @db.Char(255)
   phone_number         String          @unique @db.Char(20)
@@ -138,7 +139,7 @@ model Service {
   service_statusID       Int
   service_description    String                   @db.Char(255)
   service_time           Int
-  service_price          Int
+  service_price          Int            
   date_added             DateTime                 @default(now())
   service_status         Service_Status           @relation(fields: [service_statusID], references: [service_statusID])
   Service_Type           Service_Type             @relation(fields: [service_typeID], references: [service_typeID])
@@ -163,24 +164,20 @@ model Service_Order_Line {
   Service_Order_LineID        Int                       @id @default(autoincrement())
   ServiceOrderID              Int
   ServiceID                   Int
-  OrderID                     Int                       @unique
   service_order_line_statusID Int
   date_added                  DateTime                  @default(now())
   Service_Order_Line_Status   Service_Order_Line_Status @relation(fields: [service_order_line_statusID], references: [service_order_line_statusID])
-  Service_Order               Service_Order[]
   Service                     Service                   @relation(fields: [ServiceID], references: [ServiceID])
 }
 
 model Service_Order {
   ServiceOrderID          Int                  @id @default(autoincrement())
-  OrderID                 Int
   service_order_status_id Int
   service_order_quote     Int
   service_order_date      DateTime             @default(now())
   ClientID                Int
   Clients                 Clients              @relation(fields: [ClientID], references: [ClientID])
   Service_Order_Status    Service_Order_Status @relation(fields: [service_order_status_id], references: [Service_Order_StatusID])
-  Service_Order_Line      Service_Order_Line   @relation(fields: [OrderID], references: [OrderID])
 }
 
 model Service_Order_Line_Status {
