@@ -23,7 +23,7 @@ export default function AdditionalService() {
             onClick={handleClick}
             style={{
               borderRadius: "1rem",
-              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.9)",
+              boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.0)",
               width: "200px",
             }}
             key={offer.id}
