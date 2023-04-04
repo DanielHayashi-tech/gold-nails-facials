@@ -13,3 +13,8 @@
 
 #package-lock.json
 package-lock.json
+
+
+# Exclude Prisma migration files
+/migrations/*
+!/migrations/.keep
