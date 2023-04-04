@@ -20,7 +20,7 @@ import {
   
   
   const ServicesNavbar = React.forwardRef((props, ref) => {
-    const navBg = useColorModeValue("white", "gray.800");
+    const navBg = useColorModeValue("#faf3f7", "gray.800");
   
   
     return (
@@ -37,20 +37,14 @@ import {
                 offset={0}
                 duration={500}
                 href={href}
-                className="cursor-pointer hover:text-emerald-700">
+                className="cursor-pointer hover:text-pink-800">
                 {name}
               </Link>
             ))}
-  
-  
             <div className="text-sm">
-              
             </div>
           </div>
-  
-  
           <div className="md:hidden flex space-x-6">
-          
             <IconButton onClick={props.onOpen}>
               <Icon as={FaAlignJustify} />
             </IconButton>

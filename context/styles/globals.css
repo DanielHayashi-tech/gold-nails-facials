@@ -6,11 +6,17 @@ html,
 body {
   padding: 0;
   margin: 0;
+  background-color: #faf3f7;
+  /* 
+  #f7f7f7; 
+  
+  
+  */
 }
 
 @layer components {
   .btn {
-    @apply inline-block bg-pink-50 rounded-[10px] shadow-md active:bg-pink-800 active:translate-y-[4px]  px-4 py-2 mt-10 font-medium;
+    @apply inline-block bg-pink-50 rounded-[10px] shadow-md active:translate-y-[4px]  px-4 py-2 mt-10 font-medium;
   }
 
 

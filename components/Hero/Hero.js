@@ -55,9 +55,9 @@ export default function Hero(props) {
               </h4>
             </div>
             <div>
-            <div class="transition duration-150 ease-out hover:ease-in">
+            <div className="transition duration-150 ease-out hover:ease-in">
             
-            <button class="btn" onClick={() => servicesButton()}>
+            <button className="btn" onClick={() => servicesButton()}>
                 Book Now!
                 </button>
             </div>   

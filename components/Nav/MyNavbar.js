@@ -8,7 +8,6 @@ import {
 import { Raleway } from "next/font/google";
 import React from "react";
 import { Link } from "react-scroll";
-
 import { links } from "@/pages/api/links";
 import { FaAlignJustify } from "react-icons/fa";
 
@@ -20,7 +19,7 @@ const raleway = Raleway({
 
 
 const MyNavbar = React.forwardRef((props, ref) => {
-  const navBg = useColorModeValue("white", "gray.400");
+  const navBg = useColorModeValue("#faf3f7", "gray.400");
 
 
   return (
@@ -37,7 +36,7 @@ const MyNavbar = React.forwardRef((props, ref) => {
               offset={0}
               duration={500}
               href={href}
-              className="cursor-pointer hover:text-pink-200"
+              className="cursor-pointer hover:text-pink-900"
             >
               {name}
             </Link>
