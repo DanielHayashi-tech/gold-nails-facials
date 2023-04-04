@@ -8,7 +8,6 @@ import {
   import { Raleway } from "next/font/google";
   import React from "react";
   import { Link } from "react-scroll";
-  import { ThemeModeToggler } from "../Icons/ThemeModeToggler";
   import { loginlinks } from "@/pages/api/loginlinks";
   
   
@@ -43,14 +42,7 @@ import {
             ))}
   
   
-            <div className="text-sm">
-              <ThemeModeToggler />
-            </div>
-          </div>
-  
-  
-          <div className="md:hidden flex space-x-4">
-            <ThemeModeToggler />
+            
           </div>
         </div>
       </Flex>

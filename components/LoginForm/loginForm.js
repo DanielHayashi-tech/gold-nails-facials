@@ -10,17 +10,18 @@ import styles from './LoginForm.module.css';
 export default function LoginForm() {
   //initializing configuration
   initFirebase();
-
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { signIN } = useAuth();
+  const { signIN, googleSignIn } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     signIN(email, password)
       .then(authUser => {
+        console.log("Success. The user is created in Firebase")
         router.push("/dashboard");
       })
       .catch(error => {
@@ -32,6 +33,10 @@ export default function LoginForm() {
   }
 
 
+  const signInWithGoogle = async () => {
+    const result = await googleSignIn()
+    router.push("/dashboard")
+  }
 
   const goToSignUp = async () => {
     router.push("/signUp");
@@ -40,36 +45,29 @@ export default function LoginForm() {
 
 
   return (
-    <div className="container my-5 py-5" style={{ backgroundColor: "" }}>
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <div className="card shadow-lg border-0 rounded-lg mt-5">
-            <div className="card-header">
-              <br></br>
-              <h3
-                className="text-center"
-                style={{
-                  fontFamily: "cyrillic",
-                  fontWeight: "300",
-                  fontSize: "3rem",
-                  marginBottom: "1rem",
-                  color: "#818CF8",
-                }}
-              >
-                My Golden Nails
-              </h3>
-            </div>
-            <div className="card-body"
+    <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
+  <div className="row justify-content-center">
+    <div className="col-md-6">
+      <div className="card shadow-lg border-0 rounded-lg mt-5">
+        <div className="card-header">
+          <h3
+            className="text-center"
             style={{
-              fontFamily: "cyrillic",
-              fontWeight: "300",
-              fontSize: "2rem",
+              fontFamily: "cursive",
+              fontWeight: "600",
+              fontSize: "3rem",
               marginBottom: "1rem",
-              color: "#818CF8",
-            }}>
+              color: "#FFE1F8",
+              textShadow: "0 0 5px black", // add text-shadow property
+            }}
+          >
+            My Golden Nails 
+          </h3>
+        </div>
+            <div className="card-body">
               <Form onSubmit={handleLogin}>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label >Email address</Form.Label>
+                  <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
                     placeholder="Enter email"
@@ -78,8 +76,7 @@ export default function LoginForm() {
                     required
                   />
                 </Form.Group>
-                <br></br>
-
+  
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
@@ -89,40 +86,39 @@ export default function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                </Form.Group>
+              </Form.Group>
 
-                {error && <p className="text-danger mb-3">{error}</p>}
+              {error && <p className="text-danger mb-3">{error}</p>}
 
-                <Button
+             <Button
                   variant="primary"
                   type="submit"
-                  className="btn-block custom-button"
-                >
-                  Login
-                </Button>
+                    className="btn-block custom-button"
+                      >
+  Login
+</Button>
 
-
-              </Form>
+            </Form>
+          </div>
+          <div className="card-footer text-center">
+            <div className="small">
+              Don't have an account?{" "}
+              <Button
+                variant="success"
+                className="p-0 m-0"
+                onClick={goToSignUp}
+              >
+                Sign Up Now
+              </Button>
             </div>
-            <div className="card-footer text-center"
-            style={{
-              fontFamily: "comic sans ms",
-              fontWeight: "20",
-              fontSize: "1.1rem",
-              marginBottom: "1rem",
-              color: "#818CF8",
-            }}>
-              <div className="medium">
-                Don't have an account?{" "}
-                <br></br>
-                <Button className="btn-block custom-button p-1 m-1" variant="success" type="submit" onClick={goToSignUp}>
-                  Sign Up Now!
-                </Button>
-              </div>
+            <hr className="my-7" />
+            <div className="text-center">
+              
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }
