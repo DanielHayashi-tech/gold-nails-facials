@@ -50,19 +50,20 @@ export default function LoginForm() {
     <div className="col-md-6">
       <div className="card shadow-lg border-0 rounded-lg mt-5">
         <div className="card-header">
-          <h3
-            className="text-center"
-            style={{
-              fontFamily: "cursive",
-              fontWeight: "600",
-              fontSize: "3rem",
-              marginBottom: "1rem",
-              color: "#FFE1F8",
-              textShadow: "0 0 5px black", // add text-shadow property
-            }}
-          >
-            My Golden Nails 
-          </h3>
+        <h3
+  className="text-center"
+  style={{
+    fontFamily: "Lobster", // Change to the desired cursive font
+    fontWeight: "600",
+    fontSize: "3rem",
+    marginBottom: "1rem",
+    color: "#FFE1F8",
+    textShadow: "0 0 5px black", // add text-shadow property
+  }}
+>
+  My Golden Nails 
+</h3>
+
         </div>
             <div className="card-body">
               <Form onSubmit={handleLogin}>
@@ -90,26 +91,32 @@ export default function LoginForm() {
 
               {error && <p className="text-danger mb-3">{error}</p>}
 
-             <Button
-                  variant="primary"
-                  type="submit"
-                    className="btn-block custom-button"
-                      >
+              <Button
+  variant="light"
+  type="submit"
+  className="btn-block custom-button"
+  style={{ backgroundColor: "#FFE1F8", fontSize: "140%" }}
+>
   Login
 </Button>
+
+
 
             </Form>
           </div>
           <div className="card-footer text-center">
-            <div className="small">
+            <div className="medium">
               Don't have an account?{" "}
               <Button
-                variant="success"
-                className="p-0 m-0"
-                onClick={goToSignUp}
-              >
-                Sign Up Now
-              </Button>
+  variant="light"
+  className="p-0 m-0"
+  onClick={goToSignUp}
+  style={{ backgroundColor: '#FFE1F8', fontSize: '140%' }}
+>
+  Sign Up Now
+</Button>
+
+
             </div>
             <hr className="my-7" />
             <div className="text-center">
