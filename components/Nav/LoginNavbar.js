@@ -27,23 +27,6 @@ import {
         <div className="text-[22px] container flex items-center justify-between px-1 py-3 mx-auto">
           <div className={`text-[34px] font-bold ${lobsterTwo.className}`}>Golden Nails n Facial</div>
           <div className="hidden gap-10 md:flex">
-            {loginlinks.map(({ name, to, id, href }) => (
-              <Link
-                key={id}
-                to={to}
-                smooth={true}
-                spy={true}
-                offset={0}
-                duration={500}
-                href={href}
-                className="cursor-pointer hover:text-emerald-700"
-              >
-                {name}
-              </Link>
-            ))}
-  
-  
-            
           </div>
         </div>
       </Flex>
