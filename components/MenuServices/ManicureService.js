@@ -3,12 +3,19 @@ import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useAuth } from '../../context/AuthContext.js';
+import { Button } from 'react-bootstrap';
 
 const ManicureService = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { cart } = useAuth();
 
   function handleClick() {
     setIsOpen(!isOpen);
+  }
+
+  function getToCart(item) {
+    cart.push(item)
   }
 
   return (
@@ -46,12 +53,16 @@ const ManicureService = () => {
                   {offer.price}
                 </span>
                 <p className="px-4 py-3 text-sm tracking-tight">{offer.desc}</p>
-              </motion.div>
+                <button className="btn" onClick={() => getToCart(offer.id)}>
+                Add To Order
+                </button>
+                </motion.div>
             )}
           </motion.div>
         ))}
       </div>
     </section>
+
   );
 }
 
