@@ -15,7 +15,7 @@ export default function Service() {
   return (
     <section id="service" className="container px-4 py-10 mx-auto">
       <Headings title="Our Services" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] ">
+      <div className="grid md:grid-cols-3 gap-[70px] ">
         {/* test */}
         {offers.map((offer) => (
           <motion.div
@@ -24,7 +24,7 @@ export default function Service() {
             onClick={handleClick}
             style={{
               borderRadius: "1rem",
-              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.9)",
+              boxShadow: "0px 10px 30px rgba(0, 0, 0, 100)",
               width: "200px",
             }}
             key={offer.id}

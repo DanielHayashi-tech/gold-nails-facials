@@ -6,23 +6,9 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { GiClick } from "react-icons/gi";
 
 
-
-{/* Re fromat these 2 social media icons to be in a row */ }
-
-
-{/* <div className="grid grid-cols-2 gap-2 content-normal" >
-  <a href="https://www.yelp.com/biz/golden-nails-n-facial-katy">
-    <img src="/yelp2.png" width={35} height={35} />
-  </a>
-  <a href="https://www.google.com/search?q=golden+nails+n+facial&rlz=1C1UEAD_enUS1018US1019&oq=go&aqs=chrome.1.69i59l3j46i131i199i433i465i512j69i59j69i60l3.1911j0j9&sourceid=chrome&ie=UTF-8#lrd=0x864127357810226b:0xf7f62ead58fea018,1">
-    <img src="/google.png" width={35} height={35} />
-  </a>
-</div> */}
-
-
 const About = (props) => {
   return (
-    <section id="about" className="container px-4 py-10 mx-auto">
+    <section id="about" className="container px-9 py-10 mx-auto">
       <Headings title="About Us" />
       <div className="grid tracking-tight grid-cols-1 md:grid-cols-2 gap-[60px]">
         <div>
@@ -30,7 +16,7 @@ const About = (props) => {
             <p>{props.desc}</p>
           </div>
           <h2 className="flex items-center pb-4 text-xl font-bold pt-9">
-            <IoLocationOutline className="mr-5 text-2xl" />
+            <IoLocationOutline className="mr-5 text-4xl" />
             Location
           </h2>
           <a href="https://goo.gl/maps/5t19,VM9HLzZsSkZV8" className="hover:underline">
@@ -52,11 +38,19 @@ const About = (props) => {
 
 
         <div>
-          <h2 className="flex items-center pb-5 text-xl font-bold">
-            <BsClock className="mr-5 text-2xl" />
+          <h2 className="flex items-center justify-center pb-3 text-xl font-bold">
+            <BsClock className="mr-5 text-2xl"
+            style={{
+              marginRight: "3rem",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              lineHeight: "1.5rem",
+              letterSpacing: "0.05rem",
+            }}/>
             Hours of Operation
           </h2>
-          <div className="flex items-center justify-between w-[350px]">
+          <br></br>
+          <div className="flex items-center justify-between w-[300px]">
             <div className="flex flex-col gap-6">
               {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].map(
                 (day, index) => (
@@ -66,7 +60,7 @@ const About = (props) => {
                 )
               )}
             </div>
-            <div className="flex flex-col gap-6 text-gray-600">
+            <div className="flex flex-col gap-6 text-gray-30">
               {[":", ":", ":", ":", ":", ":", ":"].map((separator, index) => (
                 <div key={index}>{separator}</div>
               ))}
@@ -79,15 +73,30 @@ const About = (props) => {
               )}
             </div>
           </div>
-          <div className="max-w-[800px]">
-            <h2 className="mt-16 mb-10 font-bold">{props.title}</h2>
-            <p className="text-gray-600">{props.description}</p>
-          </div>
-          <h2 className="flex items-center pb-3 text-xl font-bold">
-            <BsFillTelephoneFill className="mr-5 text-2xl" />
-            Phone Number
-          </h2>
-          <p className="text-lg">(281) 392-7003</p>
+          <div className="max-w-200px]"></div>
+          <br></br>
+          <br></br>
+          <br></br>
+            <h2 className="flex items-center justify-center pb-3 text-xl font-bold"
+              style={{
+                marginRight: "8rem",
+                fontWeight: "bold",
+                fontSize: "1.2rem",
+                lineHeight: "1.5rem",
+                letterSpacing: "0.05rem",
+              }}>
+              <BsFillTelephoneFill className="mr-5 text-2xl" />
+              <span>Phone Number</span>
+            </h2>
+            <p className="flex items-center justify-center pb-3 text-xl font-bold"
+              style={{
+                marginRight: "8rem",
+                fontWeight: "bold",
+                fontSize: "1.2rem",
+                lineHeight: "1.5rem",
+                letterSpacing: "0.05rem",
+                
+              }}>(281) 392-7003</p>
         </div>
       </div>
     </section>
