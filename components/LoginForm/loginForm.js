@@ -49,8 +49,8 @@ export default function LoginForm() {
               <h3
                 className="text-center"
                 style={{
-                  fontFamily: "cursive",
-                  fontWeight: "600",
+                  fontFamily: "cyrillic",
+                  fontWeight: "300",
                   fontSize: "3rem",
                   marginBottom: "1rem",
                   color: "#818CF8",
@@ -61,8 +61,8 @@ export default function LoginForm() {
             </div>
             <div className="card-body"
             style={{
-              fontFamily: "comic sans ms",
-              fontWeight: "100",
+              fontFamily: "cyrillic",
+              fontWeight: "300",
               fontSize: "2rem",
               marginBottom: "1rem",
               color: "#818CF8",

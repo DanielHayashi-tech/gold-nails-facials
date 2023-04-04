@@ -4,6 +4,10 @@ import Contact from "../../components/Contact/Contact";
 import ManicureService from "@/components/MenuServices/ManicureService";
 import PedicureeService from "@/components/MenuServices/PedicureService";
 import WaxingService from "@/components/MenuServices/WaxingService";
+import PowderNailsService from "@/components/MenuServices/PowderNailsService";
+import FacialService from "@/components/MenuServices/FacialService";
+import PackageService from "@/components/MenuServices/PackageService";
+import AdditionalService from "@/components/MenuServices/AdditionalService";
 import MyFooter from "../../components/Footer/MyFooter";
 import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
@@ -32,6 +36,7 @@ async function handleSignUp(token) {
   console.log(data)
   return data
 }
+
 
 
 
@@ -64,6 +69,10 @@ export default function Services()  {
         <ManicureService />
         <PedicureeService />
         <WaxingService />
+        <FacialService />
+        <PowderNailsService />
+        <PackageService />
+        <AdditionalService />
         <MyFooter date="2023" rights="All rights reserved." />
         <button onClick={ async () => { 
           try {

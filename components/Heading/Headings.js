@@ -1,15 +1,15 @@
 import React from "react";
-import { Lobster_Two } from "next/font/google";
+import { Great_Vibes } from "next/font/google";
 
-const lobsterTwo = Lobster_Two({
-  weight: ["400", "700"],
+const greatVibe = Great_Vibes({
+  weight: ["400", "400"],
   subsets: ["latin"],
 });
 
 export default function Headings(props) {
   
   return (
-    <div className={`text-[40px] font-bold flex items-center gap-4 py-10 ${lobsterTwo.className}`}>
+    <div className={`text-[55px] font-bold flex items-center gap-4 py-10 ${greatVibe.className}`}>
       {props.title}
     </div>
   );

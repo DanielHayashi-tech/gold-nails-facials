@@ -16,7 +16,7 @@ import { useAuth } from '../..//context/AuthContext.js';
 import React, { useEffect } from 'react';
 
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
-const siteTitle = "Mindful Solutions.";
+const siteTitle = "Mindful Solutions Co.";
 
 // async function getPrices() {
 //   const resp = await fetch('/api/dashboard?token=test', {
