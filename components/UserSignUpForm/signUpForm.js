@@ -37,7 +37,16 @@ export default function SignUpForm() {
         margin: 'auto',
       }}
     >
-      <h1 className="text-center my-20 ">Sign Up</h1>
+      <h1 className="text-center my-20"
+    style={{
+      fontSize: "6rem",
+      fontWeight: "bold",
+      color: "#ffe2e7",
+      textShadow: "0 0 5px #000000"
+    }}>
+  Sign Up
+</h1>
+
       <Form onSubmit={handleSignUp}>
       <Form.Group className="mb-3" controlId="formBasicFirstName">
           <Form.Label> First Name</Form.Label>
@@ -94,10 +103,18 @@ export default function SignUpForm() {
             placeholder="Password"
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Sign Up
-        </Button>
+        <Button 
+  variant="primary" 
+  type="submit" 
+  className="btn-block custom-button cursor-pointer hover:text-pink-900"
+  style={{ backgroundColor: "#ffe5e9", fontSize: "1.5rem" }}
+>
+  Sign Up
+</Button>
+
       </Form>
     </div>
   );
 };
+
+
