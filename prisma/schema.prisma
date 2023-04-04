@@ -137,6 +137,7 @@ model Service {
   ServiceID              Int                      @id @default(autoincrement())
   service_typeID         Int
   service_statusID       Int
+  service_title          String                   @db.Char(255)
   service_description    String                   @db.Char(255)
   service_time           Int
   service_price          Int            

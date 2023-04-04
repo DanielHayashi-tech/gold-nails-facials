@@ -17,22 +17,24 @@ import { useAuth } from '../..//context/AuthContext.js';
 import React, { useEffect } from 'react';
 
 
-async function handleSignUp(token) {
-  console.log(token)
+async function handleSignUp(token, cart) {
   // Send a POST request to the /api/register route with the user's information
-  const response = await fetch('/api/dashboard', {
-    method: 'GET',
+  const response = await fetch('/api/services', {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + token,
-    } 
-  
+    }, 
+    body: JSON.stringify({
+      data: cart
+    }),
   });
   
   if(!response.ok) {
     throw new Error(response.statusText)
   }
   const data = await response.json();
+   cart = []
   console.log(data)
   return data
 }
@@ -42,7 +44,7 @@ async function handleSignUp(token) {
 
 export default function Services()  {
   
-  const { authUser, loading, getUser } = useAuth();
+  const { authUser, loading, getToken, cart } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function Services()  {
       <ServicesNavbar onOpen={onOpen} isOpen={isOpen} ref={refBtn} />
       <main>
         <SideDrawer ref={refBtn} onClose={onClose} isOpen={isOpen} />
-        <button onClick={handleSignUp}></button>
+        {/* <button onClick={handleSignUp}></button> */}
         <ManicureService />
         <PedicureeService />
         <WaxingService />
@@ -73,17 +75,20 @@ export default function Services()  {
         <PowderNailsService />
         <PackageService />
         <AdditionalService />
-        <MyFooter date="2023" rights="All rights reserved." />
-        <button onClick={ async () => { 
-          try {
-            await handleSignUp(getUser.getIdToken)
 
+        <button class='btn' onClick={ async () => { 
+          try {
+            await handleSignUp( await getToken(), cart)
+          
           }
           catch( error) {
             console.log(error)
           }
           
-          }}>Tesr</button>
+          }}>Submit Order</button>
+
+        <MyFooter date="2023" rights="All rights reserved." />
+        
       </main>
     </>
   );
