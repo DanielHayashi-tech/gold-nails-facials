@@ -1,3 +1,6 @@
+
+ 
+
 import {
     Box,
     Flex,
@@ -40,8 +43,7 @@ import {
                 {name}
               </Link>
             ))}
-            <div className="text-sm">
-            </div>
+            
           </div>
           <div className="md:hidden flex space-x-6">
             <IconButton onClick={props.onOpen}>

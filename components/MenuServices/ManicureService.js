@@ -13,6 +13,9 @@ const ManicureService = () => {
 
   return (
     <section id="ManicureService" className="container px-5 py-5 mx-auto">
+      <div class="grid grid-rows-3 grid-flow-col gap-4">
+        <div class="row-span-1 ..."> .</div>
+       </div>
       <ServicesHeadings title="Our Manicure Services"/>
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         
@@ -35,8 +38,8 @@ const ManicureService = () => {
             </motion.h2>
             {isOpen && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 10 }}
+                animate={{ opacity: 10 }}
                 transition={{ duration: 1.2 }}
               >
                 <span className="flex items-center justify-center text-xs text-teal-600 ">
