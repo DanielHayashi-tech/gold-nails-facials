@@ -27,7 +27,7 @@ const ManicureService = () => {
               width: "200px",
             }}
             key={offer.id}
-            className="flex flex-col items-center gap-2 dark:bg-slate-500"
+            className="flex flex-col items-center gap-2 "
           >
             <Image alt="nails" src={offer.img} className="w-[100%]" />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
@@ -39,7 +39,7 @@ const ManicureService = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2 }}
               >
-                <span className="flex items-center justify-center text-xs text-teal-600 dark:text-slate-800">
+                <span className="flex items-center justify-center text-xs text-teal-600 ">
                   {offer.price}
                 </span>
                 <p className="px-4 py-3 text-sm tracking-tight">{offer.desc}</p>

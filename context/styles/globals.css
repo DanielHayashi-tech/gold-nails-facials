@@ -10,10 +10,12 @@ body {
 
 @layer components {
   .btn {
-    @apply inline-block bg-indigo-400 rounded-[15px] shadow-md hover:bg-indigo-500 active:bg-indigo-500 active:shadow-lg active:translate-y-[4px]  px-4 py-2 mt-10 font-medium;
+    @apply inline-block bg-pink-50 rounded-[10px] shadow-md active:bg-pink-800 active:translate-y-[4px]  px-4 py-2 mt-10 font-medium;
   }
 
+
+  /* This is used to style the contact us  */
   .inputStyle {
-    @apply outline-cyan-700 dark:bg-slate-800 border-gray-400 border rounded-[5px] px-4 py-2 w-[100%];
+    @apply outline-cyan-700 border-gray-400 border rounded-[5px] px-4 py-2 w-[100%];
   }
 }
