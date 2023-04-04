@@ -14,7 +14,7 @@ export default function PackageService() {
   return (
     <section id="packageservice" className="container px-4 py-10 mx-auto">
       <ServicesHeadings title="Our Packages" />
-      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
+      <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         {/* test */}
         {packageOffers.map((offer) => (
           <motion.div
@@ -23,7 +23,7 @@ export default function PackageService() {
             onClick={handleClick}
             style={{
               borderRadius: "1rem",
-              boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.5)",
+              boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.2)",
               width: "200px",
             }}
             key={offer.id}

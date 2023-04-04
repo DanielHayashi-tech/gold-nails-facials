@@ -14,7 +14,7 @@ export default function FacialService() {
   return (
     <section id="facialservice" className="container px-4 py-10 mx-auto">
       <ServicesHeadings title="Our Facial Services" />
-      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
+      <div className="grid grid-cols-2 grid-cols-3 gap-[30px] ">
         {/* test */}
         {facialOffers.map((offer) => (
           <motion.div
@@ -23,7 +23,7 @@ export default function FacialService() {
             onClick={handleClick}
             style={{
               borderRadius: "1rem",
-              boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.3)",
+              boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.2)",
               width: "200px",
             }}
             key={offer.id}
