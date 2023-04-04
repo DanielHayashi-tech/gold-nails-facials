@@ -16,7 +16,7 @@ import { useAuth } from '../..//context/AuthContext.js';
 import React, { useEffect } from 'react';
 
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
-const siteTitle = "Mindful Solutions.";
+const siteTitle = "Mindful Solutions Co.";
 
 // async function getPrices() {
 //   const resp = await fetch('/api/dashboard?token=test', {
@@ -79,13 +79,12 @@ export default function Dashboard()  {
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit."
           title="Golden Nails & Facials"
         />
-        <About
-          desc="Welcome to Golden Nails and Facials, where we provide top-quality 
+        <About desc={<p style={{ fontSize: '25px' }}> Welcome to Golden Nails and Facials, where we provide top-quality 
           nail and skincare services in a relaxing and inviting atmosphere. 
           Our team of experienced technicians is dedicated to helping you look and feel your best, 
-          using only the highest quality products and techniques."
-        />
-        {/* <p>{prices}</p> */}
+          using only the highest quality products and techniques.</p>
+
+        } />
         <Service />
         <MyFooter date="2023" rights="All rights reserved." />
         <button onClick={ async () => { 

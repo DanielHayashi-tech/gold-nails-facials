@@ -1,7 +1,7 @@
 import { Link } from "react-scroll";
 import { Inter } from "next/font/google";
 import { motion } from "framer-motion";
-import { ThemeModeToggler } from "../Icons/ThemeModeToggler";
+
 import { Box, Drawer, useColorModeValue } from "chakra-ui/react";
 import { sideVariants, itemVariants } from "../Icons/constants";
 import { links } from "../../pages/api/links";
@@ -50,15 +50,13 @@ export default function Sidebar({ isOpen, onClose, onOpen, ref }) {
                 duration={500}
                 key={id}
                 to={to}
-                className="hover:text-teal-600 cursor-pointer text-2xl font-extrabold flex m-[20px]  justify-center items-center"
-              >
+                className="hover:text-teal-600 cursor-pointer text-2xl font-extrabold flex m-[20px]  justify-center items-center">
                 {icon}
                 {name}
               </Link>
             </motion.div>
           ))}
         </Box>
-        <ThemeModeToggler />
       </Drawer>
       {/*)}*/}
     </div>

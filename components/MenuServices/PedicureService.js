@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const PedicureService = () => {
+export default function PedicureService() {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
@@ -12,9 +12,9 @@ const PedicureService = () => {
   }
 
   return (
-    <section id="pedicureservice" className="container px-5 py-5 mx-auto">
+    <section id="pedicureservice" className="container px-4 py-10 mx-auto">
       <ServicesHeadings title="Our Pedicure Services"  />
-      <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[200px] ">
+      <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
     
         {pediOffers.map((offer) => (
           <motion.div
@@ -23,11 +23,11 @@ const PedicureService = () => {
             onClick={handleClick}
             style={{
               borderRadius: "1rem",
-              boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.9)",
+              boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.2)",
               width: "200px",
             }}
             key={offer.id}
-            className="flex flex-col items-center gap-2 dark:bg-slate-500"
+            className="flex flex-col items-center gap-2 "
           >
             <Image alt="nails" src={offer.img} className="w-[100%]" />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
@@ -39,7 +39,7 @@ const PedicureService = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.2 }}
               >
-                <span className="flex items-center justify-center text-xs text-teal-600 dark:text-slate-800">
+                <span className="flex items-center justify-center text-xs text-teal-600 ">
                   {offer.price}
                 </span>
                 <p className="px-4 py-3 text-sm tracking-tight">{offer.desc}</p>
@@ -51,5 +51,3 @@ const PedicureService = () => {
     </section>
   );
 }
-
-export default PedicureService;

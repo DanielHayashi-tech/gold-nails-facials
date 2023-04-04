@@ -1,0 +1,72 @@
+export default [
+    {
+      id: 45,
+      title: "Powder Nail Removal",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/remove.jpg"),
+    },
+    {
+      id: 46,
+      title: "Nail Repair",
+      desc: "A deluxe spa is a luxurious sanctuary that offers an extensive array of high-end services, such as hot stone massages, hydrotherapy, aromatherapy, and exotic body treatments, all designed to promote physical and mental rejuvenation.",
+      price: "25.00",
+      img: require("public/repair.jpeg"),
+    },
+    {
+      id: 47,
+      title: "Gel Removal",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/gelremove.jpg"),
+    },
+    {
+      id: 48,
+      title: "Polish Change (Hands)",
+      desc: "A deluxe spa is a luxurious sanctuary that offers an extensive array of high-end services, such as hot stone massages, hydrotherapy, aromatherapy, and exotic body treatments, all designed to promote physical and mental rejuvenation.",
+      price: "25.00",
+      img: require("public/nchange.jpg"),
+    },
+    {
+      id: 49,
+      title: "Polish Change (Toes)",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/tchange.jpg"),
+    },
+    {
+      id: 50,
+      title: "Polish Change (French Nails)",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/fnchange.jpg"),
+    },
+    {
+      id: 51,
+      title: "Polish Change (French Toes)",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/ftchange.jpg"),
+    },
+    {
+      id: 52,
+      title: "Paraffin Wax",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/pwax.jpg"),
+    },
+    {
+      id: 53,
+      title: "Nail Design",
+      desc: "A regular spa promotes relaxation, reduces stress, and improves overall well-being through services like massages, facials, and body treatments. The atmosphere is peaceful with soothing music, dim lighting, and comfortable furnishings..",
+      price: "$15.00",
+      img: require("public/design.jpg"),
+    },
+    {
+      id: 54,
+      title: "Gel Top Coat",
+      desc: "A deluxe spa is a luxurious sanctuary that offers an extensive array of high-end services, such as hot stone massages, hydrotherapy, aromatherapy, and exotic body treatments, all designed to promote physical and mental rejuvenation.",
+      price: "25.00",
+      img: require("public/gel.png"),
+    }
+  ];
