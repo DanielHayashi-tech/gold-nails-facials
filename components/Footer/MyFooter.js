@@ -17,10 +17,10 @@ export default function MyFooter(props) {
      <div className="grid grid-cols-2 gap-3 content-normal" >
 
        <a href="https://www.yelp.com/biz/golden-nails-n-facial-katy">
-         <Image src="/yelp2.png" width={35} height={35} />
+         <Image alt="footer" src="/yelp2.png" width={35} height={35} />
        </a>
        <a href="https://www.google.com/search?q=golden+nails+n+facial&rlz=1C1UEAD_enUS1018US1019&oq=go&aqs=chrome.1.69i59l3j46i131i199i433i465i512j69i59j69i60l3.1911j0j9&sourceid=chrome&ie=UTF-8#lrd=0x864127357810226b:0xf7f62ead58fea018,1">
-         <Image src="/google.png" width={35} height={35} />
+         <Image alt="googleImg" src="/google.png" width={35} height={35} />
        </a>
      </div>
      </div>

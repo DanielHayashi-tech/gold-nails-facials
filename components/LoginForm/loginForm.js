@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
-import { Navbar } from "react-bootstrap";
 import styles from './LoginForm.module.css';
 
 export default function LoginForm() {

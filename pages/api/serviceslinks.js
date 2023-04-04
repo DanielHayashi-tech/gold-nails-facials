@@ -39,28 +39,28 @@ export const serviceslinks = [
   {
     name: "Powder Nails",
     to: "powdernailsservice",
-    id: 35,
+    id: 29,
     icon: <BsHandbagFill className="mr-4" />,
     href: "/MenuServices/PowderNailsService"
   },
   {
     name: "Packages",
     to: "packageservice",
-    id: 35,
+    id: 30,
     icon: <BsHandbagFill className="mr-4" />,
     href: "/MenuServices/PackageService"
   },
   {
     name: "Additional Services",
     to: "additionalservice",
-    id: 35,
+    id: 31,
     icon: <BsHandbagFill className="mr-4" />,
     href: "/MenuServices/AdditionalService"
   },
   {
     name: <AiOutlineShoppingCart className="mr-4" size="3em" />,
     to: "shoppingcart",
-    id: 42,
+    id: 32,
     icon: <AiOutlineShoppingCart className="mr-4" size="3em" />,
     href: "/ShoppingCart",
     items: [], // an empty array to store the items in the cart
