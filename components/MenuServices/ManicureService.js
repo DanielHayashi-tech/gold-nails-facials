@@ -41,8 +41,8 @@ const ManicureService = () => {
 
   return (
     <section id="ManicureService" className="container px-5 py-5 mx-auto">
-      <div class="grid grid-rows-3 grid-flow-col gap-4">
-        <div class="row-span-1 ..."> .</div>
+      <div className="grid grid-rows-3 grid-flow-col gap-4">
+        <div className="row-span-1 ..."> .</div>
        </div>
       <ServicesHeadings title="Our Manicure Services"/>
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">

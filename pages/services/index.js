@@ -59,8 +59,8 @@ export default function Services()  {
   return (
     <>
       <Head>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta className="description" content="" />
+        <meta className="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -76,7 +76,7 @@ export default function Services()  {
         <PackageService />
         <AdditionalService />
 
-        <button class='btn' onClick={ async () => { 
+        <button className='btn' onClick={ async () => { 
           try {
             await handleSignUp( await getToken(), cart)
           
