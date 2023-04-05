@@ -1,6 +1,6 @@
 import '../public/index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import "../context/styles/globals.css";
+import "../styles/globals.css";
 
 import { AuthUserProvider } from '../context/AuthContext';
 import { initFirebase } from '../lib/firebaseApp';
@@ -13,7 +13,6 @@ export default function App({ Component, pageProps }) {
     <AuthUserProvider>
       <Component {...pageProps} />
     </AuthUserProvider>
-
-  </>
+    </>
 }
 

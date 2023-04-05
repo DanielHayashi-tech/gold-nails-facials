@@ -30,7 +30,7 @@ export default function Service() {
             key={offer.id}
             className="flex flex-col items-center gap-2 "
           >
-            <Image alt="nails" src={offer.img} className="w-[100%]" />
+            <Image alt="nails-service-dash" src={offer.img} className="w-[100%]" />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
               {offer.title}
             </motion.h2>

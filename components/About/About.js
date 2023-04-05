@@ -7,21 +7,16 @@ import { GiClick } from "react-icons/gi";
 
 
 const About = (props) => {
-
-
-
-
-
   return (
 
     <section id="about" className="container px-4 py-5 mx-auto ">
-      <div class="grid grid-cols-3 gap-4">
-        <div class="col-span-3">
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-3">
           <Headings title="About Us" />
-          <p>{props.desc}</p>
+          <div> {props.desc} </div>
         </div>
 
-        <div class="...">
+        <div className="...">
           <h2 className="flex items-center pb-4 text-xl font-bold pt-9">
             <IoLocationOutline className="mr-5 text-4xl" />
             Location
@@ -44,7 +39,7 @@ const About = (props) => {
 
         </div>
 
-        <div class="text-center pl-10">
+        <div className="text-center pl-10">
           <div className="text-center pl-10">  
           <h2 className="flex items-center pb-4 pr-4 text-xl font-bold pt-9">
             <BsClock className="pr-2 text-4xl" />
@@ -77,7 +72,7 @@ const About = (props) => {
 
         </div>
 
-        <div class="...">
+        <div className="...">
           <h2 className="flex items-center pb-4 text-xl font-bold pt-9">
             <BsTelephone className="mr-5 text-4xl" />
             Phone Number

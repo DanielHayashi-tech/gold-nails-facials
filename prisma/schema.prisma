@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,8 +16,8 @@ model Clients {
   email_address        String          @unique @db.Char(255)
   birthday             DateTime        @db.DateTime
   client_register_date DateTime        @default(now())
-  Client_status        Client_status   @relation(fields: [Client_statusID], references: [Client_statusID])
   Client_statusID      Int
+  Client_status        Client_status   @relation(fields: [Client_statusID], references: [Client_statusID])
   service_orders       Service_Order[]
 }
 
@@ -52,8 +49,8 @@ model Employee {
   employee_statusID      Int
   date_added             DateTime                 @default(now())
   status                 Employee_status          @relation(fields: [employee_statusID], references: [employee_statusID])
-  Employee_Specialty     Employee_Specialty[]
   Employee_Service_Skill Employee_Service_Skill[]
+  Employee_Specialty     Employee_Specialty[]
 }
 
 model Employee_status {
@@ -86,8 +83,8 @@ model Specialty {
   specialty_statusID    Int
   specialty_description String               @db.Char(255)
   date_added            DateTime             @default(now())
-  Specialty_Status      Specialty_Status     @relation(fields: [specialty_statusID], references: [specialty_statusID])
   Employee_Specialty    Employee_Specialty[]
+  Specialty_Status      Specialty_Status     @relation(fields: [specialty_statusID], references: [specialty_statusID])
 }
 
 model Specialty_Status {
@@ -102,8 +99,8 @@ model Skill_Level {
   skill_level_description String                   @db.Char(255)
   Skill_Level_StatusID    Int
   date_added              DateTime                 @default(now())
-  skill_level_status      Skill_Level_Status       @relation(fields: [Skill_Level_StatusID], references: [Skill_Level_StatusID])
   Employee_Service_Skill  Employee_Service_Skill[]
+  skill_level_status      Skill_Level_Status       @relation(fields: [Skill_Level_StatusID], references: [Skill_Level_StatusID])
 }
 
 model Skill_Level_Status {
@@ -138,14 +135,14 @@ model Service {
   service_typeID         Int
   service_statusID       Int
   service_title          String                   @db.Char(255)
-  service_description    String                   @db.Char(255)
+  service_description    String                   @db.Char(1300)
   service_time           Int
-  service_price          Int            
+  service_price          Int
   date_added             DateTime                 @default(now())
+  Employee_Service_Skill Employee_Service_Skill[]
   service_status         Service_Status           @relation(fields: [service_statusID], references: [service_statusID])
   Service_Type           Service_Type             @relation(fields: [service_typeID], references: [service_typeID])
   service_order_line     Service_Order_Line[]
-  Employee_Service_Skill Employee_Service_Skill[]
 }
 
 model Service_Type {
@@ -183,7 +180,7 @@ model Service_Order {
 
 model Service_Order_Line_Status {
   service_order_line_statusID           Int                  @id @default(autoincrement())
-  service_order_line_status_description String               @db.Char(255)
+  service_order_line_status_description String               @db.Char(1200)
   status_date                           DateTime             @default(now())
   Service_Order_Line                    Service_Order_Line[]
 }
