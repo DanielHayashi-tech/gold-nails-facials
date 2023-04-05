@@ -31,7 +31,7 @@ export default function SignUpForm() {
       console.log(uid)
       const token = await authUser.user.getIdToken();
       console.log(token)
-      const response = await fetch('/api/signUp/index.js', {
+      const response = await fetch('/api/signUp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

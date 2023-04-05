@@ -14,16 +14,18 @@ export default async function handler(req, res) {
       try {
         const userinfo = await prisma.clients.create({
           data: {
-            first_name, 
-            last_name, 
-            birthday, 
-            email_address, 
-            phone_number,
-            firebaseuID,
+            first_name: first_name, 
+            last_name: last_name, 
+            birthday: new Date(birthday).toISOString(), 
+            email_address: email_address, 
+            phone_number: phone_number,
+            firebaseuID: firebaseuID,
+            Client_statusID: 1
           }
         });
         return res.status(200).json({ success: true, data: userinfo });
       } catch (error) {
+        console.log(error)
         return res.status(500).json({ success: false, error });
       }
     });
