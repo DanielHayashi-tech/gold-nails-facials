@@ -6,6 +6,27 @@ import { useState } from "react";
 import { useAuth } from '../../context/AuthContext.js';
 import { Button } from 'react-bootstrap';
 
+
+async function getPrices(token) {
+  console.log(token)
+  // Send a POST request to the /api/register route with the user's information
+  const response = await fetch('/api/services/servicePrices', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+    } 
+  
+  });
+  
+  if(!response.ok) {
+    throw new Error(response.statusText)
+  }
+  const data = await response.json();
+  console.log(data)
+  return data
+}
+
 const ManicureService = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { cart } = useAuth();
@@ -23,7 +44,7 @@ const ManicureService = () => {
       <ServicesHeadings title="Our Manicure Services"/>
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         
-        {manicureOffers.map((offer) => (
+        {getPrices().map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
             layout
