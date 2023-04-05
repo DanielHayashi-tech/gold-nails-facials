@@ -1,0 +1,1 @@
+// be able to update all prices for services
