@@ -47,7 +47,7 @@ const ManicureService = () => {
       <ServicesHeadings title="Our Manicure Services"/>
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         
-        {getPrices().map((offer) => (
+        {manicureOffers.map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
             layout
