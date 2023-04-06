@@ -105,7 +105,7 @@ export default function Services(props)  {
         <PackageService prices={props.packages}/>
         <AdditionalService prices={props.add}/>
 
-        <button className='btn' onClick={ async () => { 
+        <button class='btn' onClick={ async () => { 
           try {
             await handleSignUp( await getToken(), cart)
           

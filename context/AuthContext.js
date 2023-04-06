@@ -16,3 +16,9 @@ export function AuthUserProvider({ children }) {
 }
 // custom hook to use the authUserContext and access authUser and loading
 export const useAuth = () => useContext(authUserContext);
+
+
+//              _
+//          .__(.)< (MEOW)
+//          \___)   
+//      ~~~~~~~~~~~~~~~~~~
