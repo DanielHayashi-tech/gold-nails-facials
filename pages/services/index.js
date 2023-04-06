@@ -76,7 +76,7 @@ export default function Services()  {
         <PackageService />
         <AdditionalService />
 
-        <button className='btn' onClick={ async () => { 
+        <button class='btn' onClick={ async () => { 
           try {
             await handleSignUp( await getToken(), cart)
           
