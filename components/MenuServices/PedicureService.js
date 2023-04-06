@@ -3,8 +3,10 @@ import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { PrismaClient } from '@prisma/client'
 
-export default function PedicureService() {
+
+export default function PedicureService({prices}) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
@@ -16,7 +18,7 @@ export default function PedicureService() {
       <ServicesHeadings title="Our Pedicure Services"  />
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
     
-        {pediOffers.map((offer) => (
+        {prices.map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
             layout

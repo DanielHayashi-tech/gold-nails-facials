@@ -15,6 +15,8 @@ import SideDrawer from "../../components/Sidebar/SideDrawer";
 import { useRouter } from 'next/router';
 import { useAuth } from '../..//context/AuthContext.js';
 import React, { useEffect } from 'react';
+import { PrismaClient } from '@prisma/client'
+
 
 
 async function handleSignUp(token, cart) {
@@ -39,14 +41,41 @@ async function handleSignUp(token, cart) {
   return data
 }
 
+ async function getPrices(prisma, id) {
+  const posts = await prisma.service.findMany({
+    select: {
+      ServiceID: true,
+      service_price: true,
+      service_description: true,
+      service_title: true
+    },
+    where: {
+      Service_Type: {service_typeID: id},
+
+    },
+  })
+  return posts
+ }
+export async function getStaticProps() {
+  const prisma = new PrismaClient()
+  const mani = await getPrices(prisma, 2)
+  const padi = await getPrices(prisma, 1)
+  const wax = await getPrices(prisma, 3)
+  const facials = await getPrices(prisma, 4)
+  const pdn = await getPrices(prisma, 5)
+  const add = await getPrices(prisma, 7)
+  const packages = await getPrices(prisma, 6)
+
+
+return { props: { mani, padi, wax,facials, pdn, add, packages} }
+}
 
 
 
-export default function Services()  {
+export default function Services(props)  {
   
   const { authUser, loading, getToken, cart } = useAuth();
   const router = useRouter();
-
   useEffect(() => {
     if (!loading && !authUser)
       router.push('/')
@@ -68,13 +97,13 @@ export default function Services()  {
       <main>
         <SideDrawer ref={refBtn} onClose={onClose} isOpen={isOpen} />
         {/* <button onClick={handleSignUp}></button> */}
-        <ManicureService />
-        <PedicureeService />
-        <WaxingService />
-        <FacialService />
-        <PowderNailsService />
-        <PackageService />
-        <AdditionalService />
+        <ManicureService prices={props.mani}/>
+        <PedicureeService prices={props.padi}/>
+        <WaxingService prices={props.wax}/>
+        <FacialService prices={props.facials}/>
+        <PowderNailsService prices={props.pdn}/>
+        <PackageService prices={props.packages}/>
+        <AdditionalService prices={props.add}/>
 
         <button className='btn' onClick={ async () => { 
           try {

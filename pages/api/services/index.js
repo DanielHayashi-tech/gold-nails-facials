@@ -1,6 +1,5 @@
 import prisma from '@/lib/prismaApp';
 import { authMiddleware } from '../../../lib/authMiddleware';
-import { data } from 'autoprefixer';
 
 
 export default async function handler(req, res) {
