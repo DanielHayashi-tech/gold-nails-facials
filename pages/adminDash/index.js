@@ -162,8 +162,6 @@ export default function AdminDash() {
                 <h2>Total Clients: {clientCount}</h2>
 
             </Form>
-
-            {/* handleCountAllMyClients */}
         </div>
     )
 }
