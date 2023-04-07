@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import useFirebaseAuth from '../lib/firebaseAuth';
-import { sendPasswordResetEmail } from 'firebase/auth'; // Import sendPasswordResetEmail from firebase/auth
+import { resetPassword } from 'firebase/auth'; // Import resetPassword from firebase/auth
 
 const authUserContext = createContext({
   authUser: null,
@@ -9,26 +9,27 @@ const authUserContext = createContext({
   create_account: async () => {},
   signOut: async () => {},
   getUser: async () => {},
-  sendPasswordResetEmail: async () => {},
+  resetPassword: async () => {},
 });
 
-// Add sendPasswordResetEmail function to the value provided by AuthUserProvider
+// Add resetPassword function to the value provided by AuthUserProvider
 const sendResetEmail = async (email) => {
   try {
     console.log(auth)
-    await sendPasswordResetEmail(auth.auth, email); // Call sendPasswordResetEmail with auth instance
+    await resetPassword(auth.auth, email); // Call resetPassword with auth instance
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
 
+
 export function AuthUserProvider({ children }) {
   const auth = useFirebaseAuth();
 
   return (
     <authUserContext.Provider
-      value={{ ...auth, sendPasswordResetEmail: sendResetEmail }}
+      value={{ ...auth}}
     >
       {children}
     </authUserContext.Provider>

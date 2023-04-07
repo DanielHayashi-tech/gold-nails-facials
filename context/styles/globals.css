@@ -14,9 +14,18 @@ body {
   */
 }
 
+
+
 @layer components {
   .btn {
     @apply inline-block bg-pink-50 rounded-[10px] shadow-md active:translate-y-[4px]  px-4 py-2 mt-10 font-medium;
+  }
+
+  .card {
+    background-color: theme('colors.yellow');
+    border-radius: theme('borderRadius.lg');
+    padding: theme('spacing.6');
+    box-shadow: theme('boxShadow.xl');
   }
 
 
