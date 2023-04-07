@@ -17,7 +17,7 @@ export default function LoginForm() {
   const router = useRouter();
   const { resetPassword } = useAuth();
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const { signIN } = useAuth();
+  const { signIN } = useAuth();
 
 
   const handleLogin = async (e) => {
@@ -34,6 +34,8 @@ export default function LoginForm() {
         setError(error.message)
       });
   }
+
+
 
 
   const goToSignUp = async () => {
@@ -67,17 +69,17 @@ export default function LoginForm() {
                 >
                   My Golden Nails
                 </h3>
-              </div>
+              </div>      
               <div className="card-body">
                 <ForgotPasswordForm onCancel={handleCancelForgotPassword} />
-              </div>
+              </div>         
             </div>
           </div>
         </div>
       </div>
     );
   }
-  
+
   return (
     <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
       <div className="row justify-content-center">
@@ -92,77 +94,87 @@ export default function LoginForm() {
                   fontSize: "3rem",
                   marginBottom: "1rem",
                   color: "#FFE1F8",
-                  // textShadow: "0 0 5px black", // add text-shadow property
-                }}
-              >
+                  // textShadow: "0 0 5px black", // add text-shadow property 
+                }}>
                 My Golden Nails
               </h3>
 
             </div>
-            <div className="card-body">
+            <br></br>
+            <div className="card-body text-center place-content-center">
               <Form onSubmit={handleLogin}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formBasicEmail" className="grid place-content-start md:place-content-center">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
+                    className="w-96 text-center"
+                    style={{ backgroundColor: "#FFE1F8" }}
                     placeholder="Enter email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                    required />
                 </Form.Group>
+                <br></br>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="formBasicPassword" className="grid place-content-start md:place-content-center">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
+                    className="w-96 text-center"
+                    style={{ backgroundColor: "#FFE1F8" }}
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                    required />
                 </Form.Group>
-
+                <br></br>
                 {error && <p className="text-danger mb-3">{error}</p>}
-
-                <Button
-                  variant="light"
-                  type="submit"
-                  className="btn-block custom-button"
-                  style={{ backgroundColor: "#FFE1F8", fontSize: '25px' }}
-                >
-                  Login
-                </Button>
-                <Button
-          variant="light"
-          className="btn-block custom-button mt-2"
-          onClick={handleForgotPassword}
-          style={{ backgroundColor: '#FFE1F8', fontSize: '18px' }}
-        >
-          Forgot Password
-        </Button>
+              
 
 
-              </Form>
+            <Button
+              variant="light"
+              type="submit"
+              className="btn-block custom-button w-32 mt-2 mb-3"
+              style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }}>
+              Login
+            </Button>
+            </Form>
             </div>
-            <div className="card-footer text-center">
+            <br></br>
+
+
+
+            <div className="card-footer text-center" >
+              <br></br>
+              
+              <div className="grid grid-cols-2 gap-32"><div>
               <div className="medium">
-                Don't have an account?{" "}
+                Don't have an account? </div>
+
                 <Button
-                  variant="light"
-                  className="p-0 m-0"
-                  onClick={goToSignUp}
-                  style={{ backgroundColor: '#FFE1F8', fontSize: '25px' }}
-                >
-                  Sign Up 
-                </Button>
+                variant="light"
+                className="btn-block custom-button mt-2"
+                onClick={goToSignUp}
+                style={{ backgroundColor: '#FFE1F8', fontSize: '18px' }} >
+                Sign Up Here
+              </Button>
+                </div>
+                <div>
+                <div className="medium">
+                Forgot your password? </div>
 
-
+                <Button
+                variant="light"
+                className="btn-block custom-button mt-2"
+                onClick={handleForgotPassword}
+                style={{ backgroundColor: '#FFE1F8', fontSize: '17px' }}>
+                Forgot Password
+              </Button>
+                </div>
               </div>
-              <hr className="my-7" />
-              <div className="text-center">
 
-              </div>
+
             </div>
           </div>
         </div>
