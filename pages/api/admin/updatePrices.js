@@ -11,13 +11,17 @@ export default async function handler(req, res) {
         console.log(req.query)
         console.log(ServiceID)
         console.log(service_price)
+
+
+        console.log(typeof ServiceID, ServiceID);
+        console.log(typeof service_price, service_price);
         try  {
           const servicePriceInfo = await prisma.service.update({
             where: {
-              ServiceID: { equals: parseInt(ServiceID) },
+              ServiceID: parseInt(ServiceID) ,
               
             },
-            data: {service_price: { set: parseInt(service_price) } },
+            data: {service_price: parseInt(service_price) },
             
           });
   
@@ -38,20 +42,6 @@ export default async function handler(req, res) {
       res.status(405).json({ message: 'Method not allowed' });
     }
   }
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
 
 
 
