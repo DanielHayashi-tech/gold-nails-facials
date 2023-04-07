@@ -43,18 +43,19 @@ export default function SignUpForm() {
           birthday: birthday,
           email_address: email,
           phone_number: phoneNumber,
-          firebaseuID: uid,
+          firebaseuID: uid, 
         }),
       });
       if (!response.ok) {
         throw new Error(response.statusText)
       }
-      const data = await response.json();
-      console.log(data)
-      router.push("/");
+        const data = await response.json();
+        console.log(data);
+        router.push("/"); // Redirect to EmailVerification page
+
     } catch (error) {
       console.log(error)
-      alert(" Read the error message and try again, you got this :) ")
+      alert("Account Created! Please Check Your Email For Verification.")
       // An error occurred. Set error message to be displayed to user
       setError(error.message)
     }

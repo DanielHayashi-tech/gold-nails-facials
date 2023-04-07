@@ -20,13 +20,19 @@ export default function LoginForm() {
     const { signIN } = useAuth();
 
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    signIN(email, password)
-      .then(authUser => {
-        console.log("Success. The user is created in Firebase")
-        router.push("/dashboard");
-      })
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      signIN(email, password)
+        .then((authUser) => {
+          if (!authUser.user.emailVerified) {
+            console.log("Please verify your email.");
+            alert("Please verify your email.");
+            setError("Please verify your email.");
+            return;
+          }
+          console.log("Success. The user is created in Firebase");
+          router.push("/dashboard");
+        })
       .catch(error => {
         console.log(error)
         alert("Email/Password combination is incorrect.")

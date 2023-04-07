@@ -23,6 +23,7 @@ const sendResetEmail = async (email) => {
   }
 };
 
+
 export function AuthUserProvider({ children }) {
   const auth = useFirebaseAuth();
 
