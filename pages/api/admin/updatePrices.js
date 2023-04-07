@@ -15,6 +15,7 @@ export default async function handler(req, res) {
 
         console.log(typeof ServiceID, ServiceID);
         console.log(typeof service_price, service_price);
+        
         try  {
           const servicePriceInfo = await prisma.service.update({
             where: {
