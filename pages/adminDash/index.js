@@ -30,7 +30,13 @@ export default function AdminDash() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
+                body: JSON.stringify({
+                    ServiceID : ServiceID,
+                    service_price : service_price
+                })
             });
+
+
             if (!response.ok) {
                 throw new Error(response.statusText)
             }
