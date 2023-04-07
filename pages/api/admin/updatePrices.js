@@ -14,10 +14,10 @@ export default async function handler(req, res) {
         try  {
           const servicePriceInfo = await prisma.service.update({
             where: {
-              ServiceID: parseInt(ServiceID),
+              ServiceID: { equals: parseInt(ServiceID) },
               
             },
-            data: {service_price: parseInt(service_price)},
+            data: {service_price: { set: parseInt(service_price) } },
             
           });
   

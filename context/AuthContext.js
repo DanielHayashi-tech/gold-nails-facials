@@ -12,19 +12,19 @@ const authUserContext = createContext({
   sendPasswordResetEmail: async () => {},
 });
 
+// Add sendPasswordResetEmail function to the value provided by AuthUserProvider
+const sendResetEmail = async (email) => {
+  try {
+    console.log(auth)
+    await sendPasswordResetEmail(auth.auth, email); // Call sendPasswordResetEmail with auth instance
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export function AuthUserProvider({ children }) {
   const auth = useFirebaseAuth();
-
-  // Add sendPasswordResetEmail function to the value provided by AuthUserProvider
-  const sendResetEmail = async (email) => {
-    try {
-      console.log(auth)
-      await sendPasswordResetEmail(auth.auth, email); // Call sendPasswordResetEmail with auth instance
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
 
   return (
     <authUserContext.Provider

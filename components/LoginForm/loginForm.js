@@ -15,12 +15,14 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { signIn, googleSignIn, sendPasswordResetEmail } = useAuth();
+  const { sendPasswordResetEmail } = useAuth();
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+    const { signIN } = useAuth();
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    signIn(email, password)
+    signIN(email, password)
       .then(authUser => {
         console.log("Success. The user is created in Firebase")
         router.push("/dashboard");
@@ -33,10 +35,6 @@ export default function LoginForm() {
       });
   }
 
-  const signInWithGoogle = async () => {
-    const result = await googleSignIn()
-    router.push("/dashboard")
-  }
 
   const goToSignUp = async () => {
     router.push("/signUp");

@@ -15,12 +15,12 @@ export default function AdminDash() {
     const [service_price, setServicePrice] = useState("");
     const [error, setError] = useState(null);
     const [serviceOrderCount, setServiceOrderCount] = useState(0);
+    const [clientCount, setclientCount] = useState(0);
 
 
 
     const handleUpdateServicePrice = async (e) => {
         e.preventDefault();
-        console.log(await getToken())
         const token = await getToken();
 
         try {
@@ -46,7 +46,6 @@ export default function AdminDash() {
 
     const handleServiceTotal = async (e) => {
         e.preventDefault();
-        console.log(await getToken())
         const token = await getToken();
 
         try {
@@ -71,6 +70,35 @@ export default function AdminDash() {
 
         }
     };
+
+
+    const handleCountAllMyClients = async (e) => {
+        e.preventDefault();
+        const token = await getToken();
+
+        try {
+            const response = await fetch('/api/admin/userCount', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            const data = await response.json();
+            setclientCount(data.total);
+        } catch (error) {
+            console.log(error)
+            alert("Read the error message and try again, you got this :) ")
+            // An error occurred. Set error message to be displayed to user
+            setError(error.message)
+
+        }
+    };
+
 
 
 
@@ -104,6 +132,7 @@ export default function AdminDash() {
                     Submit Update!
                 </Button>
             </Form>
+            <br></br>
             <Form onSubmit={handleServiceTotal}>
                 <Button
                     variant="primary"
@@ -115,6 +144,20 @@ export default function AdminDash() {
                 <h2>Total Service Orders: {serviceOrderCount}</h2>
 
             </Form>
+            <br></br>
+            <Form onSubmit={handleCountAllMyClients}>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                    style={{ backgroundColor: "#ffe5e9", fontSize: "1.5rem" }}>
+                    Total Number of Clients!
+                </Button>
+                <h2>Total Clients: {clientCount}</h2>
+
+            </Form>
+
+            {/* handleCountAllMyClients */}
         </div>
     )
 }
