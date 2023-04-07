@@ -7,7 +7,7 @@ export default function ForgotPasswordForm({ onCancel }) {
   const [error, setError] = useState(null);
   const { resetPassword } = useAuth();
 
-  const handleSubmittingPasswordReset = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await resetPassword(email);
@@ -20,7 +20,7 @@ export default function ForgotPasswordForm({ onCancel }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmittingPasswordReset} className="">
+      <Form onSubmit={handleSubmit} className="">
         <Form.Group controlId="formBasicEmail" className="grid place-content-start md:place-content-center">
           <Form.Label className='text-center pt-10'
 
@@ -36,6 +36,17 @@ export default function ForgotPasswordForm({ onCancel }) {
             required />
         </Form.Group>
         <br></br>
+        <div className="pt-10">
+
+          {error && <p className="text-danger mb-3">{error}</p>}
+          <Button
+            variant="light"
+            type="submit"
+            className="btn-block custom-button mt-2  "
+            style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }} >
+            Send Reset Email
+          </Button>
+        </div>
 
         <Button
           variant="light"
@@ -45,17 +56,7 @@ export default function ForgotPasswordForm({ onCancel }) {
           Cancel
         </Button>
       </Form>
-      <div className="pt-10">
 
-        {error && <p className="text-danger mb-3">{error}</p>}
-        <Button
-          variant="light"
-          type="submit"
-          className="btn-block custom-button mt-2  "
-          style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }} >
-          Send Reset Email
-        </Button>
-      </div>
     </div>
 
   );

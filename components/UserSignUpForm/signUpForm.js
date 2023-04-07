@@ -28,6 +28,7 @@ export default function SignUpForm() {
     try {
       const authUser = await create_account(email, passwordOne);
       console.log("Success. The user is created in Firebase")
+      console.log(authUser.user)
       const { uid } = authUser.user;
       console.log(uid)
       const token = await authUser.user.getIdToken();
