@@ -54,7 +54,7 @@ export default function SignUpForm() {
       router.push("/");
     } catch (error) {
       console.log(error)
-      alert("Try again dummy.")
+      alert(" Read the error message and try again, you got this :) ")
       // An error occurred. Set error message to be displayed to user
       setError(error.message)
     }

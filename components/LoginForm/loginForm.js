@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import styles from './LoginForm.module.css';
+import ForgotPasswordForm from '../../components/ForgotPassword/ForgotPasswordForm'; // Import the ForgotPasswordForm component
 
 export default function LoginForm() {
   //initializing configuration
@@ -14,7 +15,10 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { signIN, googleSignIn } = useAuth();
+  const { sendPasswordResetEmail } = useAuth();
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+    const { signIN } = useAuth();
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,17 +36,48 @@ export default function LoginForm() {
   }
 
 
-  const signInWithGoogle = async () => {
-    const result = await googleSignIn()
-    router.push("/dashboard")
-  }
-
   const goToSignUp = async () => {
     router.push("/signUp");
-
   }
 
+  const handleForgotPassword = () => {
+    setShowForgotPassword(true);
+  }
 
+  const handleCancelForgotPassword = () => {
+    setShowForgotPassword(false);
+  }
+
+  if (showForgotPassword) {
+    return (
+      <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card shadow-lg border-0 rounded-lg mt-5">
+              <div className="card-header">
+                <h3
+                  className="text-center"
+                  style={{
+                    fontFamily: "Lobster",
+                    fontWeight: "600",
+                    fontSize: "3rem",
+                    marginBottom: "1rem",
+                    color: "#FFE1F8",
+                  }}
+                >
+                  My Golden Nails
+                </h3>
+              </div>
+              <div className="card-body">
+                <ForgotPasswordForm onCancel={handleCancelForgotPassword} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
       <div className="row justify-content-center">
@@ -98,7 +133,14 @@ export default function LoginForm() {
                 >
                   Login
                 </Button>
-
+                <Button
+          variant="light"
+          className="btn-block custom-button mt-2"
+          onClick={handleForgotPassword}
+          style={{ backgroundColor: '#FFE1F8', fontSize: '18px' }}
+        >
+          Forgot Password
+        </Button>
 
 
               </Form>

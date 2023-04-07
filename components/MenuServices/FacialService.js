@@ -3,8 +3,11 @@ import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { PrismaClient } from '@prisma/client'
 
-export default function FacialService() {
+
+
+export default function FacialService(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
