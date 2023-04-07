@@ -5,12 +5,12 @@ import { useAuth } from '../../context/AuthContext';
 export default function ForgotPasswordForm({ onCancel }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
-  const { sendPasswordResetEmail } = useAuth();
+  const { resetPassword } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendPasswordResetEmail(email);
+      await resetPassword(email);
       alert("Password reset email sent. Check your inbox.");
     } catch (error) {
       setError(error.message);

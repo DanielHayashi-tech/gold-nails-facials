@@ -15,7 +15,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
-  const { sendPasswordResetEmail } = useAuth();
+  const { resetPassword } = useAuth();
   const [showForgotPassword, setShowForgotPassword] = useState(false);
     const { signIN } = useAuth();
 
