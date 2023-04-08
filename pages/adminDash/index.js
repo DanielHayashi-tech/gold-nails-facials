@@ -169,10 +169,18 @@ export default function AdminDash() {
                         
                     </Form>
                 </div>
-                <div className="col-span-2 ..."> Report goes here</div>
-                <div className="..."> Report goes here </div>
-                <div className="..."> Report goes here </div>
-                <div className="col-span-2 ..."> Report goes here </div>
+
+                <div className="col-span-2 ..."> What person f and l name ordered what servcice. Today.  </div>
+
+                <div className="..."> Sales on Services Made Today, this week, this month, this year. </div>
+
+                <div className="..."> Owner needs to be able to approve quotes and
+                this means change the status to IN PROGRSS and display how many    </div>
+
+                <div className="..."> Count how many Clients have a INACTIVE status today, this week, this year. </div>
+
+                <div className="col-span-2 ..."> I need to add an employee </div>
+
             </div>
         </div>
     )
