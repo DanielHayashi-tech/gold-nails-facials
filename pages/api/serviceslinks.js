@@ -56,15 +56,6 @@ export const serviceslinks = [
     id: 31,
     icon: <BsHandbagFill className="mr-4" />,
     href: "/MenuServices/AdditionalService"
-  },
-  {
-    name: <AiOutlineShoppingCart className="mr-4" size="3em" />,
-    to: "shoppingcart",
-    id: 32,
-    icon: <AiOutlineShoppingCart className="mr-4" size="3em" />,
-    href: "/ShoppingCart",
-    items: [], // an empty array to store the items in the cart
-    totalPrice: 0 // the initial total price of the cart
   }
   
 ];
