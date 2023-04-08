@@ -15,7 +15,10 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
+
   const { resetPassword } = useAuth();
+
+  
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { signIN } = useAuth();
 
@@ -30,7 +33,6 @@ export default function LoginForm() {
             setError("Please verify your email.");
             return;
           }
-          console.log("Success. The user is created in Firebase");
           router.push("/dashboard");
         })
       .catch(error => {

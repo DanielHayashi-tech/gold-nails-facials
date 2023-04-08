@@ -20,19 +20,18 @@ export default function SignUpForm() {
   const [passwordOne, setPasswordOne] = useState("");
   const [error, setError] = useState(null);
 
-  const { create_account } = useAuth();
-
+    const { create_account } = useAuth();
 
   const handleSignUps = async (e) => {
+
     e.preventDefault();
     try {
       const authUser = await create_account(email, passwordOne);
-      console.log("Success. The user is created in Firebase")
-      console.log(authUser.user)
-      const { uid } = authUser.user;
-      console.log(uid)
-      const token = await authUser.user.getIdToken();
-      console.log(token)
+      console.log('here is my authuser', authUser);
+      const user = authUser.user;
+      const token = await user.getIdToken();
+
+
       const response = await fetch('/api/signUp', {
         method: 'POST',
         headers: {
@@ -45,15 +44,15 @@ export default function SignUpForm() {
           birthday: birthday,
           email_address: email,
           phone_number: phoneNumber,
-          firebaseuID: uid, 
+          firebaseuID: uid,
         }),
       });
       if (!response.ok) {
         throw new Error(response.statusText)
       }
-        const data = await response.json();
-        console.log(data);
-        router.push("/"); // Redirect to EmailVerification page
+      const data = await response.json();
+      console.log(data);
+      router.push("/"); // Redirect to EmailVerification page
 
     } catch (error) {
       console.log(error)
@@ -64,30 +63,15 @@ export default function SignUpForm() {
   };
 
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    create_account(email, passwordOne)
-      .then(authUser => {
-        console.log("Success. The user is created in Firebase")
-        router.push("/");
-      })
-      .catch(error => {
-        console.log(error)
-        alert("That email is already in use.")
-        // An error occurred. Set error message to be displayed to user
-        setError(error.message)
-      });
-  }
-
-
   const handletakemebacktologin = async () => {
     router.push("/");
   }
 
   return (
-    <div className="container my-5 py-5" style={{ 
-      
-      backgroundColor: "white" }} >
+    <div className="container my-5 py-5" style={{
+
+      backgroundColor: "white"
+    }} >
       <div className="row justify-content-center" >
         <div className="col-md-8" >
           <div className="card shadow-lg rounded-lg">
@@ -188,12 +172,12 @@ export default function SignUpForm() {
                 </Form.Group>
                 <br></br>
                 <Button
-              variant="light"
-              type="submit"
-              className="btn-block custom-button w-32 mt-2 mb-3"
-              style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }}>
-              Sign Up
-            </Button>
+                  variant="light"
+                  type="submit"
+                  className="btn-block custom-button w-32 mt-2 mb-3"
+                  style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }}>
+                  Sign Up
+                </Button>
               </Form>
             </div>
 
