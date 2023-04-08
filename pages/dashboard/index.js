@@ -28,6 +28,7 @@ const siteTitle = "Mindful Solutions Co.";
 //   }
 //   return await resp.json();
 // }
+// saeedStopNamingEveryFunctionHandleSignUp
 
 async function handleSignUp(token) {
   console.log(token)

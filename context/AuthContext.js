@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 import useFirebaseAuth from '../lib/firebaseAuth';
 import { resetPassword } from 'firebase/auth'; // Import resetPassword from firebase/auth
 
+
 const authUserContext = createContext({
   authUser: null,
   loading: true,
