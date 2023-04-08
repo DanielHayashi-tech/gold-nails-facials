@@ -23,7 +23,7 @@ const About = (props) => {
           </h2>
 
           <a href="https://goo.gl/maps/5t19,VM9HLzZsSkZV8" className="hover:underline">
-            <p>1634 S Mason Rd, Katy, TX, 77450</p>
+          <p className="text-xl font-bold hover:text-blue-800">1634 S Mason Rd, Katy, TX, 77450</p>
           </a>
           <br></br>
           <div className="flex items-center pb-4 text-xl font-bold pt-9">

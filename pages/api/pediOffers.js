@@ -11,7 +11,7 @@ export default [
     title: "Deluxe Spa Pedicure",
     desc: "Experience the ultimate pampering with a relaxing soak, nail trimming and shaping, cuticle maintenance, callus removal, a foot and leg massage, exfoliating scrub, hydrating mask, and your choice of polish. Perfect for those who want to indulge in luxury.",
     price: "$35.00",
-    img: require("public/pedicure2.png"),
+    img: require("public/pedicure2.jpg"),
   },
   {
     id: 16,

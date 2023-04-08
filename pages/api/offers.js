@@ -8,7 +8,7 @@ export default [
   {
     id: 2,
     title: "Check out our Pedicure Services!",
-    img: require("public/pedicure1.jpg"),
+    img: require("public/pedicure2.jpg"),
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export default [
   {
     id: 5,
     title: "Check out our Powder Nail Services!",
-    img: require("public/manicure2.jpg"),
+    img: require("public/powdnails.jpg"),
   },
   {
     id: 6,
@@ -32,7 +32,7 @@ export default [
   },
   {
     id: 7,
-    title: "Check out our Aditional Services!",
-    img: require("public/remove.jpg"),
+    title: "Check out our Additional Services!",
+    img: require("public/addserv.jpg"),
   },
 ];
