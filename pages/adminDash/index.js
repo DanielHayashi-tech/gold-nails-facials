@@ -106,8 +106,9 @@ export default function AdminDash() {
     };
 
     return (
-        <div className="text-center">
-            <h1> Admin dash congrats!</h1>
+        <div className="">
+            <h1 className="text-center text-3xl font-bold text-pink-900"
+            > Admin dash congrats!</h1>
             <br></br>
             <div className="grid grid-cols-3 gap-4 align-content-center">
                 <div className="">
@@ -115,7 +116,7 @@ export default function AdminDash() {
                         <Form.Group>
                             <Form.Label>What Service ID would you like to update? </Form.Label>
                             <Form.Control 
-                                className="text-center"
+                                className="w-32 text-center"
                                 style={{ backgroundColor: "#FFE1F8" }}
                                 onChange={(event) => setServiceID(event.target.value)}
                                 required
@@ -124,7 +125,7 @@ export default function AdminDash() {
                         <Form.Group>
                             <Form.Label>What is the new price? </Form.Label>
                             <Form.Control
-                                className="text-center"
+                                className="w-32 text-center"
                                 style={{ backgroundColor: "#FFE1F8" }}
                                 onChange={(event) => setServicePrice(event.target.value)}
                                 required
@@ -140,9 +141,10 @@ export default function AdminDash() {
                     </Form>
                     <br></br>
                 </div>
-            <div className="...">
+            <div className="text-center">
 
                     <Form onSubmit={handleServiceTotal}>
+                        <p> Total Service Orders: {serviceOrderCount} </p>
                         <Button
                             variant="primary"
                             type="submit"
@@ -150,12 +152,13 @@ export default function AdminDash() {
                             style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
                             Total the Service Orders!
                         </Button>
-                        <br></br>
-                        <p> Total Service Orders: {serviceOrderCount} </p>
+                        
+                        
                     </Form>
                 </div>
-                <div className="...">
+                <div className="text-center">
                     <Form onSubmit={handleCountAllMyClients}>
+                        <p>Total Clients: {clientCount}</p>
                         <Button
                             variant="primary"
                             type="submit"
@@ -163,8 +166,7 @@ export default function AdminDash() {
                             style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
                             Total Number of Clients!
                         </Button>
-                        <br></br>
-                        <p>Total Clients: {clientCount}</p>
+                        
                     </Form>
                 </div>
                 <div className="col-span-2 ..."> Report goes here</div>
