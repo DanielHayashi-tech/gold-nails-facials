@@ -55,7 +55,7 @@ export default function ManicureService({prices}) {
                 transition={{ duration: 1.2 }}
               >
                 <span className="flex items-center justify-center text-xs text-teal-600 ">
-                  {offer.service_price}
+                  ${offer.service_price}.00
                 </span>
                 <p className="px-4 py-3 text-sm tracking-tight">{offer.service_description}</p>
                 <button className="btn" onClick={() => getToCart(offer.ServiceID)}>
