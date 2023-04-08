@@ -27,13 +27,10 @@ export default function ForgotPasswordForm({ onCancel }) {
   }
 
   return (
-    <div className="container my-5 py-5" style={{
-
-      backgroundColor: "white"
-      }} >
+    <div className="container my-5 py-5" style={{ backgroundColor: "white"}}>
       <div className="row justify-content-center" >
-        <div className="col-md-8" >
-          <div className="card shadow-lg rounded-lg">
+        <div className="col-md-7" >
+          <div className="card shadow-lg rounded-lg mt-5">
             <div className="card-header">
               <h3
                 className="text-center"
@@ -42,7 +39,7 @@ export default function ForgotPasswordForm({ onCancel }) {
                   fontWeight: "600",
                   fontSize: "3rem",
                   marginBottom: "1rem",
-                  color: "#FFE1F8",
+                  color: "#EAC8E7",
                   // textShadow: "0 0 5px black", // add text-shadow property 
                 }}>
                 My Golden Nails
@@ -53,8 +50,10 @@ export default function ForgotPasswordForm({ onCancel }) {
               <Form onSubmit={handleSubmit} className="">
                 <Form.Group controlId="formBasicEmail" className="grid place-content-start md:place-content-center">
                   <Form.Label className='text-center pt-10'
-
-                  >Email address</Form.Label>
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "500",
+                  fontSize: "1.3rem",
+                 }}>Email address</Form.Label>
                   <Form.Control
                     type="email"
                     className="w-96 text-center "
@@ -66,31 +65,41 @@ export default function ForgotPasswordForm({ onCancel }) {
                     required />
                 </Form.Group>
                 <br></br>
-                <div className="pt-10">
 
-                  {error && <p className="text-danger mb-3">{error}</p>}
+                <div className="card-footer text-center" >
+                <div className="grid grid-cols-2 gap-32">
+                  <div>
                   <Button
                     variant="light"
                     type="submit"
-                    className="btn-block custom-button mt-2  absolute bottom-3 left-4"
-                    style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }} >
+                    className="btn-block custom-button mt-2"
+                    style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                    fontWeight: "400",
+                      backgroundColor: "#FFE1F8", 
+                    fontSize: '18px' }} >
                     Send Reset Email
                   </Button>
+                  </div>
+                  <div>
+                  <Button
+                    variant="light"
+                    className="btn-block custom-button mt-2"
+                    onClick={handletakemebacktologin}
+                    style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                    fontWeight: "400",
+                      backgroundColor: '#FFE1F8', 
+                    fontSize: '18px' }}>
+                    Cancel
+                  </Button>
+                  </div>
                 </div>
-
-                <Button
-                  variant="light"
-                  className="btn-block custom-button mt-2 absolute bottom-3 right-4"
-                  onClick={handletakemebacktologin}
-                  style={{ backgroundColor: '#FFE1F8', fontSize: '18px' }}>
-                  Cancel
-                </Button>
-              </Form>
-
+                <br></br>
+                </div>
+                </Form>
+              </div>
             </div>
           </div>
        </div>     
-     </div>
-  </div>   
+     </div>   
   );
 }

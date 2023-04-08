@@ -88,7 +88,7 @@ export default function SignUpForm() {
                   fontWeight: "600",
                   fontSize: "3rem",
                   marginBottom: "1rem",
-                  color: "#FFE1F8",
+                  color: "#EAC8E7",
                   // textShadow: "0 0 5px black", // add text-shadow property 
                 }}>
                 My Golden Nails
@@ -99,12 +99,16 @@ export default function SignUpForm() {
             <div className="card-body text-center place-content-center">
               <Form onSubmit={handleSignUps} >
                 <Form.Group controlId="formBasicFirstName" className="grid place-content-start md:place-content-center">
-                  <Form.Label>First Name</Form.Label>
+                  <Form.Label
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "400",
+                  fontSize: "1.3rem",
+                  }}>First Name</Form.Label>
                   <Form.Control
                     type="text"
                     className="w-64 text-center"
                     style={{ backgroundColor: "#FFE1F8" }}
-                    placeholder="First Name"
+                    placeholder="Enter First Name"
                     value={firstName}
                     onChange={(event) => setFirstName(event.target.value)}
                     required />
@@ -112,12 +116,16 @@ export default function SignUpForm() {
                 <br></br>
 
                 <Form.Group controlId="formBasicLastName" className="grid place-content-start md:place-content-center">
-                  <Form.Label>Last Name</Form.Label>
+                  <Form.Label
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "400",
+                  fontSize: "1.3rem",
+                  }}>Last Name</Form.Label>
                   <Form.Control
                     type="text"
                     className="w-64 text-center"
                     style={{ backgroundColor: "#FFE1F8" }}
-                    placeholder="Last Name"
+                    placeholder="Enter Last Name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required />
@@ -125,12 +133,16 @@ export default function SignUpForm() {
                 <br></br>
 
                 <Form.Group controlId="formBasicDate" className="grid place-content-start md:place-content-center">
-                  <Form.Label>Birthday</Form.Label>
+                  <Form.Label
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "400",
+                  fontSize: "1.3rem",
+                  }}>Birthday</Form.Label>
                   <Form.Control
                     type="date"
                     className="w-40 text-center"
                     style={{ backgroundColor: "#FFE1F8" }}
-                    placeholder="Fornat: YYY/MM/DD"
+                    placeholder="Fornat: YYYY/MM/DD"
                     value={birthday}
                     onChange={(event) => setBirthday(event.target.value)}
                     required />
@@ -138,7 +150,11 @@ export default function SignUpForm() {
                 <br></br>
 
                 <Form.Group controlId="formbasicphonenumber" className="grid place-content-start md:place-content-center">
-                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Label
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "400",
+                  fontSize: "1.3rem",
+                  }}>Phone Number</Form.Label>
                   <Form.Control
                     type="tel"
                     className="w-48 text-center"
@@ -152,12 +168,16 @@ export default function SignUpForm() {
 
 
                 <Form.Group controlId="formBasicEmail" className="grid place-content-start md:place-content-center">
-                  <Form.Label>Email Address</Form.Label>
+                  <Form.Label
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "400",
+                  fontSize: "1.3rem",
+                  }}>Email Address</Form.Label>
                   <Form.Control
                     type="email"
                     className="w-64 text-center"
                     style={{ backgroundColor: "#FFE1F8" }}
-                    placeholder="Email"
+                    placeholder="Enter Email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     required />
@@ -165,19 +185,27 @@ export default function SignUpForm() {
                 <br></br>
 
                 <Form.Group controlId="formBasicPassword" className="grid place-content-start md:place-content-center">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label 
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                    fontWeight: "400",
+                    fontSize: "1.3rem",
+                  }}>Password</Form.Label>
                   <Form.Control
                     type="password"
                     className="w-64 text-center"
                     style={{ backgroundColor: "#FFE1F8" }}
-                    placeholder="Password"
+                    placeholder="Create Password"
                     value={passwordOne}
                     onChange={(e) => setPasswordOne(e.target.value)}
                     required />
                 </Form.Group>
                 <br></br>
                 <Form.Group controlId="formBasicConfirmPassword" className="grid place-content-start md:place-content-center">
-      <Form.Label>Confirm Password</Form.Label>
+      <Form.Label
+      style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+      fontWeight: "400",
+      fontSize: "1.3rem",
+      }}>Confirm Password</Form.Label>
       <Form.Control
         type="password"
         className="w-64 text-center"
@@ -192,7 +220,10 @@ export default function SignUpForm() {
                   variant="light"
                   type="submit"
                   className="btn-block custom-button w-32 mt-2 mb-3"
-                  style={{ backgroundColor: "#FFE1F8", fontSize: '18px' }}>
+                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                  fontWeight: "400",
+                    backgroundColor: "#FFE1F8",
+                     fontSize: '19px' }}>
                   Sign Up
                 </Button>
               </Form>
@@ -203,7 +234,10 @@ export default function SignUpForm() {
                 variant="light"
                 onClick={handletakemebacktologin}
                 className="btn-block custom-button mt-2 absolute bottom-5 right-4"
-                style={{ backgroundColor: '#FFE1F8', fontSize: '18px' }}>
+                style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+                fontWeight: "400",
+                  backgroundColor: '#FFE1F8',
+                 fontSize: '19px' }}>
                 Cancel
               </Button>
             </div>
