@@ -47,7 +47,7 @@ async function handleSignUp(token, cart) {
       ServiceID: true,
       service_price: true,
       service_description: true,
-      service_title: true
+      service_typeID: true
     },
     where: {
       Service_Type: {service_typeID: id},

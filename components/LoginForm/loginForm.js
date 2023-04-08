@@ -6,7 +6,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import styles from './LoginForm.module.css';
 import ForgotPasswordForm from '../../components/ForgotPassword/ForgotPasswordForm'; // Import the ForgotPasswordForm component
-
+const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
 export default function LoginForm() {
   //initializing configuration
   initFirebase();
@@ -23,26 +23,30 @@ export default function LoginForm() {
   const { signIN } = useAuth();
 
 
-    const handleLogin = async (e) => {
-      e.preventDefault();
-      signIN(email, password)
-        .then((authUser) => {
-          if (!authUser.user.emailVerified) {
-            console.log("Please verify your email.");
-            alert("Please verify your email.");
-            setError("Please verify your email.");
-            return;
-          }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    signIN(email, password)
+      .then((authUser) => {
+        if (!authUser.user.emailVerified) {
+          console.log("Please verify your email.");
+          alert("Please verify your email.");
+          setError("Please verify your email.");
+          return;
+        }
+  
+        if (authUser.user.uid === ADMIN_UID) {
+          router.push("/adminDash");
+        } else {
           router.push("/dashboard");
-        })
-      .catch(error => {
-        console.log(error)
-        alert("Email/Password combination is incorrect.")
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Email/Password combination is incorrect.");
         // An error occurred. Set error message to be displayed to user
-        setError(error.message)
+        setError(error.message);
       });
-  }
-
+  };
 
 
 
