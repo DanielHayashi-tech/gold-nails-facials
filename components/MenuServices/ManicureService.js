@@ -11,10 +11,9 @@ import { getToken } from "@chakra-ui/react";
 
 
 
-export default function ManicureService({posts}) {
+export default function ManicureService({prices}) {
   const [isOpen, setIsOpen] = useState(false);
   const { cart, getToken } = useAuth();
-  console.log(posts)
 
   function handleClick() {
     setIsOpen(!isOpen);
@@ -32,7 +31,7 @@ export default function ManicureService({posts}) {
       <ServicesHeadings title="Our Manicure Services"/>
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         
-        {posts && posts.map((offer) => (
+        {prices.map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
             layout
