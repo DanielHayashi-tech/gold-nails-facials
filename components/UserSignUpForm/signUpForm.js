@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 export default function SignUpForm() {
 
   const router = useRouter();
-
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -23,6 +23,10 @@ export default function SignUpForm() {
     const { create_account } = useAuth();
 
   const handleSignUps = async (e) => {
+    if (passwordOne !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
     e.preventDefault();
     try {
@@ -172,6 +176,18 @@ export default function SignUpForm() {
                     required />
                 </Form.Group>
                 <br></br>
+                <Form.Group controlId="formBasicConfirmPassword" className="grid place-content-start md:place-content-center">
+      <Form.Label>Confirm Password</Form.Label>
+      <Form.Control
+        type="password"
+        className="w-64 text-center"
+        style={{ backgroundColor: "#FFE1F8" }}
+        placeholder="Confirm Password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        required />
+    </Form.Group>
+    <br></br>
                 <Button
                   variant="light"
                   type="submit"

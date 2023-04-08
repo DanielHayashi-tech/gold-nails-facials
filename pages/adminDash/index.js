@@ -31,8 +31,8 @@ export default function AdminDash() {
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    ServiceID : ServiceID,
-                    service_price : service_price
+                    ServiceID: ServiceID,
+                    service_price: service_price
                 })
             });
 
@@ -61,7 +61,7 @@ export default function AdminDash() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                
+
             });
             if (!response.ok) {
                 throw new Error(response.statusText)
@@ -89,7 +89,7 @@ export default function AdminDash() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                
+
             });
             if (!response.ok) {
                 throw new Error(response.statusText)
@@ -105,63 +105,83 @@ export default function AdminDash() {
         }
     };
 
-
-
-
-
     return (
-        <div>
-            <h1 className="text-center" > Admin dash congrats!</h1>
+        <div className="">
+            <h1 className="text-center text-3xl font-bold text-pink-900"
+            > Admin dash congrats!</h1>
             <br></br>
+            <div className="grid grid-cols-3 gap-4 align-content-center">
+                <div className="">
+                    <Form onSubmit={handleUpdateServicePrice}>
+                        <Form.Group>
+                            <Form.Label>What Service ID would you like to update? </Form.Label>
+                            <Form.Control 
+                                className="w-32 text-center"
+                                style={{ backgroundColor: "#FFE1F8" }}
+                                onChange={(event) => setServiceID(event.target.value)}
+                                required
+                                type="text" placeholder="Service ID" />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>What is the new price? </Form.Label>
+                            <Form.Control
+                                className="w-32 text-center"
+                                style={{ backgroundColor: "#FFE1F8" }}
+                                onChange={(event) => setServicePrice(event.target.value)}
+                                required
+                                type="text" placeholder="New Price" />
+                        </Form.Group>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                            style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                            Submit Update!
+                        </Button>
+                    </Form>
+                    <br></br>
+                </div>
+            <div className="text-center">
 
-            <Form onSubmit={handleUpdateServicePrice}>
-                <Form.Group>
-                    <Form.Label>What Service ID would you like to update? </Form.Label>
-                    <Form.Control
-                        onChange={(event) => setServiceID(event.target.value)}
-                        required
-                        type="text" placeholder="Service ID" />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>What is the new price? </Form.Label>
-                    <Form.Control
-                        onChange={(event) => setServicePrice(event.target.value)}
-                        required
-                        type="text" placeholder="New Price" />
-                </Form.Group>
+                    <Form onSubmit={handleServiceTotal}>
+                        <p> Total Service Orders: {serviceOrderCount} </p>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                            style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                            Total the Service Orders!
+                        </Button>
+                        
+                        
+                    </Form>
+                </div>
+                <div className="text-center">
+                    <Form onSubmit={handleCountAllMyClients}>
+                        <p>Total Clients: {clientCount}</p>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                            style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                            Total Number of Clients!
+                        </Button>
+                        
+                    </Form>
+                </div>
 
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                    style={{ backgroundColor: "#ffe5e9", fontSize: "1.5rem" }}>
-                    Submit Update!
-                </Button>
-            </Form>
-            <br></br>
-            <Form onSubmit={handleServiceTotal}>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                    style={{ backgroundColor: "#ffe5e9", fontSize: "1.5rem" }}>
-                    Total the Service Orders!
-                </Button>
-                <h2>Total Service Orders: {serviceOrderCount}</h2>
+                <div className="col-span-2 ..."> What person f and l name ordered what servcice. Today.  </div>
 
-            </Form>
-            <br></br>
-            <Form onSubmit={handleCountAllMyClients}>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                    style={{ backgroundColor: "#ffe5e9", fontSize: "1.5rem" }}>
-                    Total Number of Clients!
-                </Button>
-                <h2>Total Clients: {clientCount}</h2>
+                <div className="..."> Sales on Services Made Today, this week, this month, this year. </div>
 
-            </Form>
+                <div className="..."> Owner needs to be able to approve quotes and
+                this means change the status to IN PROGRSS and display how many    </div>
+
+                <div className="..."> Count how many Clients have a INACTIVE status today, this week, this year. </div>
+
+                <div className="col-span-2 ..."> I need to add an employee </div>
+
+            </div>
         </div>
     )
 }
