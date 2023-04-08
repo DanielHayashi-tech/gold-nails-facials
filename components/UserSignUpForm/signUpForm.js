@@ -57,6 +57,7 @@ export default function SignUpForm() {
     } catch (error) {
       console.log(error)
       alert("Account Created! Please Check Your Email For Verification.")
+      router.push("/");
       // An error occurred. Set error message to be displayed to user
       setError(error.message)
     }

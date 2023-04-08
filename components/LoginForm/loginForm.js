@@ -52,6 +52,7 @@ export default function LoginForm() {
 
   const handleForgotPassword = () => {
     setShowForgotPassword(true);
+    router.push("/forgotPass");
   }
 
   const handleCancelForgotPassword = () => {
@@ -176,7 +177,7 @@ export default function LoginForm() {
                 variant="light"
                 className="btn-block custom-button mt-2"
                 onClick={handleForgotPassword}
-                style={{ backgroundColor: '#FFE1F8', fontSize: '17px' }}>
+                style={{ backgroundColor: '#FFE1F8', fontSize: '18px' }}>
                 Forgot Password
               </Button>
                 </div>
