@@ -1,21 +1,65 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import { useAuth } from '@/context/AuthContext';
 
 
-
-
+const { getToken } = useAuth();
 
 export default function AddEmployeeForm({ handleCancelForm }) {
     const router = useRouter();
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [birthday, setBirthday] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
+    const [addressOne, setaddressOne] = useState("");
+    const [addressTwo, setaddressTwo] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [zipCode, setZipCode] = useState("");
 
     const [error, setError] = useState(null);
+
+    const handleAddEmployee = async (e) => {
+        e.preventDefault();
+        try {
+          const token = await getToken();
+    
+          const response = await fetch('/api/admin/addEmployee', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                phone_number: phoneNumber,
+                email_address: email,
+                address_one: addressOne,
+                address_two: addressTwo,
+                city: city,
+                state: state,
+                zip_code: zipCode,
+
+            }),
+          });
+          if (!response.ok) {
+            throw new Error(response.statusText)
+          }
+          const data = await response.json();
+          console.log(data);
+          router.push("/"); // Redirect to EmailVerification page
+    
+        } catch (error) {
+          console.log(error)
+          alert("Account Created! Please Check Your Email For Verification.")
+          router.push("/");
+          // An error occurred. Set error message to be displayed to user
+          setError(error.message)
+        }
+      };
 
 
 
@@ -38,7 +82,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                         </div>
 
                         <div className="card-body text-center place-content-center">
-                            <Form >
+                            <Form onSubmit={handleAddEmployee}>
                                 <Form.Group controlId="formBasicFirstName" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -50,7 +94,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         type="text"
                                         className="w-64 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Enter First Name"
+                                        placeholder="First Name"
                                         value={firstName}
                                         onChange={(event) => setFirstName(event.target.value)}
                                         required />
@@ -68,27 +112,9 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         type="text"
                                         className="w-64 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Enter Last Name"
+                                        placeholder="Last Name"
                                         value={lastName}
                                         onChange={(e) => setLastName(e.target.value)}
-                                        required />
-                                </Form.Group>
-                                <br></br>
-
-                                <Form.Group controlId="formBasicDate" className="grid place-content-start md:place-content-center">
-                                    <Form.Label
-                                        style={{
-                                            fontFamily: "Open Sans", // Change to the desired cursive font
-                                            fontWeight: "400",
-                                            fontSize: "1.3rem",
-                                        }}>Birthday</Form.Label>
-                                    <Form.Control
-                                        type="date"
-                                        className="w-40 text-center"
-                                        style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Fornat: YYYY/MM/DD"
-                                        value={birthday}
-                                        onChange={(event) => setBirthday(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -111,7 +137,6 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                 </Form.Group>
                                 <br></br>
 
-
                                 <Form.Group controlId="formBasicEmail" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -123,17 +148,103 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         type="email"
                                         className="w-64 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Enter Email"
+                                        placeholder="Email"
                                         value={email}
                                         onChange={(event) => setEmail(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
 
+                                <Form.Group controlId="formBasicAddress" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem",
+                                        }}> Adress 1</Form.Label>
+                                    <Form.Control
+                                        type="address"
+                                        className="w-96 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        placeholder="Address 1"
+                                        value={addressOne}
+                                        onChange={(event) => setaddressOne(event.target.value)}
+                                        required />
+                                </Form.Group>
+                                <br></br>
+
+                                <Form.Group controlId="formBasicAddress" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem",
+                                        }}> Adress 2</Form.Label>
+                                    <Form.Control
+                                        type="address"
+                                        className="w-96 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        placeholder="Address 2"
+                                        value={addressTwo}
+                                        onChange={(event) => setaddressTwo(event.target.value)} />
+                                </Form.Group>
+                                <br></br>
+
+                                <Form.Group controlId="formBasicCity" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem",
+                                        }}> City </Form.Label>
+                                    <Form.Control
+                                        type="city"
+                                        className="w-36 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        placeholder="City"
+                                        value={city}
+                                        onChange={(event) => setCity(event.target.value)} />
+                                </Form.Group>
+                                <br></br>
+
+                                <Form.Group controlId="formBasicState" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem",
+                                        }}> State  </Form.Label>
+                                    <Form.Control
+                                        type="state"
+                                        className="w-24 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        placeholder="State"
+                                        value={state}
+                                        onChange={(event) => setState(event.target.value)} />
+                                </Form.Group>
+                                <br></br>
+
+                                <Form.Group controlId="formBasicZipcode" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem",
+                                        }}> Zipcode </Form.Label>
+                                    <Form.Control
+                                        type="zipcode"
+                                        className="w-24 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        placeholder="Zipcode"
+                                        value={zipCode}
+                                        onChange={(event) => setZipCode(event.target.value)} />
+                                </Form.Group>
+                                <br></br>
+
                                 <Button
                                     variant="light"
-                                    //   type="submit"
-                                    className="btn-block custom-button w-32 mt-2 mb-3"
+                                    type="submit"
+                                    className="btn-block custom-button w-48 mt-2 mb-3"
                                     style={{
                                         fontFamily: "Open Sans", // Change to the desired cursive font
                                         fontWeight: "400",
