@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
@@ -18,50 +18,113 @@ export default function AddEmployeeForm({ handleCancelForm }) {
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
 
+    // Add new states for specialties and selectedSpecialties
+    const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+
+    const [specialties, setSpecialties] = useState([]);
+    const [skillLevels, setSkillLevels] = useState([]);
+
     const [error, setError] = useState(null);
 
     const { getToken } = useAuth();
 
 
+
+    useEffect(() => {
+        async function fetchSpecialties() {
+            try {
+                const token = await getToken();
+                const response = await fetch('/api/admin/getEmpSpecialties', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log(data)
+                setSpecialties(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Error fetching specialties:', error);
+            }
+        }
+
+        fetchSpecialties();
+    }, []);
+
+    useEffect(() => {
+        async function fetchSkillLevels() {
+            try {
+                const token = await getToken();
+                const response = await fetch('/api/admin/getEmpSkills', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log(data)
+                setSkillLevels(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Error fetching skill levels:', error);
+            }
+        }
+
+        fetchSkillLevels();
+    }, []);
+
+    // Add a function to handle the addition and removal of specialties and their corresponding skill levels
+    const handleSpecialtyChange = (event, specialtyId) => {
+        const skillLevelId = +event.target.value;
+        setSelectedSpecialties((prevState) => {
+            const existingSpecialty = prevState.find((specialty) => specialty.specialtyID === specialtyId);
+
+            if (existingSpecialty) {
+                return prevState.map((specialty) =>
+                    specialty.specialtyID === specialtyId ? { ...specialty, skillLevelID: skillLevelId } : specialty
+                );
+            } else {
+                return [...prevState, { specialtyID: specialtyId, skillLevelID: skillLevelId }];
+            }
+        });
+    };
+
+
     const handleAddEmployee = async (e) => {
         e.preventDefault();
         try {
-          const token = await getToken();
-    
-          const response = await fetch('/api/admin/addEmployee', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                first_name: firstName,
-                last_name: lastName,
-                phone_number: phoneNumber,
-                email_address: email,
-                address_1: address_1,
-                address_2: address_2,
-                city: city,
-                state: state,
-                zip_code: zipCode,
+            const token = await getToken();
 
-            }),
-          });
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          const data = await response.json();
-          console.log(data);
-          router.push("/"); // Redirect to EmailVerification page
-    
+            const response = await fetch('/api/admin/addEmployee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone_number: phoneNumber,
+                    email_address: email,
+                    address_1: address_1,
+                    address_2: address_2,
+                    city: city,
+                    state: state,
+                    zip_code: zipCode,
+                    specialties: selectedSpecialties,
+
+                }),
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            router.push('/adminDash');
+
         } catch (error) {
-          console.log(error)
-          alert("Account Created! Please Check Your Email For Verification.")
-          router.push("/");
-          // An error occurred. Set error message to be displayed to user
-          setError(error.message)
+            console.log(error)
+            // An error occurred. Set error message to be displayed to user
+            setError(error.message)
         }
-      };
+    };
 
 
 
@@ -188,7 +251,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
                                         value={address_2}
-                                        onChange={(event) => setaddressTwo(event.target.value)} 
+                                        onChange={(event) => setaddressTwo(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -242,6 +305,43 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         value={zipCode}
                                         onChange={(event) => setZipCode(event.target.value)} />
                                 </Form.Group>
+                                <br></br>
+                                <div>
+                                    {specialties.map((specialty) => (
+                                        <div key={specialty.specialtyID}>
+                                            <Form.Group controlId={`formSpecialtySkill${specialty.specialtyID}`}>
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label={specialty.name}
+                                                    onChange={(event) => {
+                                                        if (event.target.checked) {
+                                                            handleSpecialtyChange({ target: { value: 1 } }, specialty.specialtyID);
+                                                        } else {
+                                                            setSelectedSpecialties((prevState) =>
+                                                                prevState.filter((selectedSpecialty) => selectedSpecialty.specialtyID !== specialty.specialtyID)
+                                                            );
+                                                        }
+                                                    }}
+                                                />
+                                                {selectedSpecialties.find((selectedSpecialty) => selectedSpecialty.specialtyID === specialty.specialtyID) && (
+                                                    <Form.Control
+                                                        as="select"
+                                                        value={selectedSpecialties.find((selectedSpecialty) => selectedSpecialty.specialtyID === specialty.specialtyID)
+                                                            .skillLevelID}
+                                                        onChange={(event) => handleSpecialtyChange(event, specialty.specialtyID)}
+                                                    >
+                                                        {skillLevels.map((skillLevel) => (
+                                                            <option key={`${specialty.SpecialtyID}-${skillLevel.Skill_LevelID}`} value={skillLevel.Skill_LevelID}>
+                                                                {skillLevel.name}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Control>
+                                                )}
+                                            </Form.Group>
+                                        </div>
+                                    ))}
+                                </div>
+
                                 <br></br>
 
                                 <Button
