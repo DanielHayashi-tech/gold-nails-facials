@@ -23,7 +23,7 @@ export default async function handler(req, res) {
             city: city,
             state: state,
             zip_code: zip_code,
-            Client_statusID: 1
+            employee_statusID: 1
           }
         });
         return res.status(200).json({ success: true, data: userinfo });

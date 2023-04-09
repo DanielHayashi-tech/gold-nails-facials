@@ -99,7 +99,7 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
 
                 <Button
                     variant="light"
-                    // type="submit"
+                    type="submit"
                     className="btn-block custom-button w-32 mt-2 mb-3"
                     style={{
                         fontFamily: "Open Sans",

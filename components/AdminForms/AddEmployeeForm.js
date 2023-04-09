@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 
 
-const { getToken } = useAuth();
 
 export default function AddEmployeeForm({ handleCancelForm }) {
     const router = useRouter();
@@ -13,13 +12,16 @@ export default function AddEmployeeForm({ handleCancelForm }) {
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
-    const [addressOne, setaddressOne] = useState("");
-    const [addressTwo, setaddressTwo] = useState("");
+    const [address_1, setaddressOne] = useState("");
+    const [address_2, setaddressTwo] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
 
     const [error, setError] = useState(null);
+
+    const { getToken } = useAuth();
+
 
     const handleAddEmployee = async (e) => {
         e.preventDefault();
@@ -37,8 +39,8 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                 last_name: lastName,
                 phone_number: phoneNumber,
                 email_address: email,
-                address_one: addressOne,
-                address_two: addressTwo,
+                address_1: address_1,
+                address_2: address_2,
                 city: city,
                 state: state,
                 zip_code: zipCode,
@@ -167,7 +169,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         className="w-96 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 1"
-                                        value={addressOne}
+                                        value={address_1}
                                         onChange={(event) => setaddressOne(event.target.value)}
                                         required />
                                 </Form.Group>
@@ -185,8 +187,9 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         className="w-96 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
-                                        value={addressTwo}
-                                        onChange={(event) => setaddressTwo(event.target.value)} />
+                                        value={address_2}
+                                        onChange={(event) => setaddressTwo(event.target.value)} 
+                                        required />
                                 </Form.Group>
                                 <br></br>
 

@@ -11,9 +11,7 @@ const authUserContext = createContext({
   signOut: async () => {},
   getUser: async () => {},
   resetPassword: async () => {},
-  getToken: async () => {},
 });
-
 // Add resetPassword function to the value provided by AuthUserProvider
 const sendResetEmail = async (email) => {
   try {
@@ -24,25 +22,15 @@ const sendResetEmail = async (email) => {
     throw error;
   }
 };
-
-
 export function AuthUserProvider({ children }) {
   const auth = useFirebaseAuth();
-
-  const getToken = async () => {
-    const token = await auth.getToken();
-    return token;
-  };
-
-  const value = {
-    ...auth,
-    getToken,
-  };
-
-
-  return <authUserContext.Provider value={value}>{children}</authUserContext.Provider>;
-
+  return (
+    <authUserContext.Provider
+      value={{ ...auth}}
+    >
+      {children}
+    </authUserContext.Provider>
+  );
 }
-
 // custom hook to use the authUserContext and access authUser and loading
 export const useAuth = () => useContext(authUserContext);
