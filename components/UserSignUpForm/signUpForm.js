@@ -24,7 +24,7 @@ export default function SignUpForm() {
 
   const handleSignUps = async (e) => {
     if (passwordOne !== confirmPassword) {
-      alert("Passwords do not match");
+      alert("Passwords do not match. Please try again and ensure your password is 6 characters long.");
       return;
     }
 
