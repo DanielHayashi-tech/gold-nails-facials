@@ -75,7 +75,7 @@ export default function SignUpForm() {
   return (
     <div className="container my-5 py-5" style={{
 
-      backgroundColor: "white"
+      backgroundColor: "#FFE1F8"
     }} >
       <div className="row justify-content-center" >
         <div className="col-md-8" >
