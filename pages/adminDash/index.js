@@ -20,6 +20,8 @@ export default function AdminDash() {
     const [error, setError] = useState(null);
     const [serviceOrderCount, setServiceOrderCount] = useState(0);
     const [clientCount, setclientCount] = useState(0);
+    const [showClientOrders, setshowClientOrders] = useState(0);
+    
 
 
 
@@ -53,6 +55,36 @@ export default function AdminDash() {
             setError(error.message)
         }
     };
+
+
+    const handleClientOrders = async (e) => {
+        e.preventDefault();
+        const token = await getToken();
+
+        try {
+            const response = await fetch('/api/admin/clientServiceOrders', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            const data = await response.json();
+            setshowClientOrders(data.total);
+        } catch (error) {
+            console.log(error)
+            alert("Read the error message and try again, you got this :) ")
+            // An error occurred. Set error message to be displayed to user
+            setError(error.message)
+
+        }
+    };
+
+    
 
     const handleServiceTotal = async (e) => {
         e.preventDefault();
@@ -145,6 +177,19 @@ export default function AdminDash() {
                             Total Number of Clients!
                         </Button>
                     </Form>
+
+                    <Form onSubmit={handleClientOrders}>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                    style={{ backgroundColor: "#ffe5e9", fontSize: "1.5rem" }}>
+                    All Clients Service Orders!
+                </Button>
+                <h2>Total Clients: {showClientOrders}</h2>
+
+</Form>
+
                 </div>
 
                 <div className="text-center"> 
