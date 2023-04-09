@@ -16,45 +16,11 @@ export default function AdminDash() {
 
 
 
-    // const { getToken } = useAuth();
-    // const [ServiceID, setServiceID] = useState("");
-    // const [service_price, setServicePrice] = useState("");
-    // const [error, setError] = useState(null);
-    // const [serviceOrderCount, setServiceOrderCount] = useState(0);
-    // const [clientCount, setclientCount] = useState(0);
+    const [error, setError] = useState(null);
+    const [serviceOrderCount, setServiceOrderCount] = useState(0);
+    const [clientCount, setclientCount] = useState(0);
 
 
-
-    // const handleUpdateServicePrice = async (e) => {
-    //     e.preventDefault();
-    //     const token = await getToken();
-
-    //     try {
-    //         const response = await fetch('/api/admin/updatePrices', {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': `Bearer ${token}`,
-    //             },
-    //             body: JSON.stringify({
-    //                 ServiceID: ServiceID,
-    //                 service_price: service_price
-    //             })
-    //         });
-
-
-    //         if (!response.ok) {
-    //             throw new Error(response.statusText)
-    //         }
-    //         const data = await response.json();
-    //         console.log(data)
-    //     } catch (error) {
-    //         console.log(error)
-    //         alert("Read the error message and try again, you got this :)  ")
-    //         // An error occurred. Set error message to be displayed to user
-    //         setError(error.message)
-    //     }
-    // };
 
     // const handleServiceTotal = async (e) => {
     //     e.preventDefault();

@@ -265,7 +265,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                             backgroundColor: '#FFE1F8',
                                             fontSize: '19px'
                                         }}>
-                                        Cancel
+                                        Home
                                     </Button>
                                 </div>
                             </Form>
