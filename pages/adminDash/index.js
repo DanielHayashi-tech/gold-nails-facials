@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
-// import UpdateServicePriceForm from './components/UpdateServicePriceForm';
+import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
 
 
 
@@ -131,7 +131,10 @@ export default function AdminDash() {
       {currentForm === 'addEmployee' && (
         <AddEmployeeForm handleCancelForm={handleCancelForm} />
       )}
-      {/* {currentForm === 'updateServicePrice' && <UpdateServicePriceForm />} */}
+      {currentForm === 'updateServicePrice' && (
+        <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
+      )}
+      
         </div>
 
     )

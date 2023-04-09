@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 
 export default function SignUpForm() {
-
   const router = useRouter();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -20,7 +19,7 @@ export default function SignUpForm() {
   const [passwordOne, setPasswordOne] = useState("");
   const [error, setError] = useState(null);
 
-    const { create_account } = useAuth();
+  const { create_account } = useAuth();
 
   const handleSignUps = async (e) => {
     if (passwordOne !== confirmPassword) {

@@ -17,7 +17,7 @@ const AdminDashNavBar = ({ handleFormChange }) => {
 
         <div className="flex space-x-4">
           <Button onClick={() => handleFormChange('addEmployee')}>Add a new Employee</Button>
-          {/* <Button onClick={() => handleFormChange('updateServicePrice')}>Update Service Price</Button> */}
+          <Button onClick={() => handleFormChange('updateServicePrice')}>Update Service Price</Button>
         </div>
       </div>
     </Flex>
