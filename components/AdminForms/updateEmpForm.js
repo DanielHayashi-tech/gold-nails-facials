@@ -5,97 +5,98 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 
 export default function UpdateEmployeeForm({ handleCancelForm }) {
-  const router = useRouter();
-  const [employeeID, setEmployeeID] = useState(null);
-  const [employeeData, setEmployeeData] = useState(null);
+    const router = useRouter();
+    const [employeeID, setEmployeeID] = useState(null);
+    const [employeeData, setEmployeeData] = useState(null);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [address_1, setaddressOne] = useState("");
-  const [address_2, setaddressTwo] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
+    const [employeeId, setEmployeeId] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [address_1, setAddress_1] = useState('');
+    const [address_2, setAddress_2] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipCode, setZipCode] = useState('');
 
-  const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
 
-  const { getToken } = useAuth();
+    const { getToken } = useAuth();
 
-  useEffect(() => {
-    if (employeeID) {
-      fetchEmployeeData();
-    }
-  }, [employeeID]);
+    useEffect(() => {
+        if (employeeID) {
+            fetchEmployeeData();
+        }
+    }, [employeeID]);
 
-  const fetchEmployeeData = async () => {
-    try {
-      const token = await getToken();
-      const response = await fetch(`/api/employees/${employeeID}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+    const fetchEmployeeData = async () => {
+        try {
+            const token = await getToken();
+            const response = await fetch(`/api/employees/${employeeID}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
 
-      const data = await response.json();
-      setEmployeeData(data);
-      setFirstName(data.first_name);
-      setLastName(data.last_name);
-      setPhoneNumber(data.phone_number);
-      setEmail(data.email_address);
-      setaddressOne(data.address_1);
-      setaddressTwo(data.address_2);
-      setCity(data.city);
-      setState(data.state);
-      setZipCode(data.zip_code);
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
-    }
-  };
+            const data = await response.json();
+            setEmployeeData(data);
+            setFirstName(data.first_name);
+            setLastName(data.last_name);
+            setPhoneNumber(data.phone_number);
+            setEmail(data.email_address);
+            setaddressOne(data.address_1);
+            setaddressTwo(data.address_2);
+            setCity(data.city);
+            setState(data.state);
+            setZipCode(data.zip_code);
+        } catch (error) {
+            console.log(error);
+            setError(error.message);
+        }
+    };
 
-  const handleUpdateEmployee = async (e) => {
-    e.preventDefault();
-    try {
-      const token = await getToken();
+    const handleUpdateEmployee = async (e) => {
+        e.preventDefault();
+        try {
+            const token = await getToken();
 
-      const response = await fetch(`/api/updateEmp/${employeeID}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          phone_number: phoneNumber,
-          email_address: email,
-          address_1: address_1,
-          address_2: address_2,
-          city: city,
-          state: state,
-          zip_code: zipCode,
-        }),
-      });
+            const response = await fetch(`/api/updateEmp/${employeeID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone_number: phoneNumber,
+                    email_address: email,
+                    address_1: address_1,
+                    address_2: address_2,
+                    city: city,
+                    state: state,
+                    zip_code: zipCode,
+                }),
+            });
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
 
-      const data = await response.json();
-      console.log(data);
-      alert('Employee updated successfully');
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
-    }
-  };
+            const data = await response.json();
+            console.log(data);
+            alert('Employee updated successfully');
+        } catch (error) {
+            console.log(error);
+            setError(error.message);
+        }
+    };
 
     return (
         <div className="container my-5 py-5">
@@ -237,7 +238,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
                                         value={address_2}
-                                        onChange={(event) => setaddressTwo(event.target.value)} 
+                                        onChange={(event) => setaddressTwo(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
