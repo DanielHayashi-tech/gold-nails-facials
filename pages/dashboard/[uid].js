@@ -91,17 +91,7 @@ export default function Dashboard()  {
         <Service />
         
         <MyFooter date="2023" rights="All rights reserved." />
-        <button onClick={ async () => { 
-          try {
-            console.log()
-            await handleSignUp(await getToken())
-
-          }
-          catch( error) {
-            console.log(error)
-          }
-          
-          }}>Tesr</button>
+      
       </main>
     </>
   );

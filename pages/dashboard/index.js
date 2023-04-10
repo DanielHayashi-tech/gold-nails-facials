@@ -98,7 +98,7 @@ export default function Dashboard()  {
             console.log(error)
           }
           
-          }}>Tesr</button>
+          }}></button>
       </main>
     </>
   );
