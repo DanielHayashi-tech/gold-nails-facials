@@ -2,13 +2,14 @@ import { rewrites } from '@/next.config';
 import { authMiddleware } from '../../../lib/authMiddleware';
 import jwt from 'jsonwebtoken';
 import prisma from '@/lib/prismaApp';
-
+ 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     authMiddleware(req, res, async () => {
-
-      const { first_name, last_name, phone_number, email_address, address_1, address_2, city, state, zip_code,  } = req.body;
-
+ 
+      // Add employee_statusID to the destructuring assignment
+      const { first_name, last_name, phone_number, email_address, address_1, address_2, city, state, zip_code, employee_statusID } = req.body;
+ 
       console.log(req.body)
       try {
         const userinfo = await prisma.employee.create({
@@ -22,7 +23,7 @@ export default async function handler(req, res) {
             city: city,
             state: state,
             zip_code: zip_code,
-            employee_statusID: 1,
+            employee_statusID: employee_statusID // This is already set correctly
           },
           include: {
             Employee_Specialty: true,
@@ -36,4 +37,3 @@ export default async function handler(req, res) {
     });
   }
 }
-

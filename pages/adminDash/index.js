@@ -5,27 +5,27 @@ import { useRouter } from 'next/router';
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
 import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
-
-
-
+ 
+ 
+ 
 export default function AdminDash() {
     const router = useRouter();
     const [currentForm, setCurrentForm] = useState('');
     const [addEmp, setAddEmp] = useState(false);
-
-
-
-
+ 
+ 
+ 
+ 
     const [error, setError] = useState(null);
     const [serviceOrderCount, setServiceOrderCount] = useState(0);
     const [clientCount, setclientCount] = useState(0);
-
-
-
+ 
+ 
+ 
     // const handleServiceTotal = async (e) => {
     //     e.preventDefault();
     //     const token = await getToken();
-
+ 
     //     try {
     //         const response = await fetch('/api/admin/addOrderTotal', {
     //             method: 'GET',
@@ -33,7 +33,7 @@ export default function AdminDash() {
     //                 'Content-Type': 'application/json',
     //                 'Authorization': `Bearer ${token}`,
     //             },
-
+ 
     //         });
     //         if (!response.ok) {
     //             throw new Error(response.statusText)
@@ -45,19 +45,19 @@ export default function AdminDash() {
     //         alert("Read the error message and try again, you got this :) ")
     //         // An error occurred. Set error message to be displayed to user
     //         setError(error.message)
-
+ 
     //     }
     // };
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
     // const handleCountAllMyClients = async (e) => {
     //     e.preventDefault();
     //     const token = await getToken();
-
+ 
     //     try {
     //         const response = await fetch('/api/admin/userCount', {
     //             method: 'GET',
@@ -65,7 +65,7 @@ export default function AdminDash() {
     //                 'Content-Type': 'application/json',
     //                 'Authorization': `Bearer ${token}`,
     //             },
-
+ 
     //         });
     //         if (!response.ok) {
     //             throw new Error(response.statusText)
@@ -77,22 +77,22 @@ export default function AdminDash() {
     //         alert("Read the error message and try again, you got this :) ")
     //         // An error occurred. Set error message to be displayed to user
     //         setError(error.message)
-
+ 
     //     }
     // };
-
-
+ 
+ 
     const handleFormChange = (formName) => {
         setCurrentForm(formName);
     };
-
+ 
     const handleCancelForm = () => {
         setCurrentForm('');
     };
-
+ 
     return (
         <div>
-
+ 
 <AdminDashNavbar handleFormChange={handleFormChange} />
       {currentForm === 'addEmployee' && (
         <AddEmployeeForm handleCancelForm={handleCancelForm} />
@@ -100,8 +100,8 @@ export default function AdminDash() {
       {currentForm === 'updateServicePrice' && (
         <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
       )}
-      
+ 
         </div>
-
+ 
     )
 }

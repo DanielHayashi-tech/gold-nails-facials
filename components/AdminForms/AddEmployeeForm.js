@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
-
+ 
 // dummy commit for chris
-
-
+ 
+ 
 export default function AddEmployeeForm({ handleCancelForm }) {
     const router = useRouter();
-
+ 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -18,55 +18,57 @@ export default function AddEmployeeForm({ handleCancelForm }) {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
-
+    const [employee_statusID, setStatus] = useState("");
+ 
     const [error, setError] = useState(null);
-
+ 
     const { getToken } = useAuth();
-
-
+ 
+ 
     const handleAddEmployee = async (e) => {
         e.preventDefault();
         try {
-          const token = await getToken();
-    
-          const response = await fetch('/api/admin/addEmployee', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                first_name: firstName,
-                last_name: lastName,
-                phone_number: phoneNumber,
-                email_address: email,
-                address_1: address_1,
-                address_2: address_2,
-                city: city,
-                state: state,
-                zip_code: zipCode,
-
-            }),
-          });
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          const data = await response.json();
-          console.log(data);
-          router.push("/"); // Redirect to EmailVerification page
-    
+            const token = await getToken();
+ 
+            const response = await fetch('/api/admin/addEmployee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone_number: phoneNumber,
+                    email_address: email,
+                    address_1: address_1,
+                    address_2: address_2,
+                    city: city,
+                    state: state,
+                    zip_code: zipCode,
+                    employee_statusID: parseInt(employee_statusID),
+ 
+                }),
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            const data = await response.json();
+            console.log(data);
+            router.push("/"); // Redirect to EmailVerification page
+ 
         } catch (error) {
-          console.log(error)
-          alert("Account Created! Please Check Your Email For Verification.")
-          router.push("/");
-          // An error occurred. Set error message to be displayed to user
-          setError(error.message)
+            console.log(error)
+            alert("Employee Created!")
+            router.push("/");
+            // An error occurred. Set error message to be displayed to user
+            setError(error.message)
         }
-      };
-
-
-
-
+    };
+ 
+ 
+ 
+ 
     return (
         <div className="container my-5 py-5">
             <div className="row justify-content-center" >
@@ -83,7 +85,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                 }}> Add a new Employee Form
                             </h3>
                         </div>
-
+ 
                         <div className="card-body text-center place-content-center">
                             <Form onSubmit={handleAddEmployee}>
                                 <Form.Group controlId="formBasicFirstName" className="grid place-content-start md:place-content-center">
@@ -103,7 +105,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         required />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicLastName" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -121,7 +123,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         required />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formbasicphonenumber" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -139,7 +141,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         required />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicEmail" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -157,7 +159,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         required />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicAddress" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -175,7 +177,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         required />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicAddress" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -189,11 +191,11 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
                                         value={address_2}
-                                        onChange={(event) => setaddressTwo(event.target.value)} 
+                                        onChange={(event) => setaddressTwo(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicCity" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -210,7 +212,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         onChange={(event) => setCity(event.target.value)} />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicState" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -227,7 +229,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         onChange={(event) => setState(event.target.value)} />
                                 </Form.Group>
                                 <br></br>
-
+ 
                                 <Form.Group controlId="formBasicZipcode" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -243,8 +245,35 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         value={zipCode}
                                         onChange={(event) => setZipCode(event.target.value)} />
                                 </Form.Group>
+                                <Form.Group controlId="formBasicEmployeeStatus" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans",
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem",
+                                        }}> Employee Status </Form.Label>
+                                    <Form.Select
+                                        className="w-48 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        value={employee_statusID}
+                                        onChange={(event) => setStatus(event.target.value)}>
+                                        <option value="">Choose Status</option>
+                                        <option value={1}>Receptionist</option>
+                                        <option value={2}>Apprentice</option>
+                                        <option value={3}>Manager</option>
+                                        <option value={4}>Nail Technician</option>
+                                        <option value={5}>Independent Contractor</option>
+                                        <option value={6}>Seasonal Employee</option>
+                                        <option value={7}>Inactive</option>
+                                        <option value={8}>Fired</option>
+                                        <option value={9}>Deceased</option>
+                                        <option value={10}>Training</option>
+                                        <option value={11}>Vacation</option>
+                                    </Form.Select>
+                                </Form.Group>
+ 
                                 <br></br>
-
+ 
                                 <Button
                                     variant="light"
                                     type="submit"
@@ -257,7 +286,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                     }}>
                                     Add Employee
                                 </Button>
-
+ 
                                 <div className="card-footer pt-20">
                                     <Button
                                         variant="light"
@@ -278,6 +307,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                 </div>
             </div>
         </div>
-
+ 
     );
 }
+ 
