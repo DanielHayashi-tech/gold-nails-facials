@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { Courgette } from "next/font/google";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import styles from './LoginForm.module.css';
 import ForgotPasswordForm from '../../components/ForgotPassword/ForgotPasswordForm'; // Import the ForgotPasswordForm component
 
@@ -23,6 +24,9 @@ export default function LoginForm() {
   const router = useRouter();
 
   const { resetPassword } = useAuth();
+
+  const auth = getAuth();
+
 
   
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -71,7 +75,7 @@ export default function LoginForm() {
 
   if (showForgotPassword) {
     return (
-      <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
+      <div className="container my-5 py-5" style={{ backgroundColor: "#FFE1F8" }}>
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="card shadow-lg border-0 rounded-lg mt-5">
@@ -100,7 +104,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
+    <div className="container my-5 py-5" style={{ backgroundColor: "#FFE1F8" }}>
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card shadow-lg border-0 rounded-lg mt-5">

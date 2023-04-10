@@ -13,17 +13,10 @@ export const links = [
     href: "/about",
   },
   {
-    name: "Service",
+    name: "Services",
     to: "service",
     id: 2,
     icon: <BsHandbagFill className="mr-3" />,
     href: "/service",
-  },
-  {
-    name: "Quote",
-    to: "contact",
-    id: 3,
-    icon: <FaEnvelope className="mr-3" />,
-    href: "/quote",
   },
 ];

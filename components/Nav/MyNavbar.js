@@ -9,6 +9,8 @@ import { Raleway } from "next/font/google";
 import React from "react";
 import { Link } from "react-scroll";
 import { links } from "@/pages/api/links";
+import { Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { FaAlignJustify } from "react-icons/fa";
 
 
@@ -17,10 +19,14 @@ const raleway = Raleway({
   subsets: ["cyrillic"]
 });
 
-
-const MyNavbar = React.forwardRef((props, ref) => {
+  const MyNavbar = React.forwardRef((props, ref) => {
   const navBg = useColorModeValue("#faf3f7", "gray.400");
 
+  const router = useRouter();
+
+  const logoutBtn = async () => {
+    router.push("/");
+  }
 
   return (
     <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed" ref={ref}>
@@ -42,20 +48,26 @@ const MyNavbar = React.forwardRef((props, ref) => {
             </Link>
           ))}
 
-
-          <div className="text-sm">
-            
-          </div>
+        </div>
         </div>
 
+            <Button
+              variant="light"
+              className="btn-block custom-button w-32 mt-4 mr-8 mb-4"
+              onClick={logoutBtn}
+              style={{ fontFamily: "Open Sans", // Change to the desired cursive font
+              fontWeight: "400",
+              backgroundColor: "#FFE1F8", 
+              fontSize: '19px' }}>
+              Log Out
+            </Button>
 
-        <div className="md:hidden flex space-x-4">
+        <div className="md:hidden flex space-x-2">
           
           <IconButton onClick={props.onOpen}>
             <Icon as={FaAlignJustify} />
           </IconButton>
         </div>
-      </div>
     </Flex>
   );
 });

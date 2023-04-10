@@ -11,6 +11,7 @@ import Link from 'next/link';
 import DisplaySales from '../ChartsForAdmin/DisplaySales';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActive-Inactive';
+
  
  
 export default function AdminDash() {
@@ -24,6 +25,8 @@ export default function AdminDash() {
     const [serviceOrderCount, setServiceOrderCount] = useState(0);
     const [clientCount, setclientCount] = useState(0);
     const [currentForm, setCurrentForm] = useState('');
+    const [serviceTypes, setServiceTypes] = useState([]);
+
 
 
     const handleServiceTotal = async (e) => {
@@ -96,13 +99,11 @@ export default function AdminDash() {
             border-radius: 8px;
             background-color: #fff;
             box-sizing: border-box;
-            margin: 16px 0; /* Add margin to top and bottom */
-          }
-
-          .charts-container {
-            padding: 0 20px; /* Add 20px padding to left and right */
-            margin: 0 -20px; /* Remove the negative margin on left and right */
-          }
+            z-index: 1; 
+        }
+        .labels-container {
+            z-index: 2;
+        }
       `}</style>
     </Head>
 
