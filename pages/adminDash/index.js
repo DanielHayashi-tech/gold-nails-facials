@@ -10,18 +10,42 @@ import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePri
  
 export default function AdminDash() {
     const router = useRouter();
-    const [currentForm, setCurrentForm] = useState('');
-    const [addEmp, setAddEmp] = useState(false);
+  const [addEmp, setAddEmp] = useState(false);
+  const [error, setError] = useState(null);
+  const [serviceOrderCount, setServiceOrderCount] = useState(0);
+  const [clientCount, setclientCount] = useState(0);
+  const [currentForm, setCurrentForm] = useState('');
+
+
+  const handleFormChange = (form) => {
+      setCurrentForm(form);
+  };
+
+  const handleCancelForm = () => {
+      setCurrentForm('');
+  };
  
- 
- 
- 
-    const [error, setError] = useState(null);
-    const [serviceOrderCount, setServiceOrderCount] = useState(0);
-    const [clientCount, setclientCount] = useState(0);
- 
- 
- 
+
+  return (
+      <div>
+          <AdminDashNavbar handleFormChange={handleFormChange} />
+          {currentForm === 'addEmployee' && (
+              <AddEmployeeForm handleCancelForm={handleCancelForm} />
+          )}
+          {currentForm === 'updateServicePrice' && (
+              <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
+          )}
+          {currentForm === 'updateEmployee' && ( // Add this condition to render the UpdateEmployeeForm component
+              <UpdateEmpForm handleCancelForm={handleCancelForm} />
+          )}
+      </div>
+  );
+}
+
+
+   
+
+
     // const handleServiceTotal = async (e) => {
     //     e.preventDefault();
     //     const token = await getToken();
@@ -82,26 +106,3 @@ export default function AdminDash() {
     // };
  
  
-    const handleFormChange = (formName) => {
-        setCurrentForm(formName);
-    };
- 
-    const handleCancelForm = () => {
-        setCurrentForm('');
-    };
- 
-    return (
-        <div>
- 
-<AdminDashNavbar handleFormChange={handleFormChange} />
-      {currentForm === 'addEmployee' && (
-        <AddEmployeeForm handleCancelForm={handleCancelForm} />
-      )}
-      {currentForm === 'updateServicePrice' && (
-        <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
-      )}
- 
-        </div>
- 
-    )
-}
