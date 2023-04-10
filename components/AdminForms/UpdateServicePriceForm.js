@@ -60,6 +60,8 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
                             }}> Update Service Price Form
                         </h3>
                     </div>
+            
+            <div className="card-body text-center place-content-center">        
             <Form onSubmit={handleUpdateServicePrice}>
                 <Form.Group controlId="formBasicServiceID" className="grid place-content-start md:place-content-center">
                     <Form.Label
@@ -125,6 +127,7 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
                     </Button>
                 </div>
             </Form>
+            </div>
         </div>
     </div>
 </div>
