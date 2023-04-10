@@ -21,6 +21,8 @@ export default function AdminDash() {
     const [serviceOrderCount, setServiceOrderCount] = useState(0);
     const [clientCount, setclientCount] = useState(0);
     const [showClientOrders, setshowClientOrders] = useState(0);
+    const [serviceTypes, setServiceTypes] = useState([]);
+    
     
 
 
