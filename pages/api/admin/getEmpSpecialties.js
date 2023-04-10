@@ -6,7 +6,7 @@ export default async function handle(req, res) {
   if (req.method === 'GET') {
     authMiddleware(req, res, async () => {
       try {
-        const employeeSpecialties = await prisma.employee_Specialty.findMany();
+        const employeeSpecialties = await prisma.specialty.findMany();
         res.status(200).json(employeeSpecialties);
       } catch (error) {
         console.error(error);

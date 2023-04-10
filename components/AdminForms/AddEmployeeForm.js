@@ -20,6 +20,8 @@ export default function AddEmployeeForm({ handleCancelForm }) {
 
     // Add new states for specialties and selectedSpecialties
     const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+    const [selectedSkillLevels, setSelectedSkillLevels] = useState({});
+
 
     const [specialties, setSpecialties] = useState([]);
     const [skillLevels, setSkillLevels] = useState([]);
@@ -62,7 +64,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                     },
                 });
                 const data = await response.json();
-                console.log(data)
+                // console.log(data)
                 setSkillLevels(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error('Error fetching skill levels:', error);
@@ -72,20 +74,19 @@ export default function AddEmployeeForm({ handleCancelForm }) {
         fetchSkillLevels();
     }, []);
 
-    // Add a function to handle the addition and removal of specialties and their corresponding skill levels
-    const handleSpecialtyChange = (event, specialtyId) => {
-        const skillLevelId = +event.target.value;
-        setSelectedSpecialties((prevState) => {
-            const existingSpecialty = prevState.find((specialty) => specialty.specialtyID === specialtyId);
-
-            if (existingSpecialty) {
-                return prevState.map((specialty) =>
-                    specialty.specialtyID === specialtyId ? { ...specialty, skillLevelID: skillLevelId } : specialty
-                );
+    const handleSpecialtyChange = (event, specialtyId, isSkillLevelChange = false) => {
+        if (isSkillLevelChange) {
+            const skillLevelId = +event.target.value;
+            setSelectedSkillLevels((prevState) => ({ ...prevState, [specialtyId]: skillLevelId }));
+        } else {
+            if (event.target.checked) {
+                setSelectedSpecialties((prevState) => [...prevState, specialtyId]);
             } else {
-                return [...prevState, { specialtyID: specialtyId, skillLevelID: skillLevelId }];
+                setSelectedSpecialties((prevState) =>
+                    prevState.filter((selectedSpecialty) => selectedSpecialty !== specialtyId)
+                );
             }
-        });
+        }
     };
 
 
@@ -110,7 +111,10 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                     city: city,
                     state: state,
                     zip_code: zipCode,
-                    specialties: selectedSpecialties,
+                    specialties: selectedSpecialties.map((specialtyId) => ({
+                        specialtyID: specialtyId,
+                        skillLevelID: selectedSkillLevels[specialtyId],
+                    })),
 
                 }),
             });
@@ -307,36 +311,31 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                 </Form.Group>
                                 <br></br>
                                 <div>
-                                    {specialties.map((specialty) => (
-                                        <div key={specialty.specialtyID}>
+                                    {specialties.map((specialty, index) => (
+                                        <div key={`${specialty.specialtyID}-${index}`}>
                                             <Form.Group controlId={`formSpecialtySkill${specialty.specialtyID}`}>
                                                 <Form.Check
                                                     type="checkbox"
-                                                    label={specialty.name}
-                                                    onChange={(event) => {
-                                                        if (event.target.checked) {
-                                                            handleSpecialtyChange({ target: { value: 1 } }, specialty.specialtyID);
-                                                        } else {
-                                                            setSelectedSpecialties((prevState) =>
-                                                                prevState.filter((selectedSpecialty) => selectedSpecialty.specialtyID !== specialty.specialtyID)
-                                                            );
-                                                        }
-                                                    }}
+                                                    label={specialty.specialty_description}
+                                                    onChange={(event) => handleSpecialtyChange(event, specialty.specialtyID)}
                                                 />
-                                                {selectedSpecialties.find((selectedSpecialty) => selectedSpecialty.specialtyID === specialty.specialtyID) && (
+                                                {selectedSpecialties.includes(specialty.specialtyID) && (
                                                     <Form.Control
                                                         as="select"
-                                                        value={selectedSpecialties.find((selectedSpecialty) => selectedSpecialty.specialtyID === specialty.specialtyID)
-                                                            .skillLevelID}
-                                                        onChange={(event) => handleSpecialtyChange(event, specialty.specialtyID)}
+                                                        value={selectedSkillLevels[specialty.specialtyID] || ''}
+                                                        onChange={(event) => handleSpecialtyChange(event, specialty.specialtyID, true)}
                                                     >
+                                                        <option value="" disabled>
+                                                            Select skill level
+                                                        </option>
                                                         {skillLevels.map((skillLevel) => (
                                                             <option key={`${specialty.SpecialtyID}-${skillLevel.Skill_LevelID}`} value={skillLevel.Skill_LevelID}>
-                                                                {skillLevel.name}
+                                                                {skillLevel.skill_level_description}
                                                             </option>
                                                         ))}
                                                     </Form.Control>
                                                 )}
+
                                             </Form.Group>
                                         </div>
                                     ))}
