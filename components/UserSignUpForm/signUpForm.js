@@ -4,11 +4,11 @@ import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
 
 
+// can you delete this comment?
 
 
 
 export default function SignUpForm() {
-
   const router = useRouter();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -22,7 +22,7 @@ export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
 
 
-    const { create_account } = useAuth();
+  const { create_account } = useAuth();
 
     const togglePasswordVisibility = () => {
       setShowPassword(!showPassword);
@@ -30,7 +30,7 @@ export default function SignUpForm() {
 
   const handleSignUps = async (e) => {
     if (passwordOne !== confirmPassword) {
-      alert("Passwords do not match");
+      alert("Passwords do not match. Please try again and ensure your password is 6 characters long.");
       return;
     }
 

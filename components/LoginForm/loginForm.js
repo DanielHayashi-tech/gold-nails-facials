@@ -13,7 +13,7 @@ const cougerette = Courgette({
   weight: ["400", "400"],
   subsets: ["latin"],
 });
-
+const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
 export default function LoginForm() {
   //initializing configuration
   initFirebase();
@@ -32,31 +32,30 @@ export default function LoginForm() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { signIN } = useAuth();
 
-
-    const handleLogin = async (e) => {
-      e.preventDefault();
-      signIN(email, password)
-        .then((authUser) => {
-          if (!authUser.user.emailVerified) {
-            console.log("Please verify your email.");
-            alert("Please verify your email.");
-            setError("Please verify your email.");
-            return;
-          }
-          onAuthStateChanged(auth, (user) => {
-            if (user) {
-              const uid = user.uid;
-              router.push("/dashboard/" + uid);
-            }
-        });
-        })
-      .catch(error => {
-        console.log(error)
-        alert("Email/Password combination is incorrect.")
-        // An error occurred. Set error message to be displayed to user
-        setError(error.message)
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    signIN(email, password)
+      .then((authUser) => {
+        if (!authUser.user.emailVerified) {
+          console.log("Please verify your email.");
+          alert("Please verify your email.");
+          setError("Please verify your email.");
+          return;
+        }
+  
+        if (authUser.user.uid === ADMIN_UID) {
+          router.push("/adminDash");
+        } else {
+          router.push("/dashboard");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Email/Password combination is incorrect.");
+        setError("Email/Password combination is incorrect.");
       });
-  }
+  };
+
 
 
 
