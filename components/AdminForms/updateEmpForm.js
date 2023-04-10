@@ -6,10 +6,8 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function UpdateEmployeeForm({ handleCancelForm }) {
     const router = useRouter();
-    const [employeeID, setEmployeeID] = useState(null);
+    const [EmployeeID, setEmployeeID] = useState('');
     const [employeeData, setEmployeeData] = useState(null);
-
-    const [employeeId, setEmployeeId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -25,15 +23,15 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
     const { getToken } = useAuth();
 
     useEffect(() => {
-        if (employeeID) {
+        if (EmployeeID) {
             fetchEmployeeData();
         }
-    }, [employeeID]);
+    }, [EmployeeID]);
 
     const fetchEmployeeData = async () => {
         try {
             const token = await getToken();
-            const response = await fetch(`/api/employees/${employeeID}`, {
+            const response = await fetch(`/api/employees/${EmployeeID}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -50,8 +48,8 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
             setLastName(data.last_name);
             setPhoneNumber(data.phone_number);
             setEmail(data.email_address);
-            setaddressOne(data.address_1);
-            setaddressTwo(data.address_2);
+            setAddress_1(data.address_1);
+            setAddress_2(data.address_2);
             setCity(data.city);
             setState(data.state);
             setZipCode(data.zip_code);
@@ -64,9 +62,14 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
     const handleUpdateEmployee = async (e) => {
         e.preventDefault();
         try {
+            if (!EmployeeID) {
+                throw new Error('Employee ID is required');
+            }
+    
             const token = await getToken();
+    
+            const response = await fetch(`/api/employees/${EmployeeID}`, {
 
-            const response = await fetch(`/api/updateEmp/${employeeID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,11 +87,11 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                     zip_code: zipCode,
                 }),
             });
-
+    
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
-
+    
             const data = await response.json();
             console.log(data);
             alert('Employee updated successfully');
@@ -97,7 +100,6 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
             setError(error.message);
         }
     };
-
     return (
         <div className="container my-5 py-5">
             <div className="row justify-content-center" >
@@ -129,7 +131,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         className="w-24 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder=" Emp ID"
-                                        value={employeeID}
+                                        value={EmployeeID}
                                         onChange={(event) => setEmployeeID(event.target.value)}
                                         required />
                                 </Form.Group>
@@ -220,7 +222,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 1"
                                         value={address_1}
-                                        onChange={(event) => setaddressOne(event.target.value)}
+                                        onChange={(event) => setAddress_1(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -238,7 +240,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
                                         value={address_2}
-                                        onChange={(event) => setaddressTwo(event.target.value)}
+                                        onChange={(event) => setAddress_2(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
