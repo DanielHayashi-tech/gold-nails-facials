@@ -329,7 +329,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                                             Select skill level
                                                         </option>
                                                         {skillLevels.map((skillLevel) => (
-                                                            <option key={`${specialty.SpecialtyID}-${skillLevel.Skill_LevelID}`} value={skillLevel.Skill_LevelID}>
+                                                            <option key={`${specialty.specialtyID}-${skillLevel.Skill_LevelID}`} value={skillLevel.Skill_LevelID}>
                                                                 {skillLevel.skill_level_description}
                                                             </option>
                                                         ))}
