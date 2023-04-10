@@ -1,4 +1,3 @@
-// components/UpdateEmployeeForm.js
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
@@ -6,8 +5,8 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function UpdateEmployeeForm({ handleCancelForm }) {
     const router = useRouter();
-    const [EmployeeID, setEmployeeID] = useState('');
     const [employeeData, setEmployeeData] = useState(null);
+    const [EmployeeID, setEmployeeID] = useState(router.query.id || '');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -23,11 +22,29 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
     const { getToken } = useAuth();
 
     useEffect(() => {
+        if (router.query.id) {
+            setEmployeeID(router.query.id);
+        }
+    }, [router.query.id]);
+
+    useEffect(() => {
         if (EmployeeID) {
-            fetchEmployeeData();
+            fetch(`/api/employees/${EmployeeID}`)
+                .then(response => response.json())
+                .then(data => {
+                    setFirstName(data.firstName);
+                    setLastName(data.lastName);
+                    setPhoneNumber(data.phoneNumber);
+                    setEmail(data.email);
+                    setAddress_1(data.address_1);
+                    setAddress_2(data.address_2);
+                    setCity(data.city);
+                    setState(data.state);
+                    setZipCode(data.zipCode);
+                })
+                .catch(error => console.error(error));
         }
     }, [EmployeeID]);
-
     const fetchEmployeeData = async () => {
         try {
             const token = await getToken();
@@ -43,17 +60,18 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
             }
 
             const data = await response.json();
-            setEmployeeData(data);
-            setFirstName(data.first_name || '');
-            setLastName(data.last_name || '');
-            setPhoneNumber(data.phone_number || '');
-            setEmail(data.email_address || '');
-            setAddress_1(data.address_1 || '');
-            setAddress_2(data.address_2 || '');
-            setCity(data.city || '');
-            setState(data.state || '');
-            setZipCode(data.zip_code || '');
-        } catch (error) {
+            if (data) {
+              setEmployeeData(data);
+              setFirstName(data.first_name);
+              setLastName(data.last_name);
+              setPhoneNumber(data.phone_number);
+              setEmail(data.email_address);
+              setAddress_1(data.address_1);
+              setAddress_2(data.address_2);
+              setCity(data.city);
+              setState(data.state);
+              setZipCode(data.zip_code);
+            }} catch (error) {
             console.log(error);
             setError(error.message);
         }
@@ -132,8 +150,13 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder=" Emp ID"
                                         value={EmployeeID}
-                                        onChange={(event) => setEmployeeID(event.target.value)}
-                                        required />
+                                        onChange={(event) => {
+                                            setEmployeeID(event.target.value);
+                                            // Call the function to fetch the data for the selected employee
+                                            fetchEmployeeData(event.target.value);
+                                        }}
+                                        required
+                                    />
                                 </Form.Group>
                                 <br></br>
 
@@ -150,8 +173,12 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="First Name"
                                         value={firstName}
-                                        onChange={(event) => setFirstName(event.target.value)}
-                                        required />
+                                        onChange={(event) => {
+                                        setFirstName(event.target.value);
+                                        fetchEmployeeData(event.target.value);
+                                    }}
+                                        required 
+                                        />
                                 </Form.Group>
                                 <br></br>
 
@@ -168,7 +195,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Last Name"
                                         value={lastName}
-                                        onChange={(e) => setLastName(e.target.value)}
+                                        onChange={(event) => {
+                                            setLastName(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -186,7 +216,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Format: XXXXXXXXXX"
                                         value={phoneNumber}
-                                        onChange={(event) => setPhoneNumber(event.target.value)}
+                                        onChange={(event) => {
+                                            setPhoneNumber(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -204,7 +237,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Email"
                                         value={email}
-                                        onChange={(event) => setEmail(event.target.value)}
+                                        onChange={(event) => {
+                                            setEmail(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -222,7 +258,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 1"
                                         value={address_1}
-                                        onChange={(event) => setAddress_1(event.target.value)}
+                                        onChange={(event) => {
+                                            setAddress_1(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -240,7 +279,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
                                         value={address_2}
-                                        onChange={(event) => setAddress_2(event.target.value)}
+                                        onChange={(event) => {
+                                            setAddress_2(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -258,7 +300,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="City"
                                         value={city}
-                                        onChange={(event) => setCity(event.target.value)} />
+                                        onChange={(event) => {
+                                            setCity(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }} />
                                 </Form.Group>
                                 <br></br>
 
@@ -275,7 +320,11 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="State"
                                         value={state}
-                                        onChange={(event) => setState(event.target.value)} />
+                                        onChange={(event) => {
+                                            setState(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }}
+                                        required />
                                 </Form.Group>
                                 <br></br>
 
@@ -292,7 +341,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Zipcode"
                                         value={zipCode}
-                                        onChange={(event) => setZipCode(event.target.value)} />
+                                        onChange={(event) => {
+                                            setZipCode(event.target.value);
+                                            fetchEmployeeData(event.target.value);
+                                        }} />
                                 </Form.Group>
                                 <br></br>
 
