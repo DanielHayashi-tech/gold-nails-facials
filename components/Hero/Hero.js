@@ -21,8 +21,8 @@ export default function Hero(props) {
 
   return (
     <>
-      <div id="pink" className="bg-[url(/nail-tech-a.jpeg)] flex items-center h-screen bg-fixed bg-center bg-cover">
-        <div className="container flex items-center h-screen px-4 mx-auto bg-fixed bg-center bg-cover">
+      <div className="bg-[url(/nail-tech-a.jpeg)] items-center  bg-contain bg-center bg-no-repeat">
+        <div className="container-sm flex items-center h-[750px] bg-contain bg-center bg-no-repeat">
           <div className="max-w-[450ox] text-white flex flex-col gap-[40px]">
             <div>
               <h1
