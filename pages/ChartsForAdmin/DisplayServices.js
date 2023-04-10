@@ -1,47 +1,110 @@
 import { Pie } from 'react-chartjs-2';
-import { Chart } from 'chart.js';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
-import { registerables} from 'chart.js';
-Chart.register(...registerables);
 
 const DisplayServices = () => {
-  const data = {
-    labels: ['Service 1', 'Service 2', 'Service 3', 'Service 4', 'Service 5', 'Service 6', 'Service 7'],
-    datasets: [
-      {
-        label: 'Services',
-        data: [10, 20, 5, 15, 8, 12, 18],
-        backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#32a852',
-          '#FF9F40',
-          '#a8326e',
-          '#3987c6'
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const { getToken } = useAuth();
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Services'
+  const [chartData, setChartData] = useState(null);
+
+  const backgroundColors = [
+    'rgba(255, 99, 132, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(255, 206, 86, 0.6)',
+    'rgba(75, 192, 192, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(255, 159, 64, 0.6)',
+    'rgba(255, 99, 132, 0.6)',
+  ];
+
+  const fetchChartData = async () => {
+    try {
+      if (!getToken) {
+        throw new Error('You must be logged in to view this page');
       }
+
+      const token = await getToken();
+      console.log(token)
+
+      const response = await fetch('/api/admin/ServiceTypeCount', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+ 
+      const data = await response.json();
+      const labels = data.map((serviceType) => serviceType.service_type_description.toString());
+      const values = data.map((serviceType) => serviceType.count);
+      console.log("Here are the labels: " + JSON.stringify(labels));
+      console.log("Here are the values: " + JSON.stringify(values));
+
+
+
+      setChartData({
+        labels: labels,
+        datasets: [
+          {
+            label: 'Service Type Count',
+            data: values,
+            backgroundColor: backgroundColors,
+          },
+        ],
+      });
+    } catch (error) {
+      console.log(error);
+      alert('Read the error message and try again, you got this :) ');
     }
   };
 
+  useEffect(() => {
+    const fetchChart = async () => {
+      if (getToken) {
+        await fetchChartData();
+      }
+    };
+    fetchChart();
+  }, [getToken]);
+
   return (
-    <div>
-      <h2> Services We Offer! </h2>
-      <Pie data={data} options={options} />
+    <div className="flex">
+      {chartData && (
+        <Pie
+          data={chartData}
+          height={201}
+          width={200}
+          options={{
+            maintainAspectRatio: false,
+            legend: {
+              display: false,
+            },
+          }}
+        />
+      )}
+      {chartData && (
+        <ul className="pl-4">
+          {chartData.labels.map((label, index) => (
+            <li key={index} className="flex items-center">
+              <span
+                className="mr-2 rounded-full"
+                style={{
+                  display: 'inline-block',
+                  width: '12px',
+                  height: '12px',
+                  backgroundColor: backgroundColors[index % backgroundColors.length],
+                }}
+              ></span>
+              {label}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

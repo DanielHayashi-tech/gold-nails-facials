@@ -3,13 +3,15 @@ import Headings from "../Heading/Headings";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 
 export default function Service() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   function handleClick() {
-    setIsOpen(!isOpen);
+    router.push("/services");
   }
 
   return (
