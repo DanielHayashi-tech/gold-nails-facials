@@ -166,7 +166,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans", // Change to the desired cursive font
                                             fontWeight: "400",
                                             fontSize: "1.3rem",
-                                        }}> Adress 1</Form.Label>
+                                        }}> Address 1</Form.Label>
                                     <Form.Control
                                         type="address"
                                         className="w-96 text-center"
@@ -184,7 +184,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans", // Change to the desired cursive font
                                             fontWeight: "400",
                                             fontSize: "1.3rem",
-                                        }}> Adress 2</Form.Label>
+                                        }}> Address 2</Form.Label>
                                     <Form.Control
                                         type="address"
                                         className="w-96 text-center"

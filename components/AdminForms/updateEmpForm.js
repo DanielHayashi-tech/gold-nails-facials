@@ -44,15 +44,15 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
 
             const data = await response.json();
             setEmployeeData(data);
-            setFirstName(data.first_name);
-            setLastName(data.last_name);
-            setPhoneNumber(data.phone_number);
-            setEmail(data.email_address);
-            setAddress_1(data.address_1);
-            setAddress_2(data.address_2);
-            setCity(data.city);
-            setState(data.state);
-            setZipCode(data.zip_code);
+            setFirstName(data.first_name || '');
+            setLastName(data.last_name || '');
+            setPhoneNumber(data.phone_number || '');
+            setEmail(data.email_address || '');
+            setAddress_1(data.address_1 || '');
+            setAddress_2(data.address_2 || '');
+            setCity(data.city || '');
+            setState(data.state || '');
+            setZipCode(data.zip_code || '');
         } catch (error) {
             console.log(error);
             setError(error.message);
@@ -215,7 +215,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans", // Change to the desired cursive font
                                             fontWeight: "400",
                                             fontSize: "1.3rem",
-                                        }}> Adress 1</Form.Label>
+                                        }}> Address 1</Form.Label>
                                     <Form.Control
                                         type="address"
                                         className="w-96 text-center"
@@ -233,7 +233,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans", // Change to the desired cursive font
                                             fontWeight: "400",
                                             fontSize: "1.3rem",
-                                        }}> Adress 2</Form.Label>
+                                        }}> Address 2</Form.Label>
                                     <Form.Control
                                         type="address"
                                         className="w-96 text-center"
