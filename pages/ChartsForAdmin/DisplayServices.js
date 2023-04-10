@@ -1,6 +1,8 @@
 import { Pie } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 const DisplayServices = () => {
@@ -17,6 +19,8 @@ const DisplayServices = () => {
     'rgba(255, 159, 64, 0.6)',
     'rgba(255, 99, 132, 0.6)',
   ];
+
+  Chart.register(ChartDataLabels);
 
   const fetchChartData = async () => {
     try {
@@ -74,38 +78,47 @@ const DisplayServices = () => {
 
   return (
     <div className="flex">
-      {chartData && (
-        <Pie
-          data={chartData}
-          height={201}
-          width={200}
-          options={{
-            maintainAspectRatio: false,
-            legend: {
-              display: false,
+    {chartData && (
+      <Pie
+        data={chartData}
+        height={600}
+        width={400}
+        options={{
+          maintainAspectRatio: false,
+          legend: {
+            display: false,
+          },
+          plugins: {
+            // Register the datalabels plugin
+            datalabels: ChartDataLabels,
+            // Add this block to configure the datalabels plugin
+            datalabels: {
+              color: 'white',
+              formatter: (value) => `${value}`,
             },
-          }}
-        />
-      )}
-      {chartData && (
-        <ul className="pl-4">
-          {chartData.labels.map((label, index) => (
-            <li key={index} className="flex items-center">
-              <span
-                className="mr-2 rounded-full"
-                style={{
-                  display: 'inline-block',
-                  width: '12px',
-                  height: '12px',
-                  backgroundColor: backgroundColors[index % backgroundColors.length],
-                }}
-              ></span>
-              {label}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+          },
+        }}
+      />
+    )}
+    {chartData && (
+      <ul className="pl-4">
+        {chartData.labels.map((label, index) => (
+          <li key={index} className="flex items-center">
+            <span
+              className="mr-2 rounded-full"
+              style={{
+                display: 'inline-block',
+                width: '12px',
+                height: '12px',
+                backgroundColor: backgroundColors[index % backgroundColors.length],
+              }}
+            ></span>
+            {label}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
   );
 };
 

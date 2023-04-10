@@ -135,12 +135,15 @@ export default function AdminDash() {
           </div>
           <div className="text-center">
           </div>
+          
+          
+          <DisplayServices />
 
-          <div className="col-span-1 text-center">
-            <div className="chart-container">
-                <DisplayServices />
-            </div>
+          <div>
+            
           </div>
+          
+
 
           <div className="col-span-2 text-center">
             <div className="chart-container">
