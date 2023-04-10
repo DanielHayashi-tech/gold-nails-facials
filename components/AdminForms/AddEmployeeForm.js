@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
@@ -19,50 +19,117 @@ export default function AddEmployeeForm({ handleCancelForm }) {
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
 
+    // Add new states for specialties and selectedSpecialties
+    const [selectedSpecialties, setSelectedSpecialties] = useState([]);
+    const [selectedSkillLevels, setSelectedSkillLevels] = useState({});
+
+
+    const [specialties, setSpecialties] = useState([]);
+    const [skillLevels, setSkillLevels] = useState([]);
+
     const [error, setError] = useState(null);
 
     const { getToken } = useAuth();
 
 
+
+    useEffect(() => {
+        async function fetchSpecialties() {
+            try {
+                const token = await getToken();
+                const response = await fetch('/api/admin/getEmpSpecialties', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                console.log(data)
+                setSpecialties(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Error fetching specialties:', error);
+            }
+        }
+
+        fetchSpecialties();
+    }, []);
+
+    useEffect(() => {
+        async function fetchSkillLevels() {
+            try {
+                const token = await getToken();
+                const response = await fetch('/api/admin/getEmpSkills', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                const data = await response.json();
+                // console.log(data)
+                setSkillLevels(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error('Error fetching skill levels:', error);
+            }
+        }
+
+        fetchSkillLevels();
+    }, []);
+
+    const handleSpecialtyChange = (event, specialtyId, isSkillLevelChange = false) => {
+        if (isSkillLevelChange) {
+            const skillLevelId = +event.target.value;
+            setSelectedSkillLevels((prevState) => ({ ...prevState, [specialtyId]: skillLevelId }));
+        } else {
+            if (event.target.checked) {
+                setSelectedSpecialties((prevState) => [...prevState, specialtyId]);
+            } else {
+                setSelectedSpecialties((prevState) =>
+                    prevState.filter((selectedSpecialty) => selectedSpecialty !== specialtyId)
+                );
+            }
+        }
+    };
+
+
     const handleAddEmployee = async (e) => {
         e.preventDefault();
         try {
-          const token = await getToken();
-    
-          const response = await fetch('/api/admin/addEmployee', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                first_name: firstName,
-                last_name: lastName,
-                phone_number: phoneNumber,
-                email_address: email,
-                address_1: address_1,
-                address_2: address_2,
-                city: city,
-                state: state,
-                zip_code: zipCode,
+            const token = await getToken();
 
-            }),
-          });
-          if (!response.ok) {
-            throw new Error(response.statusText)
-          }
-          const data = await response.json();
-          console.log(data);
-          router.push("/"); // Redirect to EmailVerification page
-    
+            const response = await fetch('/api/admin/addEmployee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone_number: phoneNumber,
+                    email_address: email,
+                    address_1: address_1,
+                    address_2: address_2,
+                    city: city,
+                    state: state,
+                    zip_code: zipCode,
+                    specialties: selectedSpecialties.map((specialtyId) => ({
+                        specialtyID: specialtyId,
+                        skillLevelID: selectedSkillLevels[specialtyId],
+                    })),
+
+                }),
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            router.push('/adminDash');
+
         } catch (error) {
-          console.log(error)
-          alert("Account Created! Please Check Your Email For Verification.")
-          router.push("/");
-          // An error occurred. Set error message to be displayed to user
-          setError(error.message)
+            console.log(error)
+            // An error occurred. Set error message to be displayed to user
+            setError(error.message)
         }
-      };
+    };
 
 
 
@@ -189,7 +256,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         placeholder="Address 2"
                                         value={address_2}
-                                        onChange={(event) => setaddressTwo(event.target.value)} 
+                                        onChange={(event) => setaddressTwo(event.target.value)}
                                         required />
                                 </Form.Group>
                                 <br></br>
@@ -243,6 +310,38 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         value={zipCode}
                                         onChange={(event) => setZipCode(event.target.value)} />
                                 </Form.Group>
+                                <br></br>
+                                <div>
+                                    {specialties.map((specialty, index) => (
+                                        <div key={`${specialty.specialtyID}-${index}`}>
+                                            <Form.Group controlId={`formSpecialtySkill${specialty.specialtyID}`}>
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label={specialty.specialty_description}
+                                                    onChange={(event) => handleSpecialtyChange(event, specialty.specialtyID)}
+                                                />
+                                                {selectedSpecialties.includes(specialty.specialtyID) && (
+                                                    <Form.Control
+                                                        as="select"
+                                                        value={selectedSkillLevels[specialty.specialtyID] || ''}
+                                                        onChange={(event) => handleSpecialtyChange(event, specialty.specialtyID, true)}
+                                                    >
+                                                        <option value="" disabled>
+                                                            Select skill level
+                                                        </option>
+                                                        {skillLevels.map((skillLevel) => (
+                                                            <option key={`${specialty.specialtyID}-${skillLevel.Skill_LevelID}`} value={skillLevel.Skill_LevelID}>
+                                                                {skillLevel.skill_level_description}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Control>
+                                                )}
+
+                                            </Form.Group>
+                                        </div>
+                                    ))}
+                                </div>
+
                                 <br></br>
 
                                 <Button
