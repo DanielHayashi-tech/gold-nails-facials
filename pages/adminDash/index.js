@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
+import UpdateEmpForm from '../../components/AdminForms/updateEmpForm';
 import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
  
  
