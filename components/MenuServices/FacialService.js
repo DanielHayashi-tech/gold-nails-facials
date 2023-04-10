@@ -1,4 +1,3 @@
-import facialOffers from "@/pages/api/facialOffers";
 import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -7,7 +6,7 @@ import { PrismaClient } from '@prisma/client'
 
 
 
-export default function FacialService(props) {
+export default function FacialService({prices}) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
@@ -19,7 +18,7 @@ export default function FacialService(props) {
       <ServicesHeadings title="Our Facial Services" />
       <div className="grid grid-cols-2 grid-cols-3 gap-[30px] ">
         {/* test */}
-        {facialOffers.map((offer) => (
+        {prices.map((offer) => (
           <motion.div
             transition={{ layout: { duration: 1, type: "spring" } }}
             layout
@@ -29,12 +28,12 @@ export default function FacialService(props) {
               boxShadow: "0px 10px 30px rgba(252, 106, 135, 0.2)",
               width: "200px",
             }}
-            key={offer.id}
+            key={offer.ServiceID}
             className="flex flex-col items-center gap-2 "
           >
-            <Image alt="nails-facialservice" src={offer.img} className="w-[100%]" />
+            <Image alt="nails-facialservice" src={require('public/face/' + offer.ServiceID + '.jpg')} className="w-[100%]" />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
-              {offer.title}
+              {offer.service_title}
             </motion.h2>
             {isOpen && (
               <motion.div
@@ -43,9 +42,9 @@ export default function FacialService(props) {
                 transition={{ duration: 1.2 }}
               >
                 <span className="flex items-center justify-center text-xs text-teal-600 ">
-                  {offer.price}
+                ${offer.service_price}.00
                 </span>
-                <p className="px-4 py-3 text-sm tracking-tight">{offer.desc}</p>
+                <p className="px-4 py-3 text-sm tracking-tight">{offer.service_description}</p>
               </motion.div>
             )}
           </motion.div>

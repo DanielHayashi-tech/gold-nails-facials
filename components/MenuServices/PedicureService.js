@@ -1,4 +1,3 @@
-import pediOffers from "@/pages/api/pediOffers";
 import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -31,7 +30,7 @@ export default function PedicureService({prices}) {
             key={offer.ServiceID}
             className="flex flex-col items-center gap-2 "
           >
-            {/* <Image alt="nails-pedicureservice" src={prices.img} className="w-[100%]" /> */}
+            <Image alt="nails-pedicureservice" src={require('public/pedicure/' + offer.ServiceID + '.jpg')} className="w-[100%]" />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
               {offer.service_title}
             </motion.h2>

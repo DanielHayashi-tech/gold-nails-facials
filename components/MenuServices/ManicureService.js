@@ -1,4 +1,3 @@
-import manicureOffers from "../../pages/api/manicureOffers";
 import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -44,7 +43,8 @@ export default function ManicureService({prices}) {
             key={offer.ServiceID}
             className="flex flex-col items-center gap-2 "
           >
-            {/* <Image alt="nails-manicureservice" src={offer} className="w-[100%]" /> */}
+            
+            <Image alt="nails-manicureservice" src={require('public/manicure/' + offer.ServiceID + '.jpg')} className="w-[100%]" width='100' height={100} />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
               {offer.service_title}
             </motion.h2>
@@ -67,6 +67,7 @@ export default function ManicureService({prices}) {
         ))}
       </div>
     </section>
+
 
   );
 }
