@@ -6,7 +6,8 @@ import prisma from '@/lib/prismaApp';
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     authMiddleware(req, res, async () => {
-      const { first_name, last_name, phone_number, email_address, address_1, address_2, city, state, zip_code, specialty_skills } = req.body;
+
+      const { first_name, last_name, phone_number, email_address, address_1, address_2, city, state, zip_code,  } = req.body;
 
       console.log(req.body)
       try {
@@ -22,14 +23,10 @@ export default async function handler(req, res) {
             state: state,
             zip_code: zip_code,
             employee_statusID: 1,
-            Employee_Service_Skill: {
-              create: specialty_skills.map(specialty_skill => ({
-                ServiceID: specialty_skill.specialtyID,
-                Skill_LevelID: specialty_skill.skillLevelID,
-                employee_service_statusID: 1
-              }))
-            }
-          }
+          },
+          include: {
+            Employee_Specialty: true,
+          },
         });
         return res.status(200).json({ success: true, data: userinfo });
       } catch (error) {
