@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
+
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
 import UpdateEmpForm from '../../components/AdminForms/updateEmpForm';
+
 import Link from 'next/link';
-import DisplaySales from '../ChartsForAdmin/DisplaySales';
+// import DisplaySales from '../ChartsForAdmin/DisplaySales';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
-import DisplayActiveInactive from '../ChartsForAdmin/DisplayActive-Inactive';
+// import DisplayActiveInactive from '../ChartsForAdmin/DisplayActive-Inactive';
 
  
  
@@ -88,25 +90,6 @@ export default function AdminDash() {
 
   return (
       <div>
-        <Head>
-      <style>{`
-        .chart-container {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            border: 2px solid #ccc;
-            padding: 16px;
-            border-radius: 8px;
-            background-color: #fff;
-            box-sizing: border-box;
-            z-index: 1; 
-        }
-        .labels-container {
-            z-index: 2;
-        }
-      `}</style>
-    </Head>
-
 
         <AdminDashNavbar handleFormChange={handleFormChange} />
         {currentForm === 'addEmployee' && (
@@ -124,9 +107,6 @@ export default function AdminDash() {
         <br></br>
         <br></br>
         <br></br>
-
-
-
         
         <div className="charts-container grid grid-cols-3 gap-4 align-content-center">
           <div className="text-center">
@@ -136,16 +116,14 @@ export default function AdminDash() {
           <div className="text-center">
           </div>
           
-          
           <DisplayServices />
 
           <div>
-            
           </div>
           
 
 
-          <div className="col-span-2 text-center">
+          {/* <div className="col-span-2 text-center">
             <div className="chart-container">
                 <DisplaySales />
             </div>
@@ -155,12 +133,12 @@ export default function AdminDash() {
             <div className="chart-container">
                 <DisplayActiveInactive />
             </div>
-          </div>
+          </div> */}
 
           <div className="col-span-1 text-center">
           <div className="text-center">
-            Owner needs to be able to approve quotes and
-            this means change the status to IN PROGRSS and display how many
+            {/* Owner needs to be able to approve quotes and
+            this means change the status to IN PROGRSS and display how many */}
           </div>
           </div>
 

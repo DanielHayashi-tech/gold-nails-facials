@@ -1,8 +1,7 @@
-import { Pie } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Chart } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+
 
 
 const DisplayServices = () => {
@@ -20,16 +19,15 @@ const DisplayServices = () => {
     'rgba(255, 99, 132, 0.6)',
   ];
 
-  Chart.register(ChartDataLabels);
 
   const fetchChartData = async () => {
     try {
       if (!getToken) {
         throw new Error('You must be logged in to view this page');
       }
-
+  
       const token = await getToken();
-
+  
       const response = await fetch('/api/admin/ServiceTypeCount', {
         method: 'GET',
         headers: {
@@ -37,33 +35,25 @@ const DisplayServices = () => {
           'Authorization': `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok) {
         throw new Error(response.statusText);
       }
- 
+  
       const data = await response.json();
-      const labels = data.map((serviceType) => serviceType.service_type_description.toString());
-      const values = data.map((serviceType) => serviceType.count);
-      // console.log("Here are the values: " + JSON.stringify(values));
-
-
-
-      setChartData({
-        labels: labels,
-        datasets: [
-          {
-            label: 'Service Type Count',
-            data: values,
-            backgroundColor: backgroundColors,
-          },
-        ],
-      });
+      // Transform the data to be compatible with Recharts
+      const formattedData = data.map((serviceType) => ({
+        service_type_description: serviceType.service_type_description.toString(),
+        count: serviceType.count,
+      }));
+  
+      setChartData(formattedData);
     } catch (error) {
       console.log(error);
       alert('Read the error message and try again, you got this :) ');
     }
   };
+  
 
   useEffect(() => {
     const fetchChart = async () => {
@@ -76,47 +66,28 @@ const DisplayServices = () => {
 
   return (
     <div className="flex">
-    {chartData && (
-      <Pie
-        data={chartData}
-        height={600}
-        width={400}
-        options={{
-          maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          plugins: {
-            // Register the datalabels plugin
-            datalabels: ChartDataLabels,
-            // Add this block to configure the datalabels plugin
-            datalabels: {
-              color: 'white',
-              formatter: (value) => `${value}`,
-            },
-          },
-        }}
-      />
-    )}
-    {chartData && (
-      <ul className="pl-4">
-        {chartData.labels.map((label, index) => (
-          <li key={index} className="flex items-center">
-            <span
-              className="mr-2 rounded-full"
-              style={{
-                display: 'inline-block',
-                width: '12px',
-                height: '12px',
-                backgroundColor: backgroundColors[index % backgroundColors.length],
-              }}
-            ></span>
-            {label}
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
+      {chartData && (
+        <div className="flex">
+          <PieChart width={400} height={400}>
+            <Pie
+              data={chartData}
+              dataKey="count"
+              nameKey="service_type_description"
+              cx="50%"
+              cy="50%"
+              outerRadius={150}
+              fill="#8884d8"
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={backgroundColors[index % backgroundColors.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </div>
+      )}
+    </div>
   );
 };
 
