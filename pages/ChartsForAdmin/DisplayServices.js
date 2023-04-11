@@ -53,16 +53,17 @@ const DisplayServices = () => {
       alert('Read the error message and try again, you got this :) ');
     }
   };
-  
 
   useEffect(() => {
     const fetchChart = async () => {
-      if (getToken) {
+      const token = await getToken();
+      if (token) {
         await fetchChartData();
       }
     };
     fetchChart();
   }, [getToken]);
+  
 
   return (
     <div className="flex">
