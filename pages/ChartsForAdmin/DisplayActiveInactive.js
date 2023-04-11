@@ -10,6 +10,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import Example from '../testing/index';
+
 
 const DisplayActiveInactive = () => {
   const { getToken } = useAuth();
@@ -82,20 +84,8 @@ const DisplayActiveInactive = () => {
   return (
     <div className="flex">
     {chartData && (
-      <div className="flex">
-        <div style={{ width: '100%', height: 300 }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="timeframe" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="activeClients" fill="#8884d8" />
-              <Bar dataKey="inactiveClients" fill="#82ca9d" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+      <div style={{ width: '100%', height: 300 }}>
+        <Example data={chartData} />
       </div>
     )}
   </div>
