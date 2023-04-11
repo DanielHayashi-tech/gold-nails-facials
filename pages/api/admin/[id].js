@@ -32,13 +32,14 @@ export default async function handler(req, res) {
   }
   else if (req.method === 'PUT') {
     authMiddleware(req, res, async () => {
-      const { service_price } = req.body;
+      const { service_price, service_title } = req.body;
 
       try {
         const updatedService = await prisma.service.update({
           where: { ServiceID: ServiceID },
           data: {
             service_price: parseInt(service_price),
+            service_title: service_title,
           },
         });
         return res.status(200).json({ success: true, data: updatedService });

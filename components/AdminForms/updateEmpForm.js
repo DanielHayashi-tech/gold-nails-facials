@@ -106,6 +106,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
       console.log(data);
 
       alert('Employee updated successfully');
+      handleCancelForm();
     } catch (error) {
       console.log(error);
       setError(error.message);

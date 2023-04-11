@@ -55,12 +55,12 @@ export default function AddEmployeeForm({ handleCancelForm }) {
             }
             const data = await response.json();
             console.log(data);
-            router.push("/"); // Redirect to EmailVerification page
+            alert("Employee Created!")
+            handleCancelForm();
  
         } catch (error) {
             console.log(error)
-            alert("Employee Created!")
-            router.push("/");
+            router.push("/adminDash");
             // An error occurred. Set error message to be displayed to user
             setError(error.message)
         }
