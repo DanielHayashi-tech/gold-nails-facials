@@ -31,32 +31,32 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
 
     const fetchSpecialtyStatusDescription = async (employee_specialty_statusID) => {
         if (!employee_specialty_statusID || isNaN(employee_specialty_statusID)) {
-          return;
+            return;
         }
         try {
-          const token = await getToken();
-      
-          const response = await fetch(`/api/specialtyStatus/${employee_specialty_statusID}`, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-          });
-      
-          if (!response.ok) {
-            throw new Error(response.statusText);
-          }
-          const result = await response.json();
-          const data = result.data;
-      
-          if (data) {
-            setEmployeeSpecialtyStatusDescription(data.employee_specialty_status_description);
-          }
+            const token = await getToken();
+
+            const response = await fetch(`/api/specialtyStatus/${employee_specialty_statusID}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            const result = await response.json();
+            const data = result.data;
+
+            if (data) {
+                setEmployeeSpecialtyStatusDescription(data.employee_specialty_status_description);
+            }
         } catch (error) {
-          console.log(error);
-          setError(error.message);
+            console.log(error);
+            setError(error.message);
         }
-      };
+    };
 
     const fetchEmployeeData = async (Employee_SpecialtyID) => {
         if (!Employee_SpecialtyID || isNaN(Employee_SpecialtyID)) {
@@ -109,20 +109,20 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    Employee:{
+                    Employee: {
                         EmployeeID: EmployeeID,
                         first_name: firstName,
                     },
-                    Specialty: { 
+                    Specialty: {
                         SpecialtyID: SpecialtyID,
                         specialty_description: specialty_description,
                     },
                     Employee_Specialty_Status: {
 
-                    employee_specialty_statusID: employee_specialty_statusID,
-                    employee_specialty_status_description: employee_specialty_status_description,
+                        employee_specialty_statusID: employee_specialty_statusID,
+                        employee_specialty_status_description: employee_specialty_status_description,
                     }
-                    
+
                 }),
             });
 
@@ -164,53 +164,32 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
 
                         <div className="card-body text-center place-content-center">
                             <Form onSubmit={handleUpdateEmployeeSkill}>
-                                <Form.Group controlId="formBasicEmployeeSpecialtyID" className="grid place-content-start md:place-content-center">
-                                    <Form.Label
-                                        style={{
-                                            fontFamily: "Open Sans",
-                                            fontWeight: "400",
-                                            fontSize: "1.3rem"
-                                        }}> Employee Specialty ID </Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        className="w-24 text-center"
-                                        style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder=" Emp ID"
-                                        value={Employee_SpecialtyID}
-                                        onChange={(event) => {
-                                            const newEmployeeSpecialtyID = event.target.value;
-                                            setEmployeeSpecialtyID(newEmployeeSpecialtyID);
-                                            // Call the function to fetch the data for the selected employee
-                                            fetchEmployeeData(newEmployeeSpecialtyID);
-                                        }}
-                                        required
-                                    />
+                                <Form.Group controlId="formBasicEmployeeSpecialtyID" className="grid place-content-center">
+                                    <div className="flex flex-col items-center">
+                                        <Form.Label
+                                            style={{
+                                                fontFamily: "Open Sans",
+                                                fontWeight: "400",
+                                                fontSize: "1.3rem"
+                                            }}> Employee Specialty ID </Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            className="w-24 text-center"
+                                            style={{ backgroundColor: "#FFE1F8" }}
+                                            placeholder=" Emp ID"
+                                            value={Employee_SpecialtyID}
+                                            onChange={(event) => {
+                                                const newEmployeeSpecialtyID = event.target.value;
+                                                setEmployeeSpecialtyID(newEmployeeSpecialtyID);
+                                                // Call the function to fetch the data for the selected employee
+                                                fetchEmployeeData(newEmployeeSpecialtyID);
+                                            }}
+                                            required
+                                        />
+                                    </div>
                                 </Form.Group>
+
                                 <br></br>
-
-                                <Form.Group controlId="formBasicEmployeeID" className="grid place-content-start md:place-content-center">
-                                    <Form.Label
-                                        style={{
-                                            fontFamily: "Open Sans",
-                                            fontWeight: "400",
-                                            fontSize: "1.3rem"
-                                        }}> EmployeeID </Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        className="w-64 text-center"
-                                        style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Last Name"
-                                        value={EmployeeID}
-                                        readOnly
-                                        onChange={(event) => {
-                                            setEmployeeID(event.target.value);
-                                            fetchEmployeeData(event.target.value);
-                                        }}
-                                        required />
-                                </Form.Group>
-                                <br></br>
-
-
                                 <Form.Group controlId="formBasicFirstName" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -234,27 +213,6 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                 </Form.Group>
                                 <br></br>
 
-                                <Form.Group controlId="formBasicSpecialtyID" className="grid place-content-start md:place-content-center">
-                                    <Form.Label
-                                        style={{
-                                            fontFamily: "Open Sans",
-                                            fontWeight: "400",
-                                            fontSize: "1.3rem"
-                                        }}> SpecialtyID </Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        className="w-64 text-center"
-                                        style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Last Name"
-                                        value={SpecialtyID}
-                                        readOnly
-                                        onChange={(event) => {
-                                            setSpecialtyID(event.target.value);
-                                            fetchEmployeeData(event.target.value);
-                                        }}
-                                        required />
-                                </Form.Group>
-                                <br></br>
 
                                 <Form.Group controlId="formbasicSpecialtyDescription" className="grid place-content-start md:place-content-center">
                                     <Form.Label
@@ -267,7 +225,7 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                         type="text"
                                         className="w-48 text-center"
                                         style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Format: XXXXXXXXXX"
+                                        placeholder="Description"
                                         value={specialty_description}
                                         readOnly
                                         onChange={(event) => {
@@ -277,44 +235,27 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                         required />
                                 </Form.Group>
                                 <br></br>
-
-                                <Form.Group controlId="formBasicEmployeeSpecialtyID" className="grid place-content-start md:place-content-center">
+                                <Form.Group controlId="formBasicEmployeeStatus" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
-                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontFamily: "Open Sans",
                                             fontWeight: "400",
                                             fontSize: "1.3rem",
-                                        }}>Specialty Status</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        className="w-64 text-center"
+                                        }}> Employee Status </Form.Label>
+                                    <Form.Select
+                                        className="text-center w-48"
                                         style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Email"
                                         value={employee_specialty_statusID}
-                                        onChange={(event) => {
-                                            setEmployeeSpecialtyStatusID(event.target.value);
-                                            fetchSpecialtyStatusDescription(event.target.value);
-                                          }}
-                                        required />
+                                        onChange={(event) => setEmployeeSpecialtyStatusID(event.target.value)}>
+                                        <option value="">Choose Status</option>
+                                        <option value={2}>Not Learned</option>
+                                        <option value={3}>Beginner</option>
+                                        <option value={4}>Intermediate</option>
+                                        <option value={5}>Advanced</option>
+                                        <option value={6}>Expert</option>
+                                    </Form.Select>
                                 </Form.Group>
-                                <br></br>
 
-                                <Form.Group controlId="formBasicEmployeeStatusDescription" className="grid place-content-start md:place-content-center">
-                                    <Form.Label
-                                        style={{
-                                            fontFamily: "Open Sans", // Change to the desired cursive font
-                                            fontWeight: "400",
-                                            fontSize: "1.3rem",
-                                        }}> Employee Status</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        className="w-96 text-center"
-                                        style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Address 1"
-                                        value={employee_specialty_status_description}
-                                        readOnly
-                                        required />
-                                </Form.Group>
                                 <br></br>
                                 <Button
                                     variant="light"
