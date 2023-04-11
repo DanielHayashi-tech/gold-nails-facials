@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../context/AuthContext'
@@ -6,30 +6,73 @@ import { useAuth } from '../../context/AuthContext'
 export default function UpdateServicePriceForm({ handleCancelForm }) {
     const router = useRouter();
     const { getToken } = useAuth(); 
-    const [ServiceID, setServiceID] = useState("");
-    const [service_price, setServicePrice] = useState("");
+    const [ServiceID, setServiceID] = useState('');
+    const [service_price, setServicePrice] = useState('');
     const [error, setError] = useState(null);
-
-    const handleUpdateServicePrice = async (e) => {
-        e.preventDefault();
-        const token = await getToken();
-    
+    useEffect(() => {
+        if (router.query.ServiceID) {
+          setServiceID(router.query.ServiceID);
+          fetchServiceData(router.query.ServiceID);
+        }
+      }, [router.query.ServiceID]);
+    const fetchServiceData = async (ServiceID) => {
+        if (!ServiceID || isNaN(ServiceID)) {
+            return;
+          }
         try {
-            const response = await fetch('/api/admin/updatePrices', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    ServiceID: ServiceID,
-                    service_price: service_price
-                })
-            });
+          const token = await getToken();
     
-            if (!response.ok) {
-                throw new Error(response.statusText)
+          const response = await fetch(`/api/admin/${ServiceID}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+    
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          const result = await response.json();
+          const data = result.data;
+    
+          if (data) {
+            setServicePrice(data.service_price);
+          }
+        } catch (error) {
+          console.log(error);
+          setError(error.message);
+        }
+      };
+
+      const handleUpdateServicePrice = async (e) => {
+        e.preventDefault();
+        try {
+          if (!ServiceID) {
+            throw new Error('Service ID is required');
+          }
+    
+          const token = await getToken();
+    
+          const response = await fetch(`/api/admin/${ServiceID}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                service_price: service_price,
+            }),
+          });
+    
+          if (!response.ok) {
+            const errorData = await response.json();
+            if (errorData.errorCode === 'SERVICE_NOT_FOUND') {
+              setError('Service not found');
+            } else {
+              console.error('Error details:', errorData);
+              throw new Error(response.statusText);
             }
+          }
             const data = await response.json();
             console.log(data);
     
@@ -71,12 +114,17 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
                             fontSize: "1.3rem"
                         }}> Service ID </Form.Label>
                     <Form.Control
-                        type="text"
-                        className="w-64 text-center"
+                        type="number"
+                        className="w-24 text-center"
                         style={{ backgroundColor: "#FFE1F8" }}
                         placeholder="Enter Service ID"
                         value={ServiceID}
-                        onChange={(event) => setServiceID(event.target.value)}
+                        onChange={(event) => {
+                            const newServiceID = event.target.value;
+                            setServiceID(newServiceID);
+                            // Call the function to fetch the data for the selected employee
+                            fetchServiceData(newServiceID);
+                        }}
                         required />
                 </Form.Group>
                 <br></br>
@@ -94,7 +142,9 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
                         style={{ backgroundColor: "#FFE1F8" }}
                         placeholder="Enter New Service Price"
                         value={service_price}
-                        onChange={(e) => setServicePrice(e.target.value)}
+                        onChange={(event) => {
+                            setServicePrice(event.target.value);
+                        }}
                         required />
                 </Form.Group>
                 <br></br>
