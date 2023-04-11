@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
 import Example from '../testing/index';
 
 
@@ -84,7 +74,7 @@ const DisplayActiveInactive = () => {
   return (
     <div className="flex">
     {chartData && (
-      <div style={{ width: '100%', height: 300 }}>
+      <div style={{ width: '100%', height: 400 }}>
         <Example data={chartData} />
       </div>
     )}

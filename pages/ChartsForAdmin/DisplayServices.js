@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 
@@ -69,6 +69,7 @@ const DisplayServices = () => {
     <div className="flex">
       {chartData && (
         <div className="flex">
+          
           <PieChart width={400} height={400}>
             <Pie
               data={chartData}

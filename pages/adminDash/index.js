@@ -83,41 +83,47 @@ export default function AdminDash() {
     };
 
 
-  return (
-      <div>
+    return (
+        <div>
 
-        <AdminDashNavbar handleFormChange={handleFormChange} />
-        {currentForm === 'addEmployee' && (
-            <AddEmployeeForm handleCancelForm={handleCancelForm} />
-        )}
-        {currentForm === 'updateServicePrice' && (
-            <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
-        )}
-        {currentForm === 'updateEmployee' && (
-            <UpdateEmpForm handleCancelForm={handleCancelForm} />
-        )}
-        {currentForm === 'updateEmployeeSkill' && (
-            <UpdateEmpSkillForm handleCancelForm={handleCancelForm} />
-        )}
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        
-        <div className="charts-container grid grid-cols-3 gap-4 align-content-center">
-          <div className="text-center">
-          </div>
-          <div className="text-center">
-          </div>
-          <div className="text-center">
-          </div>
-          
-          <DisplayServices />
+            <AdminDashNavbar handleFormChange={handleFormChange} />
+            {currentForm === 'addEmployee' && (
+                <AddEmployeeForm handleCancelForm={handleCancelForm} />
+            )}
+            {currentForm === 'updateServicePrice' && (
+                <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
+            )}
+            {currentForm === 'updateEmployee' && (
+                <UpdateEmpForm handleCancelForm={handleCancelForm} />
+            )}
+            {currentForm === 'updateEmployeeSkill' && (
+                <UpdateEmpSkillForm handleCancelForm={handleCancelForm} />
+            )}
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
 
-          <div>
-          </div>
+            <div className="charts-container grid grid-cols-3 gap-4 align-content-center">
+                <div className="text-center">
+                </div>
+                <div className="text-center">
+                </div>
+                <div className="text-center">
+                </div>
+
+                <div className="col-span-1 text-center">
+                    <div className="chart-container">
+                        <DisplayServices />
+                    </div>
+                </div>
+
+
+
+                <div>
+                </div>
                 <div className="col-span-1 text-center">
                     <div className="chart-container">
                         <DisplayActiveInactive />
