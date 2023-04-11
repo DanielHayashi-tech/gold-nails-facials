@@ -10,6 +10,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import { FaAlignJustify } from "react-icons/fa";
 import { serviceslinks } from "../../pages/api/serviceslinks";
+import route from 'next/link'
 
 const greatVibe = Great_Vibes({
   weight: ["400", "400"],
@@ -41,7 +42,10 @@ const ServicesNavbar = React.forwardRef((props, ref) => {
           <IconButton onClick={props.onOpen}>
             <Icon as={FaAlignJustify} />
           </IconButton>
+
         </div>
+        <route href="/order">Checkout</route>
+
       </Flex>
       <Flex justifyContent="space-evenly" className="hidden md:flex">
         {serviceslinks.map(({ name, to, id, href }) => (
@@ -66,6 +70,7 @@ const ServicesNavbar = React.forwardRef((props, ref) => {
         }
       `}</style>
     </Flex>
+    
   );
 });
 
