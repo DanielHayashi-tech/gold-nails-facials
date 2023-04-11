@@ -13,6 +13,8 @@ import UpdateEmpSkillForm from '../../components/AdminForms/updateEmpSkillForm';
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
+import DisplaySales from '../ChartsForAdmin/DisplaySales';
+
 
 
 export default function AdminDash() {
@@ -107,84 +109,81 @@ export default function AdminDash() {
             <br></br>
 
             <div className="charts-container grid grid-cols-3 gap-4 align-content-center">
-                <div className="text-center">
-                </div>
-                <div className="text-center">
-                </div>
-                <div className="text-center">
-                </div>
+    <div className="text-center">
+    </div>
+    <div className="text-center">
+    </div>
+    <div className="text-center">
+    </div>
 
-                <div className="col-span-1 text-center">
-                    <div className="chart-container">
-                        <DisplayServices />
-                    </div>
-                </div>
+    <div className="col-span-1 text-center">
+        <div className="chart-container">
+            <DisplayServices />
+        </div>
+    </div>
 
-
-
-                <div>
-                </div>
-                <div className="col-span-1 text-center">
-                    <div className="chart-container">
-                        <DisplayActiveInactive />
-                    </div>
-                </div>
+    <div className="col-span-1 text-center" style={{ position: "relative", left: "-40px" }}>
+  <div className="chart-container">
+    <DisplaySales />
+  </div>
+</div>
 
 
 
-                {/* <div className="col-span-2 text-center">
-                    <div className="chart-container">
-                        <DisplayActiveInactive />
-                    </div>
-                </div> */}
 
 
 
-                <div className="col-span-1 text-center">
-                    <div className="chart-container">
-                        <Form onSubmit={handleServiceTotal}>
-                            <p>Total Service Orders: {serviceOrderCount}</p>
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                                style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
-                                Total the Service Orders!
-                            </Button>
-                        </Form>
-                    </div>
-                </div>
 
-                <div className="text-center">
-                    Owner needs to be able to approve quotes and
-                    this means change the status to IN PROGRSS and display how many
-                </div>
+    <div className="col-span-1 text-center">
+        <div className="chart-container">
+            <DisplayActiveInactive />
+        </div>
+    </div>
 
-                <div className="text-center">
-                </div>
+    <div className="col-span-1 text-center">
+        <div className="chart-container">
+            <Form onSubmit={handleServiceTotal}>
+                <p>Total Service Orders: {serviceOrderCount}</p>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                    style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                    Total the Service Orders!
+                </Button>
+            </Form>
+        </div>
+    </div>
 
-                <div className="col-span-1 text-center">
-                    <div className="chart-container">
-                        <Form onSubmit={handleCountAllMyClients}>
-                            <p>Total Clients: {clientCount}</p>
-                            <Button
-                                variant="primary"
-                                type="submit"
-                                className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                                style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
-                                Total Number of Clients!
-                            </Button>
-                        </Form>
-                    </div>
-                </div>
-                <br></br>
+    <div className="text-center">
+        Owner needs to be able to approve quotes and
+        this means change the status to IN PROGRSS and display how many
+    </div>
 
+    <div className="text-center">
+    </div>
 
-                <div className="text-center">
-                    Sales on Services Made Today, this week, this month, this year
-                </div>
+    <div className="col-span-1 text-center">
+        <div className="chart-container">
+            <Form onSubmit={handleCountAllMyClients}>
+                <p>Total Clients: {clientCount}</p>
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                    style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                    Total Number of Clients!
+                </Button>
+            </Form>
+        </div>
+    </div>
+    <br></br>
 
-            </div>
+    <div className="text-center">
+        Sales on Services Made Today, this week, this month, this year
+    </div>
+</div>
+
         </div>
     );
 }
