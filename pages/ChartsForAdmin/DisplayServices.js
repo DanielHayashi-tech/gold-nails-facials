@@ -1,47 +1,94 @@
-import { Pie } from 'react-chartjs-2';
-import { Chart } from 'chart.js';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-import { registerables} from 'chart.js';
-Chart.register(...registerables);
+
 
 const DisplayServices = () => {
-  const data = {
-    labels: ['Service 1', 'Service 2', 'Service 3', 'Service 4', 'Service 5', 'Service 6', 'Service 7'],
-    datasets: [
-      {
-        label: 'Services',
-        data: [10, 20, 5, 15, 8, 12, 18],
-        backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#32a852',
-          '#FF9F40',
-          '#a8326e',
-          '#3987c6'
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const { getToken } = useAuth();
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Services'
+  const [chartData, setChartData] = useState(null);
+
+  const backgroundColors = [
+    'rgba(255, 99, 132, 0.6)',
+    'rgba(54, 162, 235, 0.6)',
+    'rgba(255, 206, 86, 0.6)',
+    'rgba(75, 192, 192, 0.6)',
+    'rgba(153, 102, 255, 0.6)',
+    'rgba(255, 159, 64, 0.6)',
+    'rgba(255, 99, 132, 0.6)',
+  ];
+
+
+  const fetchChartData = async () => {
+    try {
+      if (!getToken) {
+        throw new Error('You must be logged in to view this page');
       }
+  
+      const token = await getToken();
+  
+      const response = await fetch('/api/admin/ServiceTypeCount', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+  
+      const data = await response.json();
+      // Transform the data to be compatible with Recharts
+      const formattedData = data.map((serviceType) => ({
+        service_type_description: serviceType.service_type_description.toString(),
+        count: serviceType.count,
+      }));
+  
+      setChartData(formattedData);
+    } catch (error) {
+      console.log(error);
+      alert('Read the error message and try again, you got this :) ');
     }
   };
 
+  useEffect(() => {
+    const fetchChart = async () => {
+      const token = await getToken();
+      if (token) {
+        await fetchChartData();
+      }
+    };
+    fetchChart();
+  }, [getToken]);
+  
+
   return (
-    <div>
-      <h2> Services We Offer! </h2>
-      <Pie data={data} options={options} />
+    <div className="flex">
+      {chartData && (
+        <div className="flex">
+          
+          <PieChart width={400} height={400}>
+            <Pie
+              data={chartData}
+              dataKey="count"
+              nameKey="service_type_description"
+              cx="50%"
+              cy="50%"
+              outerRadius={150}
+              fill="#8884d8"
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={backgroundColors[index % backgroundColors.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </div>
+      )}
     </div>
   );
 };

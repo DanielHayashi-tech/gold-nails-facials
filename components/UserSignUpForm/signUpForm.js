@@ -4,11 +4,11 @@ import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
 
 
+// can you delete this comment?
 
 
 
 export default function SignUpForm() {
-
   const router = useRouter();
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -19,8 +19,14 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
   const [passwordOne, setPasswordOne] = useState("");
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-    const { create_account } = useAuth();
+
+  const { create_account } = useAuth();
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
 
   const handleSignUps = async (e) => {
     if (passwordOne !== confirmPassword) {
@@ -75,7 +81,7 @@ export default function SignUpForm() {
   return (
     <div className="container my-5 py-5" style={{
 
-      backgroundColor: "white"
+      backgroundColor: "#FFE1F8"
     }} >
       <div className="row justify-content-center" >
         <div className="col-md-8" >
@@ -185,37 +191,56 @@ export default function SignUpForm() {
                 <br></br>
 
                 <Form.Group controlId="formBasicPassword" className="grid place-content-start md:place-content-center">
-                  <Form.Label 
-                  style={{ fontFamily: "Open Sans", // Change to the desired cursive font
-                    fontWeight: "400",
-                    fontSize: "1.3rem",
-                  }}>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    className="w-64 text-center"
-                    style={{ backgroundColor: "#FFE1F8" }}
-                    placeholder="Create Password"
-                    value={passwordOne}
-                    onChange={(e) => setPasswordOne(e.target.value)}
-                    required />
-                </Form.Group>
-                <br></br>
-                <Form.Group controlId="formBasicConfirmPassword" className="grid place-content-start md:place-content-center">
-      <Form.Label
-      style={{ fontFamily: "Open Sans", // Change to the desired cursive font
-      fontWeight: "400",
-      fontSize: "1.3rem",
-      }}>Confirm Password</Form.Label>
-      <Form.Control
-        type="password"
-        className="w-64 text-center"
-        style={{ backgroundColor: "#FFE1F8" }}
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        required />
+        <Form.Label style={{ fontFamily: "Open Sans", fontWeight: "400", fontSize: "1.3rem" }}>Password</Form.Label>
+        <Form.Control
+          type={password ? "text" : "password"}
+          className="w-64 text-center"
+          style={{ backgroundColor: "#FFE1F8" }}
+          placeholder="Create Password"
+          value={passwordOne}
+          onChange={(e) => setPasswordOne(e.target.value)}
+          required
+        />
+      
+
+      </Form.Group>
+      <br />
+      <Form.Group controlId="formBasicConfirmPassword" className="grid place-content-start md:place-content-center">
+        <Form.Label style={{ fontFamily: "Open Sans", fontWeight: "400", fontSize: "1.3rem" }}>Confirm Password</Form.Label>
+        <Form.Control
+          type={showPassword ? "text" : "password"}
+          className="w-64 text-center"
+          style={{ backgroundColor: "#FFE1F8" }}
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        
+  <Button
+  variant="light"
+  size="sm"
+  onClick={togglePasswordVisibility}
+  className="btn-block custom-button w-32 mt-2 mb-3"
+  style={{
+    fontFamily: "Open Sans", // Change to the desired cursive font
+    fontWeight: "400",
+    backgroundColor: "#FFE1F8",
+    fontSize: '16px',
+    padding: '5px 10px',
+    border: 'none',
+    boxShadow: 'none',
+    textAlign: 'right'
+  }}
+>
+  {showPassword ? "Hide Password" : "Show Password"}
+</Button>
+
+
+
     </Form.Group>
     <br></br>
+    
                 <Button
                   variant="light"
                   type="submit"
