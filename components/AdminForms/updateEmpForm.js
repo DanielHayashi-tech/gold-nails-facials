@@ -352,7 +352,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         fontFamily: "Open Sans",
                                         fontWeight: "400",
                                         backgroundColor: "#FFE1F8",
-                                        fontSize: '19px'
+                                        fontSize: '20px'
                                     }}>
                                     Update Employee
                                 </Button>
@@ -366,7 +366,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans",
                                             fontWeight: "400",
                                             backgroundColor: '#FFE1F8',
-                                            fontSize: '19px'
+                                            fontSize: '23px'
                                         }}>
                                         Home
                                     </Button>

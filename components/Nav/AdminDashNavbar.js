@@ -1,6 +1,7 @@
 import { Box, Flex, useColorModeValue, VStack } from '@chakra-ui/react';
 import { Raleway } from 'next/font/google';
 import React from 'react';
+import {  Button } from 'react-bootstrap';
 
 const raleway = Raleway({
   weight: ['500', '500'],
@@ -8,7 +9,7 @@ const raleway = Raleway({
 });
 
 const AdminDashNavBar = ({ handleFormChange }) => {
-  const navBg = useColorModeValue('#abb1cf', 'gray.400');
+  const navBg = useColorModeValue("#faf3f7", "gray.400");
 
   const buttonStyles = {
     as: 'button',
@@ -18,7 +19,7 @@ const AdminDashNavBar = ({ handleFormChange }) => {
     border: '1px',
     px: '25px',
     borderRadius: '2px',
-    fontSize: '20px',
+    fontSize: '18px',
     fontWeight: 'semibold',
     borderColor: '#cc7eb7',
     color: '#4b4f56',
@@ -40,18 +41,31 @@ const AdminDashNavBar = ({ handleFormChange }) => {
         <div className={`text-[35px] font-bold ${raleway.className}`}>Golden Nails n Facial</div>
       </div>
       <Flex className="container flex items-end justify-between px-12 py-4 mx-auto" wrap="wrap">
+
+        
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('addEmployee')}>
           Add a new Employee
         </Box>
+        
+        
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('updateEmployee')}>
           Update Employee
         </Box>
+       
+
+        
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('updateEmployeeSkill')}>
           Update Employee Skill
         </Box>
+        
+
+        
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('updateServicePrice')}>
           Update Service Price
         </Box>
+       
+
+
       </Flex>
     </VStack>
   );

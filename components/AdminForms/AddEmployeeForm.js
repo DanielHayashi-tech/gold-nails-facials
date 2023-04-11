@@ -244,6 +244,8 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         value={zipCode}
                                         onChange={(event) => setZipCode(event.target.value)} />
                                 </Form.Group>
+                                <br></br>
+
                                 <Form.Group controlId="formBasicEmployeeStatus" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
@@ -281,7 +283,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                         fontFamily: "Open Sans", // Change to the desired cursive font
                                         fontWeight: "400",
                                         backgroundColor: "#FFE1F8",
-                                        fontSize: '19px'
+                                        fontSize: '20px'
                                     }}>
                                     Add Employee
                                 </Button>
@@ -295,7 +297,7 @@ export default function AddEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans", // Change to the desired cursive font
                                             fontWeight: "400",
                                             backgroundColor: '#FFE1F8',
-                                            fontSize: '19px'
+                                            fontSize: '23px'
                                         }}>
                                         Home
                                     </Button>
