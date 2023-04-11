@@ -29,7 +29,6 @@ const DisplayServices = () => {
       }
 
       const token = await getToken();
-      console.log(token)
 
       const response = await fetch('/api/admin/ServiceTypeCount', {
         method: 'GET',
@@ -46,8 +45,7 @@ const DisplayServices = () => {
       const data = await response.json();
       const labels = data.map((serviceType) => serviceType.service_type_description.toString());
       const values = data.map((serviceType) => serviceType.count);
-      console.log("Here are the labels: " + JSON.stringify(labels));
-      console.log("Here are the values: " + JSON.stringify(values));
+      // console.log("Here are the values: " + JSON.stringify(values));
 
 
 

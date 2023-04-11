@@ -4,121 +4,115 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 
 export default function UpdateEmployeeForm({ handleCancelForm }) {
-    const router = useRouter();
-    const [employeeData, setEmployeeData] = useState(null);
-    const [EmployeeID, setEmployeeID] = useState(router.query.id || '');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [address_1, setAddress_1] = useState('');
-    const [address_2, setAddress_2] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zipCode, setZipCode] = useState('');
+  const router = useRouter();
+  const { getToken } = useAuth();
 
-    const [error, setError] = useState(null);
+  const [EmployeeID, setEmployeeID] = useState('');
+  const [error, setError] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [address_1, setAddress_1] = useState('');
+  const [address_2, setAddress_2] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipCode] = useState('');
 
-    const { getToken } = useAuth();
+  useEffect(() => {
+    if (router.query.EmployeeID) {
+      setEmployeeID(router.query.EmployeeID);
+      fetchEmployeeData(router.query.EmployeeID);
+    }
+  }, [router.query.EmployeeID]);
 
-    useEffect(() => {
-        if (router.query.id) {
-            setEmployeeID(router.query.id);
+  const fetchEmployeeData = async (EmployeeID) => {
+    if (!EmployeeID || isNaN(EmployeeID)) {
+        return;
+      }
+    try {
+      const token = await getToken();
+
+      const response = await fetch(`/api/employees/${EmployeeID}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const result = await response.json();
+      const data = result.data;
+
+      if (data) {
+        setFirstName(data.first_name.trim());
+        setLastName(data.last_name.trim());
+        setPhoneNumber(data.phone_number.trim());
+        setEmail(data.email_address.trim());
+        setAddress_1(data.address_1.trim());
+        setAddress_2(data.address_2.trim());
+        setCity(data.city.trim());
+        setState(data.state.trim());
+        setZipCode(data.zip_code.trim());
+      }
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
+
+  const handleUpdateEmployee = async (e) => {
+    e.preventDefault();
+    try {
+      if (!EmployeeID) {
+        throw new Error('Employee ID is required');
+      }
+
+      const token = await getToken();
+
+      const response = await fetch(`/api/employees/${EmployeeID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          phone_number: phoneNumber,
+          email_address: email,
+          address_1: address_1,
+          address_2: address_2,
+          city: city,
+          state: state,
+          zip_code: zipCode,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.errorCode === 'EMPLOYEE_NOT_FOUND') {
+          setError('Employee not found');
+        } else {
+          console.error('Error details:', errorData);
+          throw new Error(response.statusText);
         }
-    }, [router.query.id]);
+      }
 
-    useEffect(() => {
-        if (EmployeeID) {
-            fetch(`/api/employees/${EmployeeID}`)
-                .then(response => response.json())
-                .then(data => {
-                    setFirstName(data.firstName);
-                    setLastName(data.lastName);
-                    setPhoneNumber(data.phoneNumber);
-                    setEmail(data.email);
-                    setAddress_1(data.address_1);
-                    setAddress_2(data.address_2);
-                    setCity(data.city);
-                    setState(data.state);
-                    setZipCode(data.zipCode);
-                })
-                .catch(error => console.error(error));
-        }
-    }, [EmployeeID]);
-    const fetchEmployeeData = async () => {
-        try {
-            const token = await getToken();
-            const response = await fetch(`/api/employees/${EmployeeID}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
+      const data = await response.json();
 
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
+      console.log(data);
 
-            const data = await response.json();
-            if (data) {
-              setEmployeeData(data);
-              setFirstName(data.first_name);
-              setLastName(data.last_name);
-              setPhoneNumber(data.phone_number);
-              setEmail(data.email_address);
-              setAddress_1(data.address_1);
-              setAddress_2(data.address_2);
-              setCity(data.city);
-              setState(data.state);
-              setZipCode(data.zip_code);
-            }} catch (error) {
-            console.log(error);
-            setError(error.message);
-        }
-    };
+      alert('Employee updated successfully');
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
 
-    const handleUpdateEmployee = async (e) => {
-        e.preventDefault();
-        try {
-            if (!EmployeeID) {
-                throw new Error('Employee ID is required');
-            }
-    
-            const token = await getToken();
-    
-            const response = await fetch(`/api/employees/${EmployeeID}`, {
-
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    first_name: firstName,
-                    last_name: lastName,
-                    phone_number: phoneNumber,
-                    email_address: email,
-                    address_1: address_1,
-                    address_2: address_2,
-                    city: city,
-                    state: state,
-                    zip_code: zipCode,
-                }),
-            });
-    
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-    
-            const data = await response.json();
-            console.log(data);
-            alert('Employee updated successfully');
-        } catch (error) {
-            console.log(error);
-            setError(error.message);
-        }
-    };
-    return (
+  return (
         <div className="container my-5 py-5">
             <div className="row justify-content-center" >
                 <div className="col-md-8" >
@@ -151,9 +145,10 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         placeholder=" Emp ID"
                                         value={EmployeeID}
                                         onChange={(event) => {
-                                            setEmployeeID(event.target.value);
+                                            const newEmployeeID = event.target.value;
+                                            setEmployeeID(newEmployeeID);
                                             // Call the function to fetch the data for the selected employee
-                                            fetchEmployeeData(event.target.value);
+                                            fetchEmployeeData(newEmployeeID);
                                         }}
                                         required
                                     />

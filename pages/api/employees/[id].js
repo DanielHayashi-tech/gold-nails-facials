@@ -5,6 +5,10 @@ import prisma from '@/lib/prismaApp';
 export default async function handler(req, res) {
   const EmployeeID = Number.parseInt(req.query.id);
 
+  if (isNaN(EmployeeID)) {
+    return res.status(400).json({ error: 'Invalid EmployeeID' });
+  }
+
   if (req.method === 'GET') {
     authMiddleware(req, res, async () => {
       try {
@@ -13,13 +17,14 @@ export default async function handler(req, res) {
         });
 
         if (!employee) {
-          return res.status(404).json({ error: 'Employee not found' });
+          return res.status(404).json({ error: 'Employee not found', errorCode: 'EMPLOYEE_NOT_FOUND' });
         }
 
 
         return res.status(200).json({ data: employee });
       } catch (error) {
         console.log(error);
+        console.log(EmployeeID)
         return res.status(500).json({ error: 'Internal server error' });
       }
       
