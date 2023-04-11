@@ -116,7 +116,7 @@ export default function Services(props)  {
 
         <Order userCart={order}/>
         
-        <button className='btn' onClick={ async () => { 
+        {/* <button className='btn' onClick={ async () => { 
           try {
             await handleSignUp( await getToken(), cart)
           
@@ -125,7 +125,7 @@ export default function Services(props)  {
             console.log(error)
           }
           
-          }}>Submit Order</button>
+          }}>Submit Order</button> */}
 
         <MyFooter date="2023" rights="All rights reserved." />
         
