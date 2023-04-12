@@ -3,8 +3,6 @@ import { FaEnvelope } from "react-icons/fa";
 import { BsHandbagFill } from "react-icons/bs";
 import { BsPatchExclamationFill } from "react-icons/bs";
 import { BsCartFill } from 'react-icons/bs';
-
-
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 export const serviceslinks = [
@@ -37,7 +35,7 @@ export const serviceslinks = [
     href: "/MenuServices/FacialService"
   },
   {
-    name: "Powder Nails",
+    name: "Powder",
     to: "powdernailsservice",
     id: 29,
     icon: <BsHandbagFill className="mr-4" />,

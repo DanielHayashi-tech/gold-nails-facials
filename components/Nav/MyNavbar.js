@@ -5,7 +5,7 @@ import {
   useColorModeValue,
   Icon,
 } from "@chakra-ui/react";
-import { Raleway } from "next/font/google";
+import { Great_Vibes } from "next/font/google";
 import React from "react";
 import { Link } from "react-scroll";
 import { links } from "@/pages/api/links";
@@ -14,9 +14,9 @@ import { useRouter } from 'next/router';
 import { FaAlignJustify } from "react-icons/fa";
 
 
-const raleway = Raleway({
-  weight: ["500", "500"],
-  subsets: ["cyrillic"]
+const greatVibe = Great_Vibes({
+  weight: ["400", "400"],
+  subsets: ["latin"],
 });
 
   const MyNavbar = React.forwardRef((props, ref) => {
@@ -30,8 +30,8 @@ const raleway = Raleway({
 
   return (
     <Flex top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed" ref={ref}>
-      <div className="text-[22px] container flex items-center justify-between px-12 py-4 mx-auto">
-        <div className={`text-[35px] font-bold ${raleway.className}`}>Golden Nails n Facial</div>
+      <div className="text-[24px] container flex items-center justify-between px-12 py-4 mx-auto">
+        <div className={`text-[40px] font-bold ${greatVibe.className}`}>Golden Nails n Facial</div>
         <div className="hidden gap-10 md:flex">
           {links.map(({ name, to, id, href }) => (
             <Link
