@@ -13,7 +13,10 @@ export default function Service() {
   function handleClick() {
     router.push("/services");
   }
-
+  function getImg(id) {
+    var img = "/../public/addon/" + id + '.jpg'
+    return img
+  }
   return (
     <section id="service" className="container px-4 py-10 mx-auto">
       <Headings title="Our Services" />

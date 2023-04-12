@@ -1,4 +1,3 @@
-import manicureOffers from "../../pages/api/manicureOffers";
 import ServicesHeadings from "../Heading/ServicesHeading";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -8,23 +7,29 @@ import { Button } from 'react-bootstrap';
 import { PrismaClient } from '@prisma/client'
 import { data } from "autoprefixer";
 import { getToken } from "@chakra-ui/react";
+import Order from "./Order";
 
 
 
 export default function ManicureService({prices}) {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart, getToken } = useAuth();
-
+  const {order, setCartItems, cart} = useAuth()
+  const service = 'Manicure'
   function handleClick() {
     setIsOpen(!isOpen);
   }
 
-  function getToCart(item) {
-    cart.push(item)
+  function addToCart(item) {
+    const newArray = [...order, item];
+    setCartItems(newArray)
+  }
+  function getImg(id) {
+    var img = "/../public/manicure/" + id + '.jpg'
+    return img
   }
 
   return (
-    <section id="ManicureService" className="container px-5 py-5 mx-auto">
+    <section id="ManicureService" className="container px-5 py-1 mx-auto">
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-1 ..."> .</div>
        </div>
@@ -44,7 +49,8 @@ export default function ManicureService({prices}) {
             key={offer.ServiceID}
             className="flex flex-col items-center gap-2 "
           >
-            {/* <Image alt="nails-manicureservice" src={offer} className="w-[100%]" /> */}
+            
+            <Image alt="nails-manicureservice" src={getImg(offer.ServiceID)} className="w-[100%]" width='100' height={100} />
             <motion.h2 className="items-center px-4 py-3 text-xl font-bold">
               {offer.service_title}
             </motion.h2>
@@ -57,16 +63,19 @@ export default function ManicureService({prices}) {
                 <span className="flex items-center justify-center text-xs text-teal-600 ">
                   ${offer.service_price}.00
                 </span>
-                <p className="px-4 py-3 text-sm tracking-tight">{offer.service_description}</p>
-                <button className="btn" onClick={() => getToCart(offer.ServiceID)}>
+                <p className="px-4 py-3 text-sm tracking-tight">{offer.service_description}
+                <button className="btn" onClick={() => addToCart({id: offer.ServiceID, service: service, price: offer.service_price, title: offer.service_title, img: getImg(offer.ServiceID)})}>
                 Add To Order
                 </button>
+                </p>
+                
                 </motion.div>
             )}
           </motion.div>
         ))}
       </div>
     </section>
+
 
   );
 }

@@ -9,6 +9,7 @@ import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePri
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
 import UpdateEmpForm from '../../components/AdminForms/updateEmpForm';
 import UpdateEmpSkillForm from '../../components/AdminForms/updateEmpSkillForm';
+import AddEmployeeSkillForm from '../../components/AdminForms/addEmployeeSkillForm';
 
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
@@ -95,6 +96,9 @@ export default function AdminDash() {
             {currentForm === 'updateServicePrice' && (
                 <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
             )}
+            {currentForm === 'addEmployeeSkill' && (
+                <AddEmployeeSkillForm handleCancelForm={handleCancelForm} />
+            )}
             {currentForm === 'updateEmployee' && (
                 <UpdateEmpForm handleCancelForm={handleCancelForm} />
             )}
@@ -108,82 +112,53 @@ export default function AdminDash() {
             <br></br>
             <br></br>
 
-            <div className="charts-container grid grid-cols-3 gap-4 align-content-center">
-    <div className="text-center">
-    </div>
-    <div className="text-center">
-    </div>
-    <div className="text-center">
-    </div>
-
-    <div className="col-span-1 text-center">
-        <div className="chart-container">
-            <DisplayServices />
-        </div>
-    </div>
-
-    <div className="col-span-1 text-center" style={{ position: "relative", left: "-40px" }}>
-  <div className="chart-container">
-    <DisplaySales />
-  </div>
-</div>
-
-
-
-
-
-
-
-    <div className="col-span-1 text-center">
-        <div className="chart-container">
-            <DisplayActiveInactive />
-        </div>
-    </div>
-
-    <div className="col-span-1 text-center">
-        <div className="chart-container">
-            <Form onSubmit={handleServiceTotal}>
-                <p>Total Service Orders: {serviceOrderCount}</p>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                    style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
-                    Total the Service Orders!
-                </Button>
-            </Form>
-        </div>
-    </div>
-
-    <div className="text-center">
-        Owner needs to be able to approve quotes and
-        this means change the status to IN PROGRSS and display how many
-    </div>
-
-    <div className="text-center">
-    </div>
-
-    <div className="col-span-1 text-center">
-        <div className="chart-container">
-            <Form onSubmit={handleCountAllMyClients}>
-                <p>Total Clients: {clientCount}</p>
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
-                    style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
-                    Total Number of Clients!
-                </Button>
-            </Form>
-        </div>
-    </div>
-    <br></br>
-
-    <div className="text-center">
-        Sales on Services Made Today, this week, this month, this year
-    </div>
-</div>
-
+            <div className="mt-20">
+                <div className="charts-container grid grid-cols-3 gap-4">
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplayServices />
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplaySales />
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplayActiveInactive />
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <Form onSubmit={handleServiceTotal}>
+                                <p>Total Service Orders: {serviceOrderCount}</p>
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                                    style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                                    Total the Service Orders!
+                                </Button>
+                            </Form>
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <Form onSubmit={handleCountAllMyClients}>
+                                <p>Total Clients: {clientCount}</p>
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    className="btn-block custom-button cursor-pointer hover:text-pink-900"
+                                    style={{ backgroundColor: "#ffe5e9", fontSize: "1rem" }}>
+                                    Total Number of Clients!
+                                </Button>
+                            </Form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 
+
 export default function UpdateEmployeeForm({ handleCancelForm }) {
   const router = useRouter();
   const { getToken } = useAuth();
@@ -352,7 +353,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                         fontFamily: "Open Sans",
                                         fontWeight: "400",
                                         backgroundColor: "#FFE1F8",
-                                        fontSize: '19px'
+                                        fontSize: '20px'
                                     }}>
                                     Update Employee
                                 </Button>
@@ -366,7 +367,7 @@ export default function UpdateEmployeeForm({ handleCancelForm }) {
                                             fontFamily: "Open Sans",
                                             fontWeight: "400",
                                             backgroundColor: '#FFE1F8',
-                                            fontSize: '19px'
+                                            fontSize: '23px'
                                         }}>
                                         Home
                                     </Button>

@@ -1,42 +1,75 @@
-// /components/AdminForms/updateEmpSkillForm.js
+// /components/AdminForms/addeEmpSkillForm.js
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 
-export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
+
+export default function AddEmployeeSkillForm({ handleCancelForm }) {
     const router = useRouter();
     const { getToken } = useAuth();
     const [error, setError] = useState(null);
-    const [Employee_SpecialtyID, setEmployeeSpecialtyID] = useState('');
     const [EmployeeID, setEmployeeID] = useState('');
-    const [firstName, setFirstName] = useState('');
     const [SpecialtyID, setSpecialtyID] = useState('');
-    const [specialty_description, setSpecialtyDescription] = useState('');
     const [employee_specialty_statusID, setEmployeeSpecialtyStatusID] = useState('');
+    const [firstName, setFirstName] = useState('');
+
+    const [specialty_description, setSpecialtyDescription] = useState('');
+
     const [employee_specialty_status_description, setEmployeeSpecialtyStatusDescription] = useState('');
+    const [specialties, setSpecialties] = useState([]);
+
 
 
 
 
 
     useEffect(() => {
-        if (router.query.Employee_SpecialtyID) {
-            setEmployeeSpecialtyID(router.query.Employee_SpecialtyID);
-            fetchEmployeeData(router.query.Employee_SpecialtyID);
+        if (router.query.EmployeeID) {
+            setEmployeeID(router.query.EmployeeID);
+            fetchEmployeeData(router.query.EmployeeID);
         }
-    }, [router.query.Employee_SpecialtyID]);
+    }, [router.query.EmployeeID]);
+    useEffect(() => {
+        const fetchSpecialties = async () => {
+            try {
+                const token = await getToken();
+                const response = await fetch('/api/specialties', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
 
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
 
+                const result = await response.json();
+                setSpecialties(result.data);
+            } catch (error) {
+                console.error(error);
+                setError(error.message);
+            }
+        };
 
-    const fetchSpecialtyStatusDescription = async (employee_specialty_statusID) => {
-        if (!employee_specialty_statusID || isNaN(employee_specialty_statusID)) {
+        fetchSpecialties();
+    }, []);
+
+    const fetchSpecialtyDescription = async (SpecialtyID) => {
+        const selectedSpecialty = specialties.find((specialty) => specialty.SpecialtyID === parseInt(SpecialtyID, 10));
+        if (selectedSpecialty) {
+            setSpecialtyDescription(selectedSpecialty.specialty_description);
+        }
+    };
+    const fetchEmployeeData = async (EmployeeID) => {
+        if (!EmployeeID || isNaN(EmployeeID)) {
             return;
         }
         try {
             const token = await getToken();
 
-            const response = await fetch(`/api/specialtyStatus/${employee_specialty_statusID}`, {
+            const response = await fetch(`/api/employee/${EmployeeID}/`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
@@ -47,44 +80,18 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                 throw new Error(response.statusText);
             }
             const result = await response.json();
+            console.log('API response:', result);
             const data = result.data;
+            console.log('Employee data:', data);
 
             if (data) {
-                setEmployeeSpecialtyStatusDescription(data.employee_specialty_status_description);
-            }
-        } catch (error) {
-            console.log(error);
-            setError(error.message);
-        }
-    };
-
-    const fetchEmployeeData = async (Employee_SpecialtyID) => {
-        if (!Employee_SpecialtyID || isNaN(Employee_SpecialtyID)) {
-            return;
-        }
-        try {
-            const token = await getToken();
-
-            const response = await fetch(`/api/skills/${Employee_SpecialtyID}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-            const result = await response.json();
-            const data = result.data;
-
-            if (data) {
-                setEmployeeID(data.Employee.EmployeeID);
-                setFirstName(data.Employee.first_name);
-                setSpecialtyID(data.Specialty.SpecialtyID);
-                setSpecialtyDescription(data.Specialty.specialty_description);
-                setEmployeeSpecialtyStatusID(data.Employee_Specialty_Status.employee_specialty_statusID);
-                setEmployeeSpecialtyStatusDescription(data.Employee_Specialty_Status.employee_specialty_status_description);
+                setEmployeeID(data.EmployeeID);
+                setFirstName(data.first_name);
+                // You may need to update these lines based on the new API response structure
+                // setSpecialtyID(data.Specialty.SpecialtyID);
+                // setSpecialtyDescription(data.Specialty.specialty_description);
+                // setEmployeeSpecialtyStatusID(data.Employee_Specialty_Status.employee_specialty_statusID);
+                // setEmployeeSpecialtyStatusDescription(data.Employee_Specialty_Status.employee_specialty_status_description);
             }
 
         } catch (error) {
@@ -93,49 +100,29 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
         }
     };
 
-    const handleUpdateEmployeeSkill = async (e) => {
+
+    const handleAddEmployeeSkill = async (e) => {
         e.preventDefault();
         try {
-            if (!Employee_SpecialtyID) {
-                throw new Error('Employee SpecialtyID ID is required');
-            }
-
             const token = await getToken();
 
-            const response = await fetch(`/api/skills/${Employee_SpecialtyID}`, {
-                method: 'PUT',
+            const response = await fetch(`/api/employee/${EmployeeID}`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                    Employee: {
-                        EmployeeID: EmployeeID,
-                        first_name: firstName,
-                    },
-                    Specialty: {
-                        SpecialtyID: SpecialtyID,
-                        specialty_description: specialty_description,
-                    },
-                    Employee_Specialty_Status: {
-
-                        employee_specialty_statusID: employee_specialty_statusID,
-                        employee_specialty_status_description: employee_specialty_status_description,
-                    }
-
+                    SpecialtyID: parseInt(SpecialtyID),
+                    employee_specialty_statusID,
                 }),
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                if (errorData.errorCode === 'EMPLOYEE_SPECIALTY_NOT_FOUND') {
-                    setError('Employee Specialty not found');
-                } else {
-                    console.error('Error details:', errorData);
-                    throw new Error(response.statusText);
-                }
+                console.error('Error details:', errorData);
+                throw new Error(response.statusText);
             }
-
 
             alert('Employee updated successfully');
             handleCancelForm();
@@ -158,36 +145,35 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                     fontSize: "3rem",
                                     marginBottom: "1rem",
                                     color: "#EAC8E7"
-                                }}> Update Employee Skill Form
+                                }}> Add Employee Skill Form
                             </h3>
                         </div>
 
                         <div className="card-body text-center place-content-center">
-                            <Form onSubmit={handleUpdateEmployeeSkill}>
-                                <Form.Group controlId="formBasicEmployeeSpecialtyID" className="grid place-content-center">
-                                    <div className="flex flex-col items-center">
-                                        <Form.Label
-                                            style={{
-                                                fontFamily: "Open Sans",
-                                                fontWeight: "400",
-                                                fontSize: "1.3rem"
-                                            }}> Employee Specialty ID </Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            className="w-24 text-center"
-                                            style={{ backgroundColor: "#FFE1F8" }}
-                                            placeholder=" Emp ID"
-                                            value={Employee_SpecialtyID}
-                                            onChange={(event) => {
-                                                const newEmployeeSpecialtyID = event.target.value;
-                                                setEmployeeSpecialtyID(newEmployeeSpecialtyID);
-                                                // Call the function to fetch the data for the selected employee
-                                                fetchEmployeeData(newEmployeeSpecialtyID);
-                                            }}
-                                            required
-                                        />
-                                    </div>
+                            <Form onSubmit={handleAddEmployeeSkill}>
+                                <Form.Group controlId="formBasicEmployeeID" className="grid place-content-start md:place-content-center">
+                                    <Form.Label
+                                        style={{
+                                            fontFamily: "Open Sans",
+                                            fontWeight: "400",
+                                            fontSize: "1.3rem"
+                                        }}> Employee ID </Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        className="w-24 text-center"
+                                        style={{ backgroundColor: "#FFE1F8" }}
+                                        placeholder=" Emp ID"
+                                        value={EmployeeID}
+                                        onChange={(event) => {
+                                            const newEmployeeID = event.target.value;
+                                            setEmployeeID(newEmployeeID);
+                                            // Call the function to fetch the data for the selected employee
+                                            fetchEmployeeData(newEmployeeID);
+                                        }}
+                                        required
+                                    />
                                 </Form.Group>
+
 
                                 <br></br>
                                 <Form.Group controlId="formBasicFirstName" className="grid place-content-start md:place-content-center">
@@ -212,28 +198,27 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                     />
                                 </Form.Group>
                                 <br></br>
-
-
-                                <Form.Group controlId="formbasicSpecialtyDescription" className="grid place-content-start md:place-content-center">
+                                <Form.Group controlId="formBasicSpecialtyID" className="grid place-content-start md:place-content-center">
                                     <Form.Label
                                         style={{
-                                            fontFamily: "Open Sans", // Change to the desired cursive font
+                                            fontFamily: "Open Sans",
                                             fontWeight: "400",
                                             fontSize: "1.3rem",
-                                        }}>Specialty Description</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        className="w-48 text-center"
+                                        }}> Specialty </Form.Label>
+                                    <Form.Select
+                                        className="text-center w-48"
                                         style={{ backgroundColor: "#FFE1F8" }}
-                                        placeholder="Description"
-                                        value={specialty_description}
-                                        readOnly
-                                        onChange={(event) => {
-                                            setSpecialtyDescription(event.target.value);
-                                            fetchEmployeeData(event.target.value);
-                                        }}
-                                        required />
+                                        value={SpecialtyID}
+                                        onChange={(event) => setSpecialtyID(event.target.value)}>
+                                        <option value="">Choose Status</option>
+                                        <option value={1}>Pedicures</option>
+                                        <option value={2}>Manicures</option>
+                                        <option value={3}>Waxing</option>
+                                        <option value={4}>Facials</option>
+                                        <option value={5}>Powder Nails</option>
+                                    </Form.Select>
                                 </Form.Group>
+
                                 <br></br>
                                 <Form.Group controlId="formBasicEmployeeStatus" className="grid place-content-start md:place-content-center">
                                     <Form.Label
@@ -246,7 +231,7 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                         className="text-center w-48"
                                         style={{ backgroundColor: "#FFE1F8" }}
                                         value={employee_specialty_statusID}
-                                        onChange={(event) => setEmployeeSpecialtyStatusID(event.target.value)}>
+                                        onChange={(event) => setEmployeeSpecialtyStatusID(parseInt(event.target.value))}>
                                         <option value="">Choose Status</option>
                                         <option value={2}>Not Learned</option>
                                         <option value={3}>Beginner</option>
@@ -267,7 +252,7 @@ export default function UpdateEmployeeSkillForm({ handleCancelForm }) {
                                         backgroundColor: "#FFE1F8",
                                         fontSize: '20px'
                                     }}>
-                                    Update Employee
+                                    Add Employee
                                 </Button>
 
                                 <div className="card-footer pt-20">

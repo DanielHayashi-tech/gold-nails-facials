@@ -6,6 +6,7 @@ import { resetPassword } from 'firebase/auth'; // Import resetPassword from fire
 const authUserContext = createContext({
   authUser: null,
   loading: true,
+  cart: [],
   signIn: async () => {},
   create_account: async () => {},
   signOut: async () => {},

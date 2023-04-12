@@ -8,6 +8,7 @@ import PowderNailsService from "@/components/MenuServices/PowderNailsService";
 import FacialService from "@/components/MenuServices/FacialService";
 import PackageService from "@/components/MenuServices/PackageService";
 import AdditionalService from "@/components/MenuServices/AdditionalService";
+import Order from "@/components/MenuServices/Order";
 import MyFooter from "../../components/Footer/MyFooter";
 import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
@@ -75,13 +76,20 @@ return { props: { mani, padi, wax,facials, pdn, add, packages} }
 
 export default function Services(props)  {
   
-  const { authUser, loading, getToken, cart } = useAuth();
+  const { authUser, loading, getToken, order, setCartItems, cart } = useAuth();
+  // const [cart, setCartItems] = useState([])
+
   const router = useRouter();
   useEffect(() => {
     if (!loading && !authUser)
       router.push('/')
   }, [authUser, loading])
 
+
+  useEffect(() => {
+    console.log(order)
+  }, [cart]); // <- add the count variable here
+  
 
   const { onOpen, onClose, isOpen } = useDisclosure();
   const refBtn = useRef(null);
@@ -106,7 +114,9 @@ export default function Services(props)  {
         <PackageService prices={props.packages}/>
         <AdditionalService prices={props.add}/>
 
-        <button className='btn' onClick={ async () => { 
+        <Order userCart={order}/>
+        
+        {/* <button className='btn' onClick={ async () => { 
           try {
             await handleSignUp( await getToken(), cart)
           
@@ -115,7 +125,7 @@ export default function Services(props)  {
             console.log(error)
           }
           
-          }}>Submit Order</button>
+          }}>Submit Order</button> */}
 
         <MyFooter date="2023" rights="All rights reserved." />
         
