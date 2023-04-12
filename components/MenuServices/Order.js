@@ -24,10 +24,10 @@ export default function Order({userCart}) {
         // Send a POST request to the /api/register route with the user's information
         const response = await fetch('/api/services', {
           method: 'POST',
-          // headers: {
-          //   'Content-Type': 'application/json',
-          //   'Authorization': "Bearer " + await getToken(),
-          // }, 
+           headers: {
+             'Content-Type': 'application/json',
+             'Authorization': "Bearer " + await getToken(),
+           }, 
           body: JSON.stringify({
             data: cart
           }),
@@ -40,7 +40,7 @@ export default function Order({userCart}) {
          cart = []
         console.log(data)
         alert('Order Created')
-        router.push('/dashboard')
+        router.push("/");
         return data
       }
 
