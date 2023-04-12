@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
@@ -14,6 +14,8 @@ import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
+import DisplayServiceTrends from '../ChartsForAdmin/DisplayServiceTrends';
+import DisplayServiceOrders from '../ChartsForAdmin/DisplayServiceOrders';
 
 
 const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
