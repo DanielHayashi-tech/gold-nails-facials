@@ -14,7 +14,7 @@ import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
 import DisplaySales from '../ChartsForAdmin/DisplaySales';
-
+import ApproveOrders from '../ChartsForAdmin/DisplayOrders'
 
 const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
 
@@ -171,7 +171,13 @@ export default function AdminDash() {
                             </Form>
                         </div>
                     </div>
+                    
                 </div>
+                <div className="col-span-1 text-center">
+                        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+                            <ApproveOrders />
+                        </div>
+                    </div>
             </div>
         </div>
     );
