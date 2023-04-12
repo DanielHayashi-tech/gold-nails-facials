@@ -10,7 +10,7 @@ import {
   DrawerOverlay,
 } from "@chakra-ui/react";
 import React from "react";
-import { links } from "@/pages/api/links";
+import { links } from "pages/api/links";
 import { Link } from "react-scroll";
 
 

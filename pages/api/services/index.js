@@ -42,7 +42,7 @@ export default async function handler(req, res) {
             }
           })
         }
-        return res.status(200).json({message: `Order Submited with orderID ${order.ServiceOrderID}`})
+        return res.status(200).json({id: order.ServiceOrderID})
     });
   } else {
     res.status(405).json({ message: 'Method not allowed' });
