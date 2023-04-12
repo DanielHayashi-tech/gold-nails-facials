@@ -10,6 +10,7 @@ const DisplayOrders = () => {
   const [chartData, setChartData] = useState([]);
 
 async function updateStatus(id, status) {
+    console.log(id)
     try {
       const token = await getToken();
 
@@ -20,8 +21,8 @@ async function updateStatus(id, status) {
           'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-            id: id,
-            status: status
+            id: id ,
+            status: status 
           }),
       });
 
@@ -31,7 +32,7 @@ async function updateStatus(id, status) {
 
       const data = await response.json();
       console.log("updateClientStatus data:", data);
-    
+      alert("Order is now set to in progress")
 
     } catch (error) {
       console.log(error);
@@ -65,6 +66,12 @@ async function updateStatus(id, status) {
     }
   };
 
+  function hideBtn(id){
+    if(id != 3) {
+        return true
+    }
+    return false
+  }
   function convertDate(data) {
     const date = new Date(data);
 
@@ -108,13 +115,13 @@ async function updateStatus(id, status) {
                     <td>{convertDate(table.service_order_date)}</td>
                     <td>${table.service_order_quote}.00</td>
                     <td>
-                        {/* <button onClick={updateStatus(table.ServiceOrderID, 3)}>
+                        <button  onClick={() => updateStatus(table.ServiceOrderID, 3)}>
                             Approve
                         </button>
                         <br></br>
-                        <button onClick={updateStatus(table.ServiceOrderID, 6)}>
+                        <button onClick={() => updateStatus(table.ServiceOrderID, 6)}>
                              Deny
-                        </button> */}
+                        </button>
                     </td>
 
                 </tr>
