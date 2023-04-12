@@ -29,7 +29,7 @@ export default function ManicureService({prices}) {
   }
 
   return (
-    <section id="ManicureService" className="container px-5 py-5 mx-auto">
+    <section id="ManicureService" className="container px-5 py-1 mx-auto">
       <div className="grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-1 ..."> .</div>
        </div>

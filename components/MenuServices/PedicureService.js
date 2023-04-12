@@ -21,7 +21,7 @@ export default function PedicureService({prices}) {
     setCartItems(newArray)
   }
   return (
-    <section id="pedicureservice" className="container px-4 py-10 mx-auto">
+    <section id="pedicureservice" className="container px-5 py-5 mx-auto">
       <ServicesHeadings title="Our Pedicure Services"  />
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
     

@@ -20,7 +20,7 @@ export default function PowderNailService({prices}) {
     setCartItems(newArray)
   }
   return (
-    <section id="powdernailsservice" className="container px-4 py-10 mx-auto">
+    <section id="powdernailsservice" className="container px-5 py-5 mx-auto">
       <ServicesHeadings title="Our Powder Nails Services" />
       <div className="grid grid-cols-1 grid-cols-2 md:grid-cols-3 md:grid-cols-4 gap-[30px] ">
         {/* test */}

@@ -23,7 +23,7 @@ export default function FacialService({prices}) {
     setCartItems(newArray)
   }
   return (
-    <section id="facialservice" className="container px-4 py-10 mx-auto">
+    <section id="facialservice" className="container px-5 py-5 mx-auto">
       <ServicesHeadings title="Our Facial Services" />
       <div className="grid grid-cols-2 grid-cols-3 gap-[30px] ">
         {/* test */}
