@@ -24,10 +24,10 @@ export default function Order({userCart}) {
         // Send a POST request to the /api/register route with the user's information
         const response = await fetch('/api/services', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + await getToken(),
-          }, 
+          // headers: {
+          //   'Content-Type': 'application/json',
+          //   'Authorization': "Bearer " + await getToken(),
+          // }, 
           body: JSON.stringify({
             data: cart
           }),
@@ -52,14 +52,14 @@ export default function Order({userCart}) {
     
         const formData = new FormData();
         formData.append('file', file);
-    
-        try {
+        formData.append('feildname', 'test.png')
+        try { 
             const response = await fetch('/api/services/upload', {
                 method: 'POST',
                   headers: {
                       'Content-Type': 'multipart/form-data boundary=${formData._boundary}',
                       'Authorization': "Bearer " + await getToken(),
-                  }, 
+                    }, 
                 body: formData
             });
             const data = await response.json();
