@@ -15,8 +15,7 @@ import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
 import DisplayServiceTrends from '../ChartsForAdmin/DisplayServiceTrends';
-import DisplayServiceOrders from '../ChartsForAdmin/DisplayServiceOrders';
-
+import ApproveOrders from '../ChartsForAdmin/DisplayOrders'
 
 const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
 
@@ -189,14 +188,12 @@ export default function AdminDash() {
         </Form>
     </div>
 </div>
-<div className="col-span-3 text-center">
-    <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-        <h2 className="text-lg font-medium mb-2">Service Order Details</h2>
-        <DisplayServiceOrders />
-    </div>
-</div>
-
                 </div>
+                <div className="col-span-1 text-center">
+                        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+                            <ApproveOrders />
+                        </div>
+                    </div>
             </div>
         </div>
     );
