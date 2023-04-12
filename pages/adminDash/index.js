@@ -120,12 +120,7 @@ export default function AdminDash() {
             {currentForm === 'updateEmployeeSkill' && (
                 <UpdateEmpSkillForm handleCancelForm={handleCancelForm} />
             )}
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+            
 
             <div className="mt-20">
     <div className="charts-container grid grid-cols-3 gap-4">
