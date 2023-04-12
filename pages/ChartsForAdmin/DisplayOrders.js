@@ -79,7 +79,7 @@ async function updateStatus(id, status) {
     const day = date.getDate();
 
     return `${month}-${day}-${year}`
-
+    
 
   }
 
@@ -93,65 +93,41 @@ async function updateStatus(id, status) {
     fetchData();
   }, [getToken]);
 
-
   return (
-    <div className="h-96 overflow-y-scroll">
-      <div className="w-full h-96">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Customer Name
-              </th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Customer Email
-              </th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Order Date
-              </th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Order Cost
-              </th>
-              <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {chartData.map((table) => (
-              <tr key={table.ServiceOrderID}>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  {table.Clients.first_name + table.Clients.last_name}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  {table.Clients.email_address}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  {convertDate(table.service_order_date)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  ${table.service_order_quote}.00
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-center">
-                  <button
-                    className="text-white bg-green-500 hover:bg-green-600 py-1 px-4 rounded"
-                    onClick={() => updateStatus(table.ServiceOrderID, 3)}
-                  >
-                    Approve
-                  </button>
-                  <br />
-                  <button
-                    className="text-white bg-red-500 hover:bg-red-600 py-1 px-4 mt-1 rounded"
-                    onClick={() => updateStatus(table.ServiceOrderID, 6)}
-                  >
-                    Deny
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div style={{ height: '400px', overflowY: 'scroll' }}>
+        <div style={{ width: '100%', height: 400 }}>
+            <table className="table">
+            <thead>
+                <tr>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Order Cost</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {chartData.map((table) => (
+                <tr key={table.ServiceOrderID}>
+                    <td>{table.Clients.first_name + table.Clients.last_name}</td>
+                    <td>{table.Clients.email_address}</td>
+                    <td>{convertDate(table.service_order_date)}</td>
+                    <td>${table.service_order_quote}.00</td>
+                    <td>
+                        {/* <button onClick={updateStatus(table.ServiceOrderID, 3)}>
+                            Approve
+                        </button>
+                        <br></br>
+                        <button onClick={updateStatus(table.ServiceOrderID, 6)}>
+                             Deny
+                        </button> */}
+                    </td>
+
+                </tr>
+                ))}
+            </tbody>
+            </table>
+        </div>
     </div>
   );
 };

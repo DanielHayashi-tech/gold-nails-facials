@@ -36,7 +36,7 @@ const AdminDashNavBar = ({ handleFormChange }) => {
   };
 
   return (
-    <VStack spacing={4} top="0" w="100%" zIndex="sticky" bg={navBg} position="relative">
+    <VStack spacing={4} top="0" w="100%" zIndex="sticky" bg={navBg} position="fixed">
       <div className="text-[22px] container flex items-center ">
         <div className={`text-[35px] font-bold ${raleway.className}`}>Golden Nails n Facial</div>
       </div>
