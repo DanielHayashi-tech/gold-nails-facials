@@ -5,24 +5,39 @@ import { useAuth } from '../../context/AuthContext';
 const DisplayServiceTrends = () => {
     const { getToken } = useAuth();
 
-    const [servicesData, setServicesData] = useState([]);
+    const [servicesData, setServicesData] = useState({ data: [], serviceTypes: {} });
     const [isMounted, setIsMounted] = useState(false);
+
+    const lineColors = [
+        '#8884d8',
+        '#82ca9d',
+        '#ffc658',
+        '#FF8042',
+        '#0088FE',
+        '#FFBB28',
+        '#FF8888',
+      ];
+      
 
 
     function transformData(data) {
         if (!Array.isArray(data)) {
             console.error('Fetched data is not an array:', data);
-            return [];
+            return { data: [], serviceTypes: {} };
         }
 
         const uniqueDatesSet = new Set();
         const transformedData = [];
+        const serviceTypes = {};
 
         data.forEach((item) => {
             uniqueDatesSet.add(item.date.slice(0, 10));
+            serviceTypes[`service_type_${item.service_typeID}`] = item.service_type_description;
         });
 
+
         const uniqueDatesArray = Array.from(uniqueDatesSet).sort();
+
 
         uniqueDatesArray.forEach((date) => {
             const dateData = { date };
@@ -34,8 +49,9 @@ const DisplayServiceTrends = () => {
             transformedData.push(dateData);
         });
 
-        return transformedData;
+        return { data: transformedData, serviceTypes };
     }
+
 
     const fetchChartData = async () => {
         try {
@@ -59,7 +75,8 @@ const DisplayServiceTrends = () => {
 
             const data = await response.json();
             const transformedData = transformData(data);
-            setServicesData(transformedData);
+            setServicesData({ data: transformedData.data, serviceTypes: transformedData.serviceTypes });
+            console.log(servicesData)
         } catch (error) {
             console.log(error);
             alert('Read the error message and try again, you got this :) ');
@@ -83,7 +100,7 @@ const DisplayServiceTrends = () => {
             {isMounted && (
                 <ResponsiveContainer width="100%" height={300}>
                     <LineChart
-                        data={servicesData}
+                        data={servicesData.data}
                         margin={{
                             top: 5,
                             right: 30,
@@ -97,11 +114,15 @@ const DisplayServiceTrends = () => {
                         <Tooltip />
                         <Legend />
                         {/* Iterate through unique service_typeIDs and create a Line for each one */}
-                        {servicesData.length > 0 &&
-                            Object.keys(servicesData[0])
-                                .filter((key) => key.startsWith('service_type_'))
-                                .map((key, index) => (
-                                    <Line key={key} type="monotone" dataKey={key} stroke={index % 2 === 0 ? '#8884d8' : '#82ca9d'} />
+                        {servicesData.data.length > 0 &&
+                            Object.keys(servicesData.serviceTypes).map((key, index) => (
+                                <Line
+                                    key={key}
+                                    type="monotone"
+                                    dataKey={key}
+                                    stroke={lineColors[index % lineColors.length]}
+                                    name={servicesData.serviceTypes[key]}
+                                />
                                 ))}
                     </LineChart>
                 </ResponsiveContainer>
