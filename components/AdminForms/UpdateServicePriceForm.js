@@ -104,7 +104,7 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
                   fontSize: "3rem",
                   marginBottom: "1rem",
                   color: "#EAC8E7"
-                }}> Update Service Price Form
+                }}> Update Service Form
               </h3>
             </div>
 
@@ -186,7 +186,7 @@ export default function UpdateServicePriceForm({ handleCancelForm }) {
                     backgroundColor: "#FFE1F8",
                     fontSize: '20px'
                   }}>
-                  Update Price
+                  Update
                 </Button>
 
                 <div className="card-footer pt-20">

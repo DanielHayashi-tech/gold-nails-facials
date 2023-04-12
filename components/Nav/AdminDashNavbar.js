@@ -46,14 +46,13 @@ const AdminDashNavBar = ({ handleFormChange }) => {
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('addEmployee')}>
           Add a new Employee
         </Box>
-        
-        
+
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('updateEmployee')}>
           Update Employee
         </Box>
-       
-
-        
+        <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('addEmployeeSkill')}>
+          Add Employee Skill
+        </Box>
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('updateEmployeeSkill')}>
           Update Employee Skill
         </Box>
@@ -61,7 +60,7 @@ const AdminDashNavBar = ({ handleFormChange }) => {
 
         
         <Box {...buttonStyles} bg="#f5f6f7" onClick={() => handleFormChange('updateServicePrice')}>
-          Update Service Price
+          Update Service
         </Box>
        
 

@@ -9,6 +9,7 @@ import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePri
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
 import UpdateEmpForm from '../../components/AdminForms/updateEmpForm';
 import UpdateEmpSkillForm from '../../components/AdminForms/updateEmpSkillForm';
+import AddEmployeeSkillForm from '../../components/AdminForms/addEmployeeSkillForm';
 
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
@@ -92,6 +93,9 @@ export default function AdminDash() {
             )}
             {currentForm === 'updateServicePrice' && (
                 <UpdateServicePriceForm handleCancelForm={handleCancelForm} />
+            )}
+            {currentForm === 'addEmployeeSkill' && (
+                <AddEmployeeSkillForm handleCancelForm={handleCancelForm} />
             )}
             {currentForm === 'updateEmployee' && (
                 <UpdateEmpForm handleCancelForm={handleCancelForm} />
