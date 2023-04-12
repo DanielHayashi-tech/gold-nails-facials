@@ -44,7 +44,7 @@ export default function LoginForm() {
         }
   
         if (authUser.user.uid === ADMIN_UID) {
-          router.push("/adminDash/" + ADMIN_UID);
+          router.push("/adminDash");
         } else {
             onAuthStateChanged(auth, (user) => {
               if (user) {

@@ -15,8 +15,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import SideDrawer from "../../components/Sidebar/SideDrawer";
 import { useRouter } from 'next/router';
 import { useAuth } from '../..//context/AuthContext.js';
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { PrismaClient } from '@prisma/client'
+import { getAuth} from "firebase/auth";
 
 
 
@@ -79,12 +80,16 @@ export default function Services(props)  {
   const { authUser, loading, getToken, order, setCartItems, cart } = useAuth();
   // const [cart, setCartItems] = useState([])
 
-  const router = useRouter();
-  useEffect(() => {
-    if (!loading && !authUser)
-      router.push('/')
-  }, [authUser, loading])
+  const auth = getAuth();
 
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authUser) {
+      router.push('/');
+    }
+  }, [authUser, router]);
 
   useEffect(() => {
     console.log(order)

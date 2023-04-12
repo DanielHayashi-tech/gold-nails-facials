@@ -1,22 +1,22 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
-
+import React, { useState, useEffect } from 'react';
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
 import UpdateEmpForm from '../../components/AdminForms/updateEmpForm';
 import UpdateEmpSkillForm from '../../components/AdminForms/updateEmpSkillForm';
 import AddEmployeeSkillForm from '../../components/AdminForms/addEmployeeSkillForm';
-
+import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
 import DisplaySales from '../ChartsForAdmin/DisplaySales';
 
 
+const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
 
 export default function AdminDash() {
     const { getToken } = useAuth();
@@ -26,7 +26,19 @@ export default function AdminDash() {
     const [serviceOrderCount, setServiceOrderCount] = useState(0);
     const [clientCount, setclientCount] = useState(0);
     const [currentForm, setCurrentForm] = useState('');
+    const auth = getAuth();
 
+    useEffect(() => {
+        const checkUser = async () => {
+          const authUser = auth.currentUser;
+          if (!authUser) {
+            router.push('/'); // Redirect to the login page if not authenticated
+          } else if (authUser.uid !== ADMIN_UID) {
+            router.push('/dashboard/' + authUser.uid); // Redirect to the user dashboard if not an admin
+          }
+        };
+        checkUser();
+      }, []);
 
 
     const handleServiceTotal = async (e) => {
@@ -52,6 +64,8 @@ export default function AdminDash() {
             setError(error.message)
         }
     };
+
+    
     const handleCountAllMyClients = async (e) => {
         e.preventDefault();
         const token = await getToken();
