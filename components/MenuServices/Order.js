@@ -56,10 +56,10 @@ export default function Order({userCart}) {
         try {
             const response = await fetch('/api/services/upload', {
                 method: 'POST',
-                // headers: {
-                //     'Content-Type': 'multipart/form-data boundary=${formData._boundary}',
-                //     'Authorization': "Bearer " + await getToken(),
-                // }, 
+                  headers: {
+                      'Content-Type': 'multipart/form-data boundary=${formData._boundary}',
+                      'Authorization': "Bearer " + await getToken(),
+                  }, 
                 body: formData
             });
             const data = await response.json();
