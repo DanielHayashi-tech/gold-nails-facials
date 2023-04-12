@@ -25,8 +25,6 @@ const DisplayActiveInactive = () => {
       }
 
       const data = await response.json();
-      console.log("updateClientStatus data:", data);
-
 
     } catch (error) {
       console.log(error);
@@ -49,10 +47,8 @@ const DisplayActiveInactive = () => {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      console.log("response:", response)
 
       const data = await response.json();
-      console.log("Chart data:", data);
       setChartData(data);
     } catch (error) {
       console.log(error);

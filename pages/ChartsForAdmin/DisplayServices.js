@@ -1,3 +1,5 @@
+//pages/ChartsForAdmin/DisplayServices.js
+
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
