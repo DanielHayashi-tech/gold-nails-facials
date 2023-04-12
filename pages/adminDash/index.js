@@ -132,7 +132,7 @@ export default function AdminDash() {
     <div className="charts-container grid grid-cols-3 gap-4">
         <div className="col-span-1 text-center">
             <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-                <h2 className="text-lg font-medium mb-2">Service Summary</h2>
+                <h2 className="text-lg font-medium mb-2">In-Service Orders</h2>
                 <DisplayServices />
             </div>
         </div>
