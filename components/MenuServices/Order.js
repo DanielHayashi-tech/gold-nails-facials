@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useAuth } from '../../context/AuthContext.js';
+import { useRouter } from 'next/router'
 
 
 
 export default function Order({userCart}) {
     const {getToken} = useAuth()
     const [file, setFile] = useState(null);
+    const router = useRouter()
     let cart = userCart.map(product => product.id)
     let prices = userCart.map(product => product.price); // extract an array of prices
     let total = prices.reduce((acc, cur) => acc + cur, 0); // sum up the prices
@@ -40,6 +42,7 @@ export default function Order({userCart}) {
          cart = []
         console.log(data)
         alert('Order Created')
+        router.push('/dashboard')
         return data
       }
 

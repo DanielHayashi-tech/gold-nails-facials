@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
@@ -14,6 +15,11 @@ import AddEmployeeSkillForm from '../../components/AdminForms/addEmployeeSkillFo
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
+import DisplayServiceTrends from '../ChartsForAdmin/DisplayServiceTrends';
+
+// import DisplaySales from '../ChartsForAdmin/DisplaySales';
+import DisplayServiceOrders from '../ChartsForAdmin/DisplayServiceOrders';
+
 
 
 export default function AdminDash() {
@@ -119,7 +125,23 @@ export default function AdminDash() {
                     </div>
                     <div className="col-span-1 text-center">
                         <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
                             <DisplayActiveInactive />
+                        </div>
+                    </div>
+                    <div className="col-span-3 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplayServiceTrends  />
+
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplayServiceOrders />
                         </div>
                     </div>
                     <div className="col-span-1 text-center">
