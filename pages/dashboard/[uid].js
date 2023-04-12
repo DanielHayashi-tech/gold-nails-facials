@@ -5,6 +5,7 @@ import Service from "../../components/Service/Service";
 
 
 import About from "../../components/About/About";
+import Gallery from "@/components/Gallery/Gallery";
 import MyFooter from "../../components/Footer/MyFooter";
 import { useRef } from "react";
 import { useDisclosure } from "@chakra-ui/react";
@@ -13,6 +14,7 @@ import SideDrawer from "../../components/Sidebar/SideDrawer";
 
 import { useRouter } from 'next/router';
 import { useAuth } from '../..//context/AuthContext.js';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useEffect } from 'react';
 
 const name = "Mindful Solutions brings to you the next wave of nails and beauty services.";
@@ -63,7 +65,6 @@ export default function Dashboard()  {
   }, [authUser, loading])
 
   const { uid } = router.query;
-  console.log(router);
 
   return (
     <>
@@ -89,6 +90,7 @@ export default function Dashboard()  {
 
         } />
         <Service />
+        <Gallery />
         
         <MyFooter date="2023" rights="All rights reserved." />
       

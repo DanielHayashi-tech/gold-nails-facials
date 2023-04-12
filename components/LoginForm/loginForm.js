@@ -44,9 +44,14 @@ export default function LoginForm() {
         }
   
         if (authUser.user.uid === ADMIN_UID) {
-          router.push("/adminDash");
+          router.push("/adminDash/" + ADMIN_UID);
         } else {
-          router.push("/dashboard");
+            onAuthStateChanged(auth, (user) => {
+              if (user) {
+                const uid = user.uid;
+          router.push("/dashboard/" + uid);
+            }
+          });
         }
       })
       .catch((error) => {
@@ -75,7 +80,7 @@ export default function LoginForm() {
 
   if (showForgotPassword) {
     return (
-      <div className="container my-5 py-5" style={{ backgroundColor: "#FFE1F8" }}>
+      <div className="container my-5 py-5" style={{ backgroundColor: "white" }}>
         <div className="row justify-content-center">
           <div className="col-md-6">
             <div className="card shadow-lg border-0 rounded-lg mt-5">
@@ -104,10 +109,10 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="container my-5 py-5" style={{ backgroundColor: "#FFE1F8" }}>
+    <div className="container my-5 py-5" style={{ backgroundColor: "#faf3f7" }}>
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card shadow-lg border-0 rounded-lg mt-5">
+          <div className="card shadow-lg bg-slate-100 border-0 rounded-lg mt-5">
             <div className="card-header">
               <h3
                 className="text-center"
@@ -116,7 +121,7 @@ export default function LoginForm() {
                   fontWeight: "600",
                   fontSize: "3rem",
                   marginBottom: "1rem",
-                  color: "#EAC8E7",
+                  color: "#EEC1EE",
                   // textShadow: "0 0 5px black", // add text-shadow property 
                 }}>
                 My Golden Nails
@@ -138,7 +143,7 @@ export default function LoginForm() {
                     style={{ fontFamily: "Open Sans", // Change to the desired cursive font
                     fontWeight: "500",
                     fontSize: "1rem",
-                    backgroundColor: "#FFE1F8" }}
+                    backgroundColor: "#EFE1EB" }}
                     placeholder="Enter email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -158,8 +163,8 @@ export default function LoginForm() {
                     style={{ fontFamily: "Open Sans", // Change to the desired cursive font
                     fontWeight: "500",
                     fontSize: "1rem",
-                    backgroundColor: "#FFE1F8" }}
-                    placeholder="Password"
+                    backgroundColor: "#EFE1EB" }}
+                    placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required />
@@ -175,7 +180,7 @@ export default function LoginForm() {
               className="btn-block custom-button w-32 mt-2 mb-3"
               style={{ fontFamily: "Open Sans", // Change to the desired cursive font
               fontWeight: "400",
-              backgroundColor: "#FFE1F8", 
+              backgroundColor: "#EAC8E7", 
               fontSize: '19px' }}>
               Login
             </Button>
@@ -202,7 +207,7 @@ export default function LoginForm() {
                 onClick={goToSignUp}
                 style={{ fontFamily: "Open Sans", // Change to the desired cursive font
                 fontWeight: "400",
-                backgroundColor: "#FFE1F8", 
+                backgroundColor: "#EAC8E7", 
                 fontSize: '18px'  }} >
                 Sign Up Here
               </Button>
@@ -221,7 +226,7 @@ export default function LoginForm() {
                 onClick={handleForgotPassword}
                 style={{ fontFamily: "Open Sans", // Change to the desired cursive font
                 fontWeight: "400",
-                backgroundColor: "#FFE1F8", 
+                backgroundColor: "#EAC8E7", 
                 fontSize: '18px'  }}>
                 Forgot Password
               </Button>

@@ -19,4 +19,11 @@ export const links = [
     icon: <BsHandbagFill className="mr-3" />,
     href: "/service",
   },
+  {
+    name: "Gallery",
+    to: "gallery",
+    id: 3,
+    icon: <BsHandbagFill className="mr-3" />,
+    href: "/gallery",
+  },
 ];
