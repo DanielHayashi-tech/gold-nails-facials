@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 export default function Order({userCart}) {
     const {getToken} = useAuth()
-    const [file, setFile] = useState(null);
+      const [file, setFile] = useState(null);
     const router = useRouter()
     let cart = userCart.map(product => product.id)
     let prices = userCart.map(product => product.price); // extract an array of prices
@@ -18,9 +18,7 @@ export default function Order({userCart}) {
           } 
           return img.slice(10)
     }
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    }
+   
     async function handleSignUp() {
         console.log(cart)
         // Send a POST request to the /api/register route with the user's information
@@ -46,8 +44,9 @@ export default function Order({userCart}) {
         return data
       }
 
-    const handleSubmit = async (event) => {
+      const handleSubmit = async (event) => {
         event.preventDefault();
+    
         if (!file) {
           console.error('No file selected');
           return;
@@ -55,21 +54,21 @@ export default function Order({userCart}) {
     
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('feildname', 'test.png')
-        try { 
-            const response = await fetch('/api/services/upload', {
-                method: 'POST',
-                  headers: {
-                      'Content-Type': 'multipart/form-data boundary=${formData._boundary}',
-                      'Authorization': "Bearer " + await getToken(),
-                    }, 
-                body: formData
-            });
-            const data = await response.json();
-            console.log('File uploaded successfully:', data);
-            } catch (error) {
-            console.error('Error uploading file:', error);
-            }
+    
+        try {
+          const response = await fetch('/api/services/upload', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await response.json();
+          console.log('File uploaded successfully:', data);
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      };
+    
+      const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
       };
     return (
         <section className="h-100" >
