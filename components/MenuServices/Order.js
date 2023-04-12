@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useAuth } from '../../context/AuthContext.js';
+import { useRouter } from 'next/router'
 
 
 
 export default function Order({userCart}) {
     const {getToken} = useAuth()
-    const [file, setFile] = useState(null);
+      const [file, setFile] = useState(null);
+    const router = useRouter()
     let cart = userCart.map(product => product.id)
     let prices = userCart.map(product => product.price); // extract an array of prices
     let total = prices.reduce((acc, cur) => acc + cur, 0); // sum up the prices
@@ -16,18 +18,16 @@ export default function Order({userCart}) {
           } 
           return img.slice(10)
     }
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    }
+   
     async function handleSignUp() {
         console.log(cart)
         // Send a POST request to the /api/register route with the user's information
         const response = await fetch('/api/services', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': "Bearer " + await getToken(),
-          }, 
+          // headers: {
+          //   'Content-Type': 'application/json',
+          //   'Authorization': "Bearer " + await getToken(),
+          // }, 
           body: JSON.stringify({
             data: cart
           }),
@@ -40,11 +40,13 @@ export default function Order({userCart}) {
          cart = []
         console.log(data)
         alert('Order Created')
+        router.push('/dashboard')
         return data
       }
 
-    const handleSubmit = async (event) => {
+      const handleSubmit = async (event) => {
         event.preventDefault();
+    
         if (!file) {
           console.error('No file selected');
           return;
@@ -54,19 +56,19 @@ export default function Order({userCart}) {
         formData.append('file', file);
     
         try {
-            const response = await fetch('/api/services/upload', {
-                method: 'POST',
-                // headers: {
-                //     'Content-Type': 'multipart/form-data boundary=${formData._boundary}',
-                //     'Authorization': "Bearer " + await getToken(),
-                // }, 
-                body: formData
-            });
-            const data = await response.json();
-            console.log('File uploaded successfully:', data);
-            } catch (error) {
-            console.error('Error uploading file:', error);
-            }
+          const response = await fetch('/api/services/upload', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await response.json();
+          console.log('File uploaded successfully:', data);
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      };
+    
+      const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
       };
     return (
         <section className="h-100" >

@@ -1,8 +1,9 @@
 import Head from 'next/head';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+
 import AdminDashNavbar from '../../components/Nav/AdminDashNavbar';
 import UpdateServicePriceForm from '../../components/AdminForms/UpdateServicePriceForm';
 import AddEmployeeForm from '../../components/AdminForms/AddEmployeeForm';
@@ -13,7 +14,6 @@ import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import DisplayServices from '../ChartsForAdmin/DisplayServices';
 import DisplayActiveInactive from '../ChartsForAdmin/DisplayActiveInactive';
-import DisplaySales from '../ChartsForAdmin/DisplaySales';
 
 
 const ADMIN_UID = "CFsOKUyXSicjCHYr3RwzJIK3Zgu2";
@@ -135,12 +135,18 @@ export default function AdminDash() {
                     </div>
                     <div className="col-span-1 text-center">
                         <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-                            <DisplaySales />
+                            <DisplayActiveInactive />
+                        </div>
+                    </div>
+                    <div className="col-span-3 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplayServiceTrends  />
+
                         </div>
                     </div>
                     <div className="col-span-1 text-center">
                         <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-                            <DisplayActiveInactive />
+                            <DisplayServiceOrders />
                         </div>
                     </div>
                     <div className="col-span-1 text-center">
