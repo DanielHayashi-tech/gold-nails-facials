@@ -137,6 +137,11 @@ export default function AdminDash() {
                     </div>
                     <div className="col-span-1 text-center">
                         <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
                             <DisplayActiveInactive />
                         </div>
                     </div>
@@ -146,11 +151,7 @@ export default function AdminDash() {
 
                         </div>
                     </div>
-                    <div className="col-span-1 text-center">
-                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-                            <DisplayServiceOrders />
-                        </div>
-                    </div>
+                    
                     <div className="col-span-1 text-center">
                         <div className="p-4 bg-gray-100 rounded-lg shadow-md">
                             <Form onSubmit={handleServiceTotal}>
@@ -167,6 +168,11 @@ export default function AdminDash() {
                     </div>
                     <div className="col-span-1 text-center">
                         <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+
+                        </div>
+                    </div>
+                    <div className="col-span-1 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
                             <Form onSubmit={handleCountAllMyClients}>
                                 <p>Total Clients: {clientCount}</p>
                                 <Button
@@ -177,6 +183,11 @@ export default function AdminDash() {
                                     Total Number of Clients!
                                 </Button>
                             </Form>
+                        </div>
+                    </div>
+                    <div className="col-span-3 text-center">
+                        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+                            <DisplayServiceOrders />
                         </div>
                     </div>
                 </div>
